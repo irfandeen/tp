@@ -1,5 +1,4 @@
 # LogJob project template
-
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij
@@ -16,12 +15,16 @@ Prerequisites: JDK 17 (use the exact version), update Intellij to the most recen
    
    > Task :Duke.main()
    Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   
+
+ ___       ________  ________        ___  ________  ________
+|\  \     |\   __  \|\   ____\      |\  \|\   __  \|\   __  \
+\ \  \    \ \  \|\  \ \  \___|      \ \  \ \  \|\  \ \  \|\ /_
+ \ \  \    \ \  \\\  \ \  \  ___  __ \ \  \ \  \\\  \ \   __  \
+  \ \  \____\ \  \\\  \ \  \|\  \|\  \\_\  \ \  \\\  \ \  \|\  \
+   \ \_______\ \_______\ \_______\ \________\ \_______\ \_______\
+    \|_______|\|_______|\|_______|\|________|\|_______|\|_______|
+
+
    What is your name?
    ```
    Type some word and press enter to let the execution proceed to the end.
