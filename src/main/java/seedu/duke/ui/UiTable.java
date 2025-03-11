@@ -1,7 +1,7 @@
 package seedu.duke.ui;
 
-import java.util.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the printing of table cells for listing of the applications
@@ -14,16 +14,22 @@ import java.util.ArrayList;
  */
 public class UiTable {
     private static ArrayList<String> header;
+
     UiTable() {
-        UiTable.header = new ArrayList<>(List.of("ID", "Company", "Job Title", "Status", "Date of Application"));
+        UiTable.header = new ArrayList<>(
+                List.of("ID", "Company", "Job Title", "Status", "Date of Application")
+        );
     }
 
     /**
      * Takes a 2-dimensional array of strings and print the data as a table on the CLI, row by row.
+     *
      * @param data 2-d ArrayList of String.
      */
     public static void printTable(ArrayList<ArrayList<String>> data) {
-        if (data.isEmpty()) return;
+        if (data.isEmpty()) {
+            return;
+        }
 
         int[] columnWidths = getColumnWidths(data);
         printHorizontalBorder(columnWidths);
@@ -35,7 +41,9 @@ public class UiTable {
     }
 
     /**
-     * Determines the largest column width needed for the table by checking each column, finding the string with maximum length
+     * Determines the largest column width needed for the table by checking each column,
+     * finding the string with maximum length
+     *
      * @param data 2-d ArrayList of String.
      * @return An array of widths representing the maximum width needed for corresponding columns.
      */
@@ -53,6 +61,7 @@ public class UiTable {
 
     /**
      * Prints the horizontal border of the cells for the table.
+     *
      * @param columnWidths An array of widths representing the maximum width needed for corresponding columns.
      */
     private static void printHorizontalBorder(int[] columnWidths) {
@@ -65,7 +74,8 @@ public class UiTable {
 
     /**
      * Prints a single row for the table.
-     * @param row An arraylist of string to be displayed as a row in the table.
+     *
+     * @param row          An arraylist of string to be displayed as a row in the table.
      * @param columnWidths An array of widths representing the maximum width needed for corresponding columns.
      */
     private static void printRow(ArrayList<String> row, int[] columnWidths) {
@@ -78,8 +88,9 @@ public class UiTable {
 
     /**
      * Prints a single cell for the table.
+     *
      * @param content The content to be inserted into the current cell of the table.
-     * @param width Maximum width needed for the current cell.
+     * @param width   Maximum width needed for the current cell.
      */
     private static void printCell(String content, int width) {
         System.out.print(" " + content + " ".repeat(width - content.length()) + " |");
