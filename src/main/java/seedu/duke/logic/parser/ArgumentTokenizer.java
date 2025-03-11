@@ -63,7 +63,7 @@ public class ArgumentTokenizer {
     private static String getArgumentValue(String arguments, FlagPosition currPosition, FlagPosition nextPosition) {
         Flag currFlag = currPosition.flag();
 
-        int valueStartIndex = currPosition.startIndex() + currFlag.getFlag().length();
+        int valueStartIndex = currPosition.startIndex() + currFlag.flag().length();
         int valueEndIndex = nextPosition.startIndex();
 
         return arguments.substring(valueStartIndex, valueEndIndex);
