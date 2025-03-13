@@ -1,4 +1,7 @@
 package seedu.duke.logic.commands;
 
-public class Command {
+public abstract class Command {
+    public Command() {
+    }
+    public abstract void execute();
 }

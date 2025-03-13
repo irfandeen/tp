@@ -15,7 +15,7 @@ public class ApplicationParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
             "^(?<commandWord>\\S+)(?:\\s+(?<arguments>.+))?$");
 
-    public Command parseCommand(String userInput) throws ParseException {
+    public static Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
