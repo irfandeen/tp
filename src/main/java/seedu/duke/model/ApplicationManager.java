@@ -42,7 +42,7 @@ public class ApplicationManager {
     /**
      * Lists all internship applications in a table format.
      */
-    public static void listApplication() {
+    public static void listApplication() throws Exception {
         ArrayList<ArrayList<String>> applicationTable = new ArrayList<>();
         applicationTable.add(Constants.TABLE_HEADER_ARRAYLIST);
 

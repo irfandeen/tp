@@ -8,6 +8,10 @@ public class ListCommand extends Command {
 
     @Override
     public void execute() {
-        ApplicationManager.listApplication();
+        try {
+            ApplicationManager.listApplication();
+        } catch (Exception e) {
+            System.out.println("There are no applications in the list.");
+        }
     }
 }
