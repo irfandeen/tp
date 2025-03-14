@@ -12,9 +12,12 @@ public class Duke {
 
     public static void main(String[] args) {
         UiMain.introMessage();
+
+        /* Parsing not implemented, disabled for now
         while (isRunning) {
             UiMain.readInput();
-        }
+        } */
+
         UiMain.exitMessage();
     }
 }
