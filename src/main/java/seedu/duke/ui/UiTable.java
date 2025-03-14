@@ -15,7 +15,7 @@ import java.util.List;
 public class UiTable {
     private static ArrayList<String> header;
 
-    UiTable() {
+    public UiTable() {
         UiTable.header = new ArrayList<>(
                 List.of("ID", "Company", "Job Title", "Status", "Date of Application")
         );
@@ -26,9 +26,9 @@ public class UiTable {
      *
      * @param data 2-d ArrayList of String.
      */
-    public static void printTable(ArrayList<ArrayList<String>> data) {
+    public static void printTable(ArrayList<ArrayList<String>> data) throws Exception {
         if (data.isEmpty()) {
-            return;
+            throw new Exception();
         }
 
         int[] columnWidths = getColumnWidths(data);
@@ -106,6 +106,10 @@ public class UiTable {
                 new ArrayList<>(List.of("1", "Google", "SWE", "Resume Screening", "NULL"))
         ));
 
-        printTable(data);
+        try {
+            printTable(data);
+        } catch (Exception e) {
+            System.out.println("Empty Table");
+        }
     }
 }
