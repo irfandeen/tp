@@ -11,10 +11,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        UiMain.IntroMessage();
+        UiMain.introMessage();
         while (isRunning) {
             UiMain.readInput();
         }
-        UiMain.ExitMessage();
+        UiMain.exitMessage();
     }
 }
