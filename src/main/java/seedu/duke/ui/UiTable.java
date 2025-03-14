@@ -3,6 +3,8 @@ package seedu.duke.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.duke.main.Constants;
+
 /**
  * Handles the printing of table cells for listing of the applications
  * E.g.
@@ -13,12 +15,8 @@ import java.util.List;
  * +----+---------+-----------+------------------+---------------------+
  */
 public class UiTable {
-    private static ArrayList<String> header;
 
     public UiTable() {
-        UiTable.header = new ArrayList<>(
-                List.of("ID", "Company", "Job Title", "Status", "Date of Application")
-        );
     }
 
     /**
@@ -98,11 +96,9 @@ public class UiTable {
 
     // For testing purposes only
     public static void main(String[] args) {
-        UiTable uiTable = new UiTable();
-        UiLogo uiLogo = new UiLogo();
-        UiLogo.print();
+        System.out.println(Constants.LOGO);
         ArrayList<ArrayList<String>> data = new ArrayList<>(List.of(
-                UiTable.header,
+                Constants.TABLE_HEADER_ARRAYLIST,
                 new ArrayList<>(List.of("1", "Google", "SWE", "Resume Screening", "NULL"))
         ));
 
