@@ -15,8 +15,12 @@ public class UiMain {
 
     public static void readInput() {
         try {
-            String input = scan.nextLine();
-            ApplicationParser.parseCommand(input);
+            if (scan.hasNextLine()) {
+                String input = scan.nextLine();
+                ApplicationParser.parseCommand(input);
+            } else {
+                System.out.println("No input available.");
+            }
         } catch (seedu.duke.logic.parser.exceptions.ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }
