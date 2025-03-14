@@ -1,6 +1,5 @@
 package seedu.duke.ui;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
