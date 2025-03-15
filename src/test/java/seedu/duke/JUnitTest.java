@@ -20,12 +20,13 @@ public class JUnitTest {
     }
 
     @Test
-    void listApplication_2inputs_expectTable() throws Exception {
-         InternshipApplication application1 = new InternshipApplication("Google", "SWE");
-         InternshipApplication application2 = new InternshipApplication("Facebook", "Data Analyst", ApplicationStatus.INTERVIEW);
-         ApplicationManager.addApplication(application1);
-         ApplicationManager.addApplication(application2);
-         ApplicationManager.listApplication();
+    void listApplication_twoInputs_expectTable() throws Exception {
+        InternshipApplication application1 = new InternshipApplication("Google", "SWE");
+        InternshipApplication application2 =
+                new InternshipApplication("Facebook", "Data Analyst", ApplicationStatus.INTERVIEW);
+        ApplicationManager.addApplication(application1);
+        ApplicationManager.addApplication(application2);
+        ApplicationManager.listApplication();
 
     }
 }
