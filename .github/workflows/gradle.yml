@@ -10,16 +10,16 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - name: Set up repository
-        uses: actions/checkout@master
-
-      - name: Set up repository
-        uses: actions/checkout@master
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          ref: master
+          fetch-depth: 0  # Ensures all files are fetched
 
-      - name: Merge to master
-        run: git checkout --progress --force ${{ github.sha }}
+      - name: Debug Gradle Wrapper
+        run: |
+          echo "Checking if Gradle wrapper files exist..."
+          ls -l gradle/wrapper || echo "gradle/wrapper directory is missing!"
+          ls -l gradle/wrapper/gradle-wrapper.jar || echo "gradle-wrapper.jar is missing!"
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
