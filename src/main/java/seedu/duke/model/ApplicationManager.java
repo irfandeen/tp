@@ -52,6 +52,7 @@ public class ApplicationManager {
             applicationRow.add(applicationList.get(i).getCompanyName());
             applicationRow.add(applicationList.get(i).getJobTitle());
             applicationRow.add(applicationList.get(i).getStatusToString());
+            applicationRow.add("DATE_NOT_IMPLEMENTED");
             applicationTable.add(applicationRow);
         }
         
