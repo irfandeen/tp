@@ -1,8 +1,10 @@
 package seedu.duke.logic.parser;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Tokenizes argument strings in the form: {@code <flag>value flag<value> ...}
@@ -15,23 +17,40 @@ public class ArgumentTokenizer {
      * their respective argument value.
      *
      * @param arguments argument strings in the form: {@code <flag>value flag<value> ...}
-     * @param flags Flags that mark each argument.
-     * @return HashMap object that maps flags to their arguments.
+     * @param flags     Flags that mark each argument.
+     * @return          HashMap object that maps flags to their arguments.
      */
     public static HashMap<Flag, String> tokenize(String arguments, Flag... flags) {
-        List<FlagPosition> allFlagPositions = getFlagPositions(arguments, flags);
+        List<FlagPosition> allFlagPositions = getAllFlagPositions(arguments, flags);
 
         return extractArguments(arguments, allFlagPositions);
     }
 
-    private static List<FlagPosition> getFlagPositions (String arguments, Flag... flags) {
+    /**
+     * Finds all positions for each flag in the given argument string.
+     *
+     * @param arguments argument strings in the form: {@code <flag>value flag<value> ...}
+     * @param flags     Flags to be found in the String
+     * @return          list of all positions of all flags in the argument string
+     */
+    private static List<FlagPosition> getAllFlagPositions(String arguments, Flag... flags) {
+        List<Flag> allFlags = Arrays.asList(flags);
+        return  allFlags.stream()
+                .flatMap(flag -> getOneFlagPositions(arguments, flag).stream())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Helper function for {@code getAllFlagPositions}. Gets all positions for a single flag within the argument string.
+     */
+    private static List<FlagPosition> getOneFlagPositions (String arguments, Flag flag) {
         List<FlagPosition> flagPositions = new ArrayList<>();
-        for (Flag flag : flags) {
-            int index = getFlagIndex(arguments, flag);
+        int index = getFlagIndex(arguments, flag, 0);
+        while (index != -1) {
             FlagPosition position = new FlagPosition(flag, index);
             flagPositions.add(position);
+            index = getFlagIndex(arguments, flag, index);
         }
-
         return flagPositions;
     }
 
@@ -47,7 +66,6 @@ public class ArgumentTokenizer {
         for (int i = 0; i < flagPositions.size() - 1; i++) {
             FlagPosition currPosition = flagPositions.get(i);
             FlagPosition nextPosition = flagPositions.get(i + 1);
-
             String argumentValue = getArgumentValue(arguments, currPosition, nextPosition);
             argumentMap.put(currPosition.flag(), argumentValue);
         }
@@ -56,17 +74,21 @@ public class ArgumentTokenizer {
     }
 
 
-    private static int getFlagIndex(String arguments, Flag flag) {
-        return arguments.indexOf(flag.toString());
+    private static int getFlagIndex(String arguments, Flag flag, int startIndex) {
+        int index = arguments.indexOf(" " + flag.flag(), startIndex);
+        return (index == -1) ? -1 : index + 1;
     }
 
+    /**
+     * Returns the argument value in the argument string starting from {@code currPosition} to {@code nextPosition}
+     */
     private static String getArgumentValue(String arguments, FlagPosition currPosition, FlagPosition nextPosition) {
         Flag currFlag = currPosition.flag();
 
         int valueStartIndex = currPosition.startIndex() + currFlag.flag().length();
         int valueEndIndex = nextPosition.startIndex();
 
-        return arguments.substring(valueStartIndex, valueEndIndex);
+        return arguments.substring(valueStartIndex, valueEndIndex).trim();
     }
 
     private record FlagPosition(Flag flag, int startIndex) {
