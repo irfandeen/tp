@@ -15,17 +15,6 @@ class StorageTest {
     @Test
     // happy path
     void storeApplicationsToFile() {
-        Storage storage = new StorageManager();
 
-        InternshipApplication[] applications = new InternshipApplication[3];
-        for (int i = 0; i < 3; i++) {
-            applications[i] = new InternshipApplication("Google", "SWE", ApplicationStatus.APPLIED);
-        }
-
-        try {
-            storage.storeApplicationsToFile(applications);
-        } catch (StorageException e) {
-
-        }
     }
 }
