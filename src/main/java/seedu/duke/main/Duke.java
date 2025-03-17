@@ -24,36 +24,6 @@ public class Duke {
     public static void main(String[] args) {
         UiMain.introMessage();
 
-        Storage storage = new StorageManager();
-        InternshipApplication[] previousApplications = null;
-        try {
-            previousApplications = storage.readApplicationsFromFile();
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-            return;
-        } catch (StorageException e) {
-            System.out.println("Storage Exception");
-            return;
-        } catch (InvalidDelimitedStringException e) {
-            System.out.println("Invalid delimited string: " + e.getMessage());
-            return;
-        }
-
-        ArrayList<InternshipApplication> applicationsList = new ArrayList<>(3);
-        for (int i = 0; i < 3; i++) {
-            applicationsList.add(new InternshipApplication("google", "engineer", ApplicationStatus.REJECTED));
-        }
-
-        for (InternshipApplication application : previousApplications) {
-            applicationsList.add(application);
-        }
-
-        try {
-            storage.storeApplicationsToFile(applicationsList.toArray(new InternshipApplication[0]));
-        } catch (StorageException e) {
-            System.out.println(e.getMessage());
-        }
-
         UiMain.exitMessage();
     }
 }
