@@ -33,7 +33,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public InternshipApplication[] readApplicationsFromFile() throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
+    public InternshipApplication[] readApplicationsFromFile()
+            throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
         Scanner scanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();

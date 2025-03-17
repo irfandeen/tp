@@ -10,12 +10,16 @@ public class ApplicationSerializer {
     private static final int NUMBER_OF_FIELDS = 3;
     private static final String NUM_FIELDS_ERR_MSG = "Data files contains an incorrect number of fields.";
 
-    private ApplicationSerializer() {}
-    public static String applicationToDelimitedString(InternshipApplication application) {
-        return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER + application.getStatusToString();
+    private ApplicationSerializer() {
     }
 
-    public static InternshipApplication delimitedStringToApplication(String delimitedString) throws InvalidDelimitedStringException {;
+    public static String applicationToDelimitedString(InternshipApplication application) {
+        return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER +
+                application.getStatusToString();
+    }
+
+    public static InternshipApplication delimitedStringToApplication(String delimitedString)
+            throws InvalidDelimitedStringException {
         String[] fields = delimitedString.split(DELIMITER);
         if (fields.length != NUMBER_OF_FIELDS) {
             throw new InvalidDelimitedStringException(NUM_FIELDS_ERR_MSG);

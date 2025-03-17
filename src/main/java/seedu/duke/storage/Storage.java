@@ -29,7 +29,8 @@ public interface Storage {
      * @throws StorageException
      * @throws InvalidDelimitedStringException
      */
-    public InternshipApplication[] readApplicationsFromFile() throws IOException, StorageException, InvalidDelimitedStringException;
+    public InternshipApplication[] readApplicationsFromFile()
+            throws IOException, StorageException, InvalidDelimitedStringException;
 
     /**
      * Takes an array of InternshipApplication objects, and stores them into memory
