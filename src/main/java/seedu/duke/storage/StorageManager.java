@@ -51,9 +51,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void storeApplicationsToFile(InternshipApplication[] applications) throws StorageException {
-        System.out.print("here");
         requireNonNullFile();
-        System.out.print("here2");
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(file);
