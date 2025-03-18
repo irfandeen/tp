@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +21,7 @@ public class ArgumentTokenizer {
      * @param flags     Flags that mark each argument.
      * @return          HashMap object that maps flags to their arguments.
      */
-    public static HashMap<Flag, String> tokenize(String arguments, Flag... flags) {
+    public static HashMap<Flag, List<String>> tokenize(String arguments, Flag... flags) {
         List<FlagPosition> allFlagPositions = getAllFlagPositions(arguments, flags);
 
         return extractArguments(arguments, allFlagPositions);
@@ -55,9 +56,9 @@ public class ArgumentTokenizer {
     }
 
 
-    private static HashMap<Flag, String> extractArguments(String arguments, List<FlagPosition> flagPositions) {
-        HashMap<Flag, String> argumentMap = new HashMap<>();
-        flagPositions.sort((flagPos1, flagPos2) -> flagPos1.startIndex() - flagPos2.startIndex());
+    private static HashMap<Flag, List<String>> extractArguments(String arguments, List<FlagPosition> flagPositions) {
+        HashMap<Flag, List<String>> argumentMap = new HashMap<>();
+        flagPositions.sort(Comparator.comparingInt(FlagPosition::startIndex));
 
         // Dummy end position to represent end of the String
         FlagPosition endPositionMarker = new FlagPosition(new Flag(""), arguments.length());
@@ -67,7 +68,10 @@ public class ArgumentTokenizer {
             FlagPosition currPosition = flagPositions.get(i);
             FlagPosition nextPosition = flagPositions.get(i + 1);
             String argumentValue = getArgumentValue(arguments, currPosition, nextPosition);
-            argumentMap.put(currPosition.flag(), argumentValue);
+
+            // Ensure all occurrences of flag are tracked.
+            argumentMap.putIfAbsent(currPosition.flag(), new ArrayList<>());
+            argumentMap.get(currPosition.flag()).add(argumentValue);
         }
 
         return argumentMap;
