@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.duke.main.Constants;
+import seedu.duke.ui.exceptions.EmptyTableException;
 
 /**
  * Handles the printing of table cells for listing of the applications
@@ -14,7 +15,7 @@ import seedu.duke.main.Constants;
  * | 1  | Google  | SWE       | Resume Screening | NULL                |
  * +----+---------+-----------+------------------+---------------------+
  */
-public class UiTable {
+public final class UiTable {
 
     public UiTable() {
     }
@@ -24,9 +25,9 @@ public class UiTable {
      *
      * @param data 2-d ArrayList of String.
      */
-    public static void printTable(ArrayList<ArrayList<String>> data) throws Exception {
+    public static void printTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
         if (data.isEmpty()) {
-            throw new Exception();
+            throw new EmptyTableException("Empty table");
         }
 
         int[] columnWidths = getColumnWidths(data);

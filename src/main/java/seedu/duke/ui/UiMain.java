@@ -6,7 +6,7 @@ import seedu.duke.logic.parser.ApplicationParser;
 import seedu.duke.main.Constants;
 
 public class UiMain {
-    private static Scanner scan = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
 
     public static void introMessage() {
         System.out.println(Constants.LOGO);
