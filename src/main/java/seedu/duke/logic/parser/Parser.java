@@ -2,7 +2,7 @@ package seedu.duke.logic.parser;
 
 import seedu.duke.logic.commands.Command;
 
-import java.text.ParseException;
+import seedu.duke.logic.parser.exceptions.ParseException;
 
 public interface Parser<T extends Command> {
 

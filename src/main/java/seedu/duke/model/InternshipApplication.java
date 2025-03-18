@@ -26,6 +26,6 @@ public class InternshipApplication {
     }
 
     public String getStatusToString() {
-        return ApplicationStatus.statusToString(status);
+        return this.status.toString();
     }
 }
