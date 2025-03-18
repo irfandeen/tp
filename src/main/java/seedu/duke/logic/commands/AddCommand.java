@@ -5,6 +5,7 @@ import seedu.duke.model.ApplicationStatus;
 import seedu.duke.model.InternshipApplication;
 
 public class AddCommand extends Command {
+    public static final String COMMAND_WORD = "add";
     private final String companyName;
     private final String jobTitle;
     private final ApplicationStatus status;
