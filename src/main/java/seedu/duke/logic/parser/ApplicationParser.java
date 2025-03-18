@@ -3,8 +3,8 @@ package seedu.duke.logic.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import seedu.duke.logic.commands.Command;
+import seedu.duke.logic.commands.AddCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
 /**
@@ -24,8 +24,14 @@ public class ApplicationParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
+        switch (commandWord) {
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
 
-        return null;
+        default:
+            return null;
+        }
+
     }
 
 

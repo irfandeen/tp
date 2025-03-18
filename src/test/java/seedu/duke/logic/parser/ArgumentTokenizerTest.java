@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 public class ArgumentTokenizerTest {
@@ -19,7 +20,7 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_oneArg_success() {
         String argString = " -n Microsoft APAC ";
-        HashMap<Flag, String> argMap = ArgumentTokenizer.tokenize(argString, nameFlag);
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag);
 
         assertFalse(argMap.isEmpty());
         assertArgumentExists(argMap, nameFlag, "Microsoft APAC");
@@ -28,12 +29,12 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_multipleArgs_success() {
         String argString = " ~z first z argument     -n Bytedance Asia  /W W argument ~z second z argument  ";
-        HashMap<Flag, String> argMap = ArgumentTokenizer.tokenize(argString, nameFlag, wFlag, zFlag);
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag, wFlag, zFlag);
 
         assertFalse(argMap.isEmpty());
         assertArgumentExists(argMap, nameFlag, "Bytedance Asia");
         assertArgumentExists(argMap, wFlag, "W argument");
-        assertArgumentExists(argMap, zFlag, "second z argument");
+        assertArgumentExists(argMap, zFlag, "first z argument");
 
         assertArgumentDoesNotExist(argMap, invalidFlag);
     }
@@ -41,17 +42,17 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_emptyArgsString_emptyHashMap() {
         String argString = " ";
-        HashMap<Flag, String> argMap = ArgumentTokenizer.tokenize(argString, nameFlag);
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag);
         assertTrue(argMap.isEmpty());
         assertArgumentDoesNotExist(argMap, nameFlag);
     }
 
-    private void assertArgumentExists(HashMap<Flag, String> argMap, Flag flag, String argValue) {
+    private void assertArgumentExists(HashMap<Flag, List<String>> argMap, Flag flag, String argValue) {
         assertTrue(argMap.containsKey(flag));
-        assertEquals(argMap.get(flag), argValue);
+        assertEquals(argMap.get(flag).get(0), argValue);
     }
 
-    private void assertArgumentDoesNotExist(HashMap<Flag, String> argMap, Flag flag) {
+    private void assertArgumentDoesNotExist(HashMap<Flag, List<String>> argMap, Flag flag) {
         assertFalse(argMap.containsKey(flag));
         assertNull(argMap.get(flag));
     }
