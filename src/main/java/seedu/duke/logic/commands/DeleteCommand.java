@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        ApplicationManager.deleteApplication(commandIndex);
+    public void execute(ApplicationManager applicationManager) {
+        applicationManager.deleteApplication(commandIndex);
     }
 }
