@@ -20,4 +20,6 @@ public class Constants {
             List.of("ID", "Company", "Job Title", "Status", "Date of Application");
 
     public static final ArrayList<String> TABLE_HEADER_ARRAYLIST = new ArrayList<>(Constants.TABLE_HEADERS);
+
+    public static final String LINE_BREAK = "----------------------------------------";
 }

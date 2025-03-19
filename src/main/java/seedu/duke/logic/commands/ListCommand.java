@@ -9,9 +9,9 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(ApplicationManager applicationManager) {
         try {
-            ApplicationManager.listApplication();
+            applicationManager.listApplication();
         } catch (Exception e) {
             System.out.println("There are no applications in the list.");
         }
