@@ -10,7 +10,7 @@ import seedu.duke.logic.parser.ApplicationParser;
 //import seedu.duke.storage.StorageManager;
 import seedu.duke.model.ApplicationManager;
 
-public class Duke {
+public class LogJob {
 
     private static Boolean isRunning = true;
 
