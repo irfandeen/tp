@@ -12,12 +12,12 @@ import java.util.List;
 
 
 public class ArgumentTokenizerTest {
-    private final Flag invalidFlag = new Flag("--i");
-    private final Flag nameFlag = new Flag("-n");
-    private final Flag jobTitleFlag = new Flag("-j");
-    private final Flag statusFlag = new Flag("-s");
-    private final Flag wFlag = new Flag("/W");
-    private final Flag zFlag = new Flag("~z");
+    private static final Flag invalidFlag = new Flag("--i");
+    private static final Flag nameFlag = new Flag("-n");
+    private static final Flag jobTitleFlag = new Flag("-j");
+    private static final Flag statusFlag = new Flag("-s");
+    private static final Flag wFlag = new Flag("/W");
+    private static final Flag zFlag = new Flag("~z");
 
     @Test
     public void tokenize_oneArg_success() {
@@ -33,7 +33,6 @@ public class ArgumentTokenizerTest {
         String argString = " -n JP Morgan & Chase -j Risk Analyst Intern -s 0";
         HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag, jobTitleFlag, statusFlag);
 
-        System.out.println(argMap.toString());
         assertFalse(argMap.isEmpty());
         assertArgumentExists(argMap, nameFlag, "JP Morgan & Chase");
         assertArgumentExists(argMap, jobTitleFlag, "Risk Analyst Intern");
