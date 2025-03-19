@@ -27,7 +27,7 @@ public class LogJob {
                 isRunning = c.isRunning();
                 c.execute(applicationManager);
             } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
 

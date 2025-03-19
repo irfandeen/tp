@@ -1,8 +1,9 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import seedu.duke.ui.exceptions.EmptyTableException;
+import seedu.duke.main.Constants;
 
 /**
  * Handles the printing of table cells for listing of the applications
@@ -13,24 +14,27 @@ import seedu.duke.ui.exceptions.EmptyTableException;
  * | 1  | Google  | SWE       | Resume Screening | NULL                |
  * +----+---------+-----------+------------------+---------------------+
  */
-public class UiTable {
+public final class UiTable {
     /**
      * Takes a 2-dimensional array of strings and print the data as a table on the CLI, row by row.
      *
      * @param data 2-d ArrayList of String.
      */
-    public void printTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
+    public static String getTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
         if (data.isEmpty()) {
             throw new EmptyTableException("Empty table");
         }
 
+        StringBuilder table = new StringBuilder();
         int[] columnWidths = getColumnWidths(data);
-        printHorizontalBorder(columnWidths);
+        table.append(getHorizontalBorder(columnWidths));
 
         for (ArrayList<String> datum : data) {
-            printRow(datum, columnWidths);
-            printHorizontalBorder(columnWidths);
+            table.append(getRow(datum, columnWidths));
+            table.append(getHorizontalBorder(columnWidths));
         }
+
+        return table.toString();
     }
 
     /**
@@ -40,7 +44,7 @@ public class UiTable {
      * @param data 2-d ArrayList of String.
      * @return An array of widths representing the maximum width needed for corresponding columns.
      */
-    private int[] getColumnWidths(ArrayList<ArrayList<String>> data) {
+    private static int[] getColumnWidths(ArrayList<ArrayList<String>> data) {
         int columns = data.get(0).size();
         int[] widths = new int[columns];
 
@@ -57,12 +61,16 @@ public class UiTable {
      *
      * @param columnWidths An array of widths representing the maximum width needed for corresponding columns.
      */
-    private void printHorizontalBorder(int[] columnWidths) {
-        System.out.print("+");
+    private static String getHorizontalBorder(int[] columnWidths) {
+        StringBuilder border = new StringBuilder();
+        border.append("+");
         for (int width : columnWidths) {
-            System.out.print("-".repeat(width + 2) + "+");
+            border.append("-".repeat(width + 2));
+            border.append("+");
         }
-        System.out.println();
+        border.append("\n");
+
+        return border.toString();
     }
 
     /**
@@ -71,12 +79,14 @@ public class UiTable {
      * @param row          An arraylist of string to be displayed as a row in the table.
      * @param columnWidths An array of widths representing the maximum width needed for corresponding columns.
      */
-    private void printRow(ArrayList<String> row, int[] columnWidths) {
-        System.out.print("|");
+    private static String getRow(ArrayList<String> row, int[] columnWidths) {
+        StringBuilder tableRow = new StringBuilder();
+        tableRow.append("|");
         for (int i = 0; i < row.size(); i++) {
-            printCell(row.get(i), columnWidths[i]);
+            tableRow.append(getCell(row.get(i), columnWidths[i]));
         }
-        System.out.println();
+        tableRow.append("\n");
+        return tableRow.toString();
     }
 
     /**
@@ -85,8 +95,8 @@ public class UiTable {
      * @param content The content to be inserted into the current cell of the table.
      * @param width   Maximum width needed for the current cell.
      */
-    private void printCell(String content, int width) {
-        System.out.print(" " + content + " ".repeat(width - content.length()) + " |");
+    private static String getCell(String content, int width) {
+        return " " + content + " ".repeat(width - content.length()) + " |";
     }
 
 }

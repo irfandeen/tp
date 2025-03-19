@@ -1,6 +1,7 @@
 package seedu.duke.model;
 
 import seedu.duke.main.Constants;
+import seedu.duke.ui.UiMain;
 import seedu.duke.ui.UiTable;
 
 import java.util.ArrayList;
@@ -34,9 +35,10 @@ public class ApplicationManager {
      * Lists all internship applications in a table format.
      */
     public void listApplication() throws Exception {
-        UiTable uiTable = new UiTable();
-        ArrayList<ArrayList<String>> applicationTable = new ArrayList<>();
-        applicationTable.add(Constants.TABLE_HEADER_ARRAYLIST);
+        UiMain uiMain = new UiMain();
+
+        ArrayList<ArrayList<String>> applications = new ArrayList<>();
+        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
 
         for (int i = 0; i < applicationList.size(); i++) {
             ArrayList<String> applicationRow = new ArrayList<>();
@@ -45,9 +47,9 @@ public class ApplicationManager {
             applicationRow.add(applicationList.get(i).getJobTitle());
             applicationRow.add(applicationList.get(i).getStatusToString());
             applicationRow.add("DATE_NOT_IMPLEMENTED");
-            applicationTable.add(applicationRow);
+            applications.add(applicationRow);
         }
-        
-        uiTable.printTable(applicationTable);
+
+        uiMain.printApplications(applications);
     }
 }
