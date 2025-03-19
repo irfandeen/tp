@@ -1,6 +1,5 @@
 package seedu.duke.model;
 
-import seedu.duke.logic.commands.Command;
 import seedu.duke.main.Constants;
 import seedu.duke.ui.UiTable;
 
@@ -14,11 +13,6 @@ public class ApplicationManager {
 
     public ApplicationManager() {
     }
-
-    /**
-     * Executes the given command.
-     * @param command The command to be executed.
-     */
 
     /**
      * Adds a new internship application to the list.
