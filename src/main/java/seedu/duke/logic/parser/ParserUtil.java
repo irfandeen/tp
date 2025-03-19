@@ -2,6 +2,7 @@ package seedu.duke.logic.parser;
 
 
 import seedu.duke.logic.parser.exceptions.ParseException;
+import seedu.duke.logic.validator.JobApplicationIndexValidator;
 import seedu.duke.model.ApplicationStatus;
 import seedu.duke.logic.validator.CompanyNameValidator;
 import seedu.duke.logic.validator.JobTitleValidator;
@@ -16,6 +17,8 @@ public class ParserUtil {
     private static final JobTitleValidator jobTitleValidator = JobTitleValidator.getInstance();
     private static final ApplicationStatusValidator applicationStatusValidator =
             ApplicationStatusValidator.getInstance();
+    private static final JobApplicationIndexValidator jobApplicationIndexValidator =
+            JobApplicationIndexValidator.getInstance();
 
     public static String parseCompanyName(String companyName)
             throws ParseException {
@@ -23,6 +26,19 @@ public class ParserUtil {
             throw new ParseException("Invalid Company Name: " + companyName);
         }
         return companyName.trim();
+    }
+
+    /**
+     * Parses job application index provided by user, ensuring it is a numeric only string and its a valid index.
+     * @param indexString Argument containing the index of job application
+     * @return Index of job application
+     * @throws ParseException
+     */
+    public static int parseJobApplicationIndex(String indexString) throws ParseException {
+        if (!jobApplicationIndexValidator.validate(indexString)) {
+            throw new ParseException("Job Application Index must be numeric: " + indexString);
+        }
+        return Integer.parseInt(indexString.trim());
     }
 
     public static String parseJobTitle(String jobTitle)
