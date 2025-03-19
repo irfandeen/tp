@@ -3,7 +3,6 @@ package seedu.duke.ui;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.ui.UiTable;
 
 import java.util.ArrayList;
 
