@@ -6,7 +6,7 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 public class ExitCommandParser implements Parser<ExitCommand>{
     @Override
     public ExitCommand parse(String args) throws ParseException {
-        if (!args.isEmpty()) {
+        if (args != null) {
             throw new ParseException("Invalid arguments: " + args);
         }
 
