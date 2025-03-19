@@ -1,9 +1,9 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import seedu.duke.ui.exceptions.EmptyTableException;
-import seedu.duke.main.Constants;
+
 
 /**
  * Handles the printing of table cells for listing of the applications

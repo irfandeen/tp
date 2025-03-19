@@ -2,7 +2,6 @@ package seedu.duke.model;
 
 import seedu.duke.main.Constants;
 import seedu.duke.ui.UiMain;
-import seedu.duke.ui.UiTable;
 
 import java.util.ArrayList;
 
