@@ -5,7 +5,11 @@ import java.util.Scanner;
 import seedu.duke.main.Constants;
 
 public class UiMain {
-    private final Scanner scan = new Scanner(System.in);
+    private final Scanner scan;
+
+    public UiMain() {
+       this.scan = new Scanner(System.in);
+    }
 
     public void introMessage() {
         System.out.println(Constants.LOGO);
