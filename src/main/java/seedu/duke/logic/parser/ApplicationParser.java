@@ -1,5 +1,6 @@
 package seedu.duke.logic.parser;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +18,7 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 public class ApplicationParser {
 
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "^(?<commandWord>\\S+)(?:\\s+(?<arguments>.+))?$");
+            "^(?<commandWord>\\S+)(?<arguments>.+)?$");
 
     public static Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
