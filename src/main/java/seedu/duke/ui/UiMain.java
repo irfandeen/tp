@@ -8,7 +8,7 @@ public class UiMain {
     private final Scanner scan;
 
     public UiMain() {
-       this.scan = new Scanner(System.in);
+        this.scan = new Scanner(System.in);
     }
 
     public void introMessage() {
