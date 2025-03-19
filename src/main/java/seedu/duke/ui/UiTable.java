@@ -16,10 +16,6 @@ import seedu.duke.ui.exceptions.EmptyTableException;
  * +----+---------+-----------+------------------+---------------------+
  */
 public final class UiTable {
-
-    public UiTable() {
-    }
-
     /**
      * Takes a 2-dimensional array of strings and print the data as a table on the CLI, row by row.
      *

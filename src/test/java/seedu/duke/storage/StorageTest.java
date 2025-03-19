@@ -56,7 +56,7 @@ class StorageTest {
         writeToFileInvalidJobApplications();
         Storage storage = new StorageManager(testFilePath);
 
-        assertThrows(InvalidDelimitedStringException.class, () -> storage.readApplicationsFromFile(),
+        assertThrows(InvalidDelimitedStringException.class, storage::readApplicationsFromFile,
                 "Invalid storage format throws InvalidDelimitedStringException.");
     }
 }
