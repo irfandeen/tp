@@ -8,8 +8,8 @@ import static seedu.duke.logic.parser.ParserUtil.parseJobApplicationIndex;
 public class DeleteCommandParser implements Parser<DeleteCommand>{
     /**
      * Parses the delete command. Delete takes in index of job application, and deletes it.
-     * @param input Index to delete it if valid
-     * @return DeleteCommand object
+     * @param indexString Index to delete it if valid
+     * @return DeleteCommand objectbbbbp
      * @throws ParseException
      */
     @Override
