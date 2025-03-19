@@ -1,9 +1,9 @@
 package seedu.duke.model;
 
 public class InternshipApplication {
-    private String companyName;
-    private String jobTitle;
-    private ApplicationStatus status;
+    private final String companyName;
+    private final String jobTitle;
+    private final ApplicationStatus status;
 
     public InternshipApplication(String companyName, String jobTitle, ApplicationStatus status) {
         this.companyName = companyName;

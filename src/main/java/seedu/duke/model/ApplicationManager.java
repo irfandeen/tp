@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Manages the list of internship applications.
  */
 public class ApplicationManager {
-    private static ArrayList<InternshipApplication> applicationList = new ArrayList<>();
+    private static final ArrayList<InternshipApplication> applicationList = new ArrayList<>();
 
     private ApplicationManager() {
     }
