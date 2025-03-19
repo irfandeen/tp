@@ -23,8 +23,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(ApplicationManager applicationManager) {
         InternshipApplication newApplication = new InternshipApplication(companyName, jobTitle, status);
-        ApplicationManager.addApplication(newApplication);
+        applicationManager.addApplication(newApplication);
     }
 }
