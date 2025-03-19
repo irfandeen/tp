@@ -3,6 +3,8 @@ package seedu.duke.logic.commands;
 import seedu.duke.model.ApplicationManager;
 
 public class ListCommand extends Command {
+    public static final String COMMAND_WORD = "list";
+
     public ListCommand() {
     }
 
