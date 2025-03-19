@@ -13,8 +13,13 @@ import java.util.Scanner;
 
 public class StorageManager implements Storage {
     private static final String DEFAULT_FILE_PATH = "data.txt";
-    private String filePath;
+    private final String filePath;
     private File file;
+
+    public StorageManager(String filePath) {
+        this.filePath = filePath;
+        this.file = new File(filePath);
+    }
 
     public StorageManager() {
         this.filePath = DEFAULT_FILE_PATH;
@@ -26,26 +31,20 @@ public class StorageManager implements Storage {
         return filePath;
     }
 
-    // For future extensions when user can choose where to store data
-    @Override
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     @Override
     public InternshipApplication[] readApplicationsFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
-        Scanner scanner = new Scanner(file);
+        Scanner fileScanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        while (fileScanner.hasNextLine()) {
+            String line = fileScanner.nextLine();
             InternshipApplication application = ApplicationSerializer.delimitedStringToApplication(line);
             applicationsList.add(application);
         }
 
-        scanner.close();
+        fileScanner.close();
         return applicationsList.toArray(new InternshipApplication[0]);
     }
 
