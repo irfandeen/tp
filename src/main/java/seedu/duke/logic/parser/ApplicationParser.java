@@ -4,9 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.AddCommand;
 import seedu.duke.logic.commands.ExitCommand;
 import seedu.duke.logic.commands.HelpCommand;
+import seedu.duke.logic.commands.DeleteCommand;
+import seedu.duke.logic.commands.AddCommand;
 import seedu.duke.logic.commands.ListCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
@@ -36,6 +37,9 @@ public class ApplicationParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommandParser().parse(arguments);
