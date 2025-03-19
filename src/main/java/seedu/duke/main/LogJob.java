@@ -17,11 +17,12 @@ public class LogJob {
     public static void main(String[] args) {
         //StorageManager storage = new StorageManager();
         ApplicationManager applicationManager = new ApplicationManager();
-        UiMain.introMessage();
+        UiMain uiMain = new UiMain();
+        uiMain.introMessage();
         while (isRunning) {
             try {
-                String input = UiMain.readInput();
-                UiMain.showLineBreak();
+                String input = uiMain.readInput();
+                uiMain.showLineBreak();
                 Command c = ApplicationParser.parseCommand(input);
                 isRunning = c.isRunning();
                 c.execute(applicationManager);
@@ -30,6 +31,6 @@ public class LogJob {
             }
         }
 
-        UiMain.exitMessage();
+        uiMain.exitMessage();
     }
 }

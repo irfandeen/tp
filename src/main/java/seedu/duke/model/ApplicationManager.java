@@ -34,6 +34,7 @@ public class ApplicationManager {
      * Lists all internship applications in a table format.
      */
     public void listApplication() throws Exception {
+        UiTable uiTable = new UiTable();
         ArrayList<ArrayList<String>> applicationTable = new ArrayList<>();
         applicationTable.add(Constants.TABLE_HEADER_ARRAYLIST);
 
@@ -47,6 +48,6 @@ public class ApplicationManager {
             applicationTable.add(applicationRow);
         }
         
-        UiTable.printTable(applicationTable);
+        uiTable.printTable(applicationTable);
     }
 }

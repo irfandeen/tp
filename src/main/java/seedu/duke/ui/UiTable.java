@@ -1,9 +1,7 @@
 package seedu.duke.ui;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import seedu.duke.main.Constants;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
 /**
@@ -15,13 +13,13 @@ import seedu.duke.ui.exceptions.EmptyTableException;
  * | 1  | Google  | SWE       | Resume Screening | NULL                |
  * +----+---------+-----------+------------------+---------------------+
  */
-public final class UiTable {
+public class UiTable {
     /**
      * Takes a 2-dimensional array of strings and print the data as a table on the CLI, row by row.
      *
      * @param data 2-d ArrayList of String.
      */
-    public static void printTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
+    public void printTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
         if (data.isEmpty()) {
             throw new EmptyTableException("Empty table");
         }
@@ -42,7 +40,7 @@ public final class UiTable {
      * @param data 2-d ArrayList of String.
      * @return An array of widths representing the maximum width needed for corresponding columns.
      */
-    private static int[] getColumnWidths(ArrayList<ArrayList<String>> data) {
+    private int[] getColumnWidths(ArrayList<ArrayList<String>> data) {
         int columns = data.get(0).size();
         int[] widths = new int[columns];
 
@@ -59,7 +57,7 @@ public final class UiTable {
      *
      * @param columnWidths An array of widths representing the maximum width needed for corresponding columns.
      */
-    private static void printHorizontalBorder(int[] columnWidths) {
+    private void printHorizontalBorder(int[] columnWidths) {
         System.out.print("+");
         for (int width : columnWidths) {
             System.out.print("-".repeat(width + 2) + "+");
@@ -73,7 +71,7 @@ public final class UiTable {
      * @param row          An arraylist of string to be displayed as a row in the table.
      * @param columnWidths An array of widths representing the maximum width needed for corresponding columns.
      */
-    private static void printRow(ArrayList<String> row, int[] columnWidths) {
+    private void printRow(ArrayList<String> row, int[] columnWidths) {
         System.out.print("|");
         for (int i = 0; i < row.size(); i++) {
             printCell(row.get(i), columnWidths[i]);
@@ -87,22 +85,8 @@ public final class UiTable {
      * @param content The content to be inserted into the current cell of the table.
      * @param width   Maximum width needed for the current cell.
      */
-    private static void printCell(String content, int width) {
+    private void printCell(String content, int width) {
         System.out.print(" " + content + " ".repeat(width - content.length()) + " |");
     }
 
-    // For testing purposes only
-    public static void main(String[] args) {
-        System.out.println(Constants.LOGO);
-        ArrayList<ArrayList<String>> data = new ArrayList<>(List.of(
-                Constants.TABLE_HEADER_ARRAYLIST,
-                new ArrayList<>(List.of("1", "Google", "SWE", "Resume Screening", "NULL"))
-        ));
-
-        try {
-            printTable(data);
-        } catch (Exception e) {
-            System.out.println("Empty Table");
-        }
-    }
 }
