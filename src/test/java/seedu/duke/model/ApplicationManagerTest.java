@@ -1,6 +1,7 @@
 package seedu.duke.model;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ class ApplicationManagerTest {
         DummyApplicationManager manager = new DummyApplicationManager();
         String expectedCompany = "ExampleCorp";
         String expectedJobTitle = "Developer";
-        InternshipApplication application = new InternshipApplication(expectedCompany, expectedJobTitle, ApplicationStatus.APPLIED);
+        InternshipApplication application =
+                new InternshipApplication(expectedCompany, expectedJobTitle, ApplicationStatus.APPLIED);
 
         manager.addApplication(application);
         assertEquals(1, manager.getApplications().size(), "One application should be added.");
