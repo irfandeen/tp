@@ -8,7 +8,7 @@ public class JobApplicationIndexValidator implements Validator<String> {
         String trimmedJobApplicationIndex = jobApplicationIndex.trim();
 
         try {
-            Integer.parseInt(trimmedJobApplicationIndexgit );
+            Integer.parseInt(trimmedJobApplicationIndex);
         } catch (NumberFormatException e) {
             return false;
         }
