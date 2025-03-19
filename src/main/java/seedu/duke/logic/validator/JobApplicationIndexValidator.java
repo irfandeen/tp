@@ -5,8 +5,10 @@ public class JobApplicationIndexValidator implements Validator<String> {
 
     @Override
     public boolean validate(String jobApplicationIndex) {
+        String trimmedJobApplicationIndex = jobApplicationIndex.trim();
+
         try {
-            Integer.parseInt(jobApplicationIndex);
+            Integer.parseInt(trimmedJobApplicationIndexgit );
         } catch (NumberFormatException e) {
             return false;
         }
