@@ -3,8 +3,8 @@ package seedu.duke.main;
 import seedu.duke.ui.UiMain;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.parser.ApplicationParser;
-import seedu.duke.logic.parser.exceptions.ParseException;
-import seedu.duke.storage.StorageManager;
+//import seedu.duke.logic.parser.exceptions.ParseException; I catch all Exceptions for easier debugging first next time change back
+//import seedu.duke.storage.StorageManager; Enable when storage is implemented
 import seedu.duke.model.ApplicationManager;
 
 public class Duke {
