@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.AddCommand;
+import seedu.duke.logic.commands.ExitCommand;
+import seedu.duke.logic.commands.HelpCommand;
+import seedu.duke.logic.commands.ListCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
 /**
@@ -19,7 +22,7 @@ public class ApplicationParser {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
-            throw new ParseException("abc");
+            throw new ParseException("Empty Command");
         }
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
@@ -28,8 +31,17 @@ public class ApplicationParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case ListCommand.COMMAND_WORD:
+            return new ListCommandParser().parse(arguments);
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommandParser().parse(arguments);
+
         default:
-            return null;
+            throw new ParseException("Unknown command word: " + commandWord);
         }
 
     }
