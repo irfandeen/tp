@@ -12,10 +12,12 @@ import java.util.List;
 
 
 public class ArgumentTokenizerTest {
-    private final Flag invalidFlag = new Flag("--i");
-    private final Flag nameFlag = new Flag("-n");
-    private final Flag wFlag = new Flag("/W");
-    private final Flag zFlag = new Flag("~z");
+    private static final Flag invalidFlag = new Flag("--i");
+    private static final Flag nameFlag = new Flag("-n");
+    private static final Flag jobTitleFlag = new Flag("-j");
+    private static final Flag statusFlag = new Flag("-s");
+    private static final Flag wFlag = new Flag("/W");
+    private static final Flag zFlag = new Flag("~z");
 
     @Test
     public void tokenize_oneArg_success() {
@@ -27,7 +29,18 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_multipleArgs_success() {
+    public void tokenize_threeArgs_success() {
+        String argString = " -n JP Morgan & Chase -j Risk Analyst Intern -s 0";
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag, jobTitleFlag, statusFlag);
+
+        assertFalse(argMap.isEmpty());
+        assertArgumentExists(argMap, nameFlag, "JP Morgan & Chase");
+        assertArgumentExists(argMap, jobTitleFlag, "Risk Analyst Intern");
+        assertArgumentExists(argMap, statusFlag, "0");
+    }
+
+    @Test
+    public void tokenize_duplicateArgs_success() {
         String argString = " ~z first z argument     -n Bytedance Asia  /W W argument ~z second z argument  ";
         HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag, wFlag, zFlag);
 
