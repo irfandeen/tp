@@ -14,14 +14,6 @@ public interface Storage {
     public String getFilePath();
 
     /**
-     * Set the preferred location to store application data.
-     * If left undeclared, will be intialized to default location.
-     *
-     * @param filePath Relative file path of data file
-     */
-    public void setFilePath(String filePath);
-
-    /**
      * Reads data file from memory and loads it into program.
      *
      * @return Array of InternshipApplication objects
