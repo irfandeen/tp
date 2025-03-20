@@ -1,23 +1,39 @@
 package seedu.duke.main;
 
+import seedu.duke.model.InternshipApplication;
+import seedu.duke.storage.Storage;
+import seedu.duke.storage.StorageManager;
+import seedu.duke.storage.exceptions.InvalidDelimitedStringException;
+import seedu.duke.storage.exceptions.StorageException;
 import seedu.duke.ui.UiMain;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.parser.ApplicationParser;
-//I catch all Exceptions for easier debugging first next time change back
-//import seedu.duke.logic.parser.exceptions.ParseException;
 
-//Enable when storage is implemented
-//import seedu.duke.storage.StorageManager;
 import seedu.duke.model.ApplicationManager;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class LogJob {
 
     private static Boolean isRunning = true;
 
     public static void main(String[] args) {
-        //StorageManager storage = new StorageManager();
+        Storage storage = new StorageManager();
         ApplicationManager applicationManager = new ApplicationManager();
         UiMain uiMain = new UiMain();
+        InternshipApplication[] internships =  null;
+
+        try {
+            internships = storage.readApplicationsFromFile();
+        } catch (IOException | StorageException | InvalidDelimitedStringException e) {
+            uiMain.print(e.getMessage());
+        }
+
+        assert internships != null;
+        for (InternshipApplication internship : internships) {
+            applicationManager.addApplication(internship);
+        }
+
         uiMain.introMessage();
         while (isRunning) {
             try {
@@ -31,6 +47,13 @@ public class LogJob {
             }
         }
 
+        ArrayList<InternshipApplication> latestApplications = applicationManager.getArrayList();
+        InternshipApplication[] applicationsArray = latestApplications.toArray(new InternshipApplication[0]);
+        try {
+            storage.storeApplicationsToFile(applicationsArray);
+        } catch (StorageException e) {
+            uiMain.print(e.getMessage());
+        }
         uiMain.exitMessage();
     }
 }
