@@ -51,4 +51,8 @@ public class ApplicationManager {
 
         uiMain.printApplications(applications);
     }
+
+    public ArrayList<InternshipApplication> getArrayList() {
+        return applicationList;
+    }
 }

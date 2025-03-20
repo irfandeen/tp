@@ -36,6 +36,10 @@ public class UiMain {
         return input;
     }
 
+    public void print(String output) {
+        System.out.println(output);
+    }
+
     public void showLineBreak() {
         System.out.println(Constants.LINE_BREAK);
     }
