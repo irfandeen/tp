@@ -4,12 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.model.ApplicationManager;
+import seedu.duke.model.InternshipApplication;
+import seedu.duke.ui.exceptions.EmptyTableException;
+
+import java.util.ArrayList;
 
 public class ListCommandTest {
 
     // Dummy ApplicationManager to record if listApplication is invoked.
     private class DummyApplicationManager extends ApplicationManager {
         boolean listCalled = false;
+
+        public DummyApplicationManager() {
+            super(new ArrayList<InternshipApplication>());
+        }
 
         @Override
         public void listApplication() {
@@ -22,7 +30,7 @@ public class ListCommandTest {
     }
 
     @Test
-    void execute_callsListApplication() {
+    void execute_callsListApplication() throws EmptyTableException {
         DummyApplicationManager dummyManager = new DummyApplicationManager();
         ListCommand listCommand = new ListCommand();
 

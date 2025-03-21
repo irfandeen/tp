@@ -2,6 +2,7 @@ package seedu.duke.model;
 
 import seedu.duke.main.Constants;
 import seedu.duke.ui.UiMain;
+import seedu.duke.ui.exceptions.EmptyTableException;
 
 import java.util.ArrayList;
 
@@ -9,9 +10,10 @@ import java.util.ArrayList;
  * Manages the list of internship applications.
  */
 public class ApplicationManager {
-    private final ArrayList<InternshipApplication> applicationList = new ArrayList<>();
+    private ArrayList<InternshipApplication> applicationList;
 
-    public ApplicationManager() {
+    public ApplicationManager(ArrayList<InternshipApplication> applicationList) {
+        this.applicationList = applicationList;
     }
 
     /**
@@ -33,7 +35,7 @@ public class ApplicationManager {
     /**
      * Lists all internship applications in a table format.
      */
-    public void listApplication() throws Exception {
+    public void listApplication() throws EmptyTableException {
         UiMain uiMain = new UiMain();
 
         ArrayList<ArrayList<String>> applications = new ArrayList<>();
@@ -54,5 +56,9 @@ public class ApplicationManager {
 
     public ArrayList<InternshipApplication> getArrayList() {
         return applicationList;
+    }
+
+    public int getSize() {
+        return applicationList.size();
     }
 }

@@ -19,9 +19,8 @@ public class LogJob {
 
     public static void main(String[] args) {
         Storage storage = new StorageManager();
-        ApplicationManager applicationManager = new ApplicationManager();
         UiMain uiMain = new UiMain();
-        InternshipApplication[] internships =  null;
+        ArrayList<InternshipApplication> internships =  null;
 
         try {
             internships = storage.readApplicationsFromFile();
@@ -30,9 +29,8 @@ public class LogJob {
         }
 
         assert internships != null;
-        for (InternshipApplication internship : internships) {
-            applicationManager.addApplication(internship);
-        }
+
+        ApplicationManager applicationManager = new ApplicationManager(internships);
 
         uiMain.introMessage();
         while (isRunning) {

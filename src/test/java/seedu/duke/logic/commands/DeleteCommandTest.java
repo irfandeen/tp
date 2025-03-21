@@ -14,6 +14,10 @@ public class DeleteCommandTest {
     private class DummyApplicationManager extends ApplicationManager {
         private final ArrayList<InternshipApplication> applications = new ArrayList<>();
 
+        public DummyApplicationManager() {
+            super(new ArrayList<InternshipApplication>());
+        }
+
         @Override
         public void addApplication(InternshipApplication application) {
             applications.add(application);
@@ -22,6 +26,11 @@ public class DeleteCommandTest {
         @Override
         public void deleteApplication(int index) {
             applications.remove(index);
+        }
+
+        @Override
+        public int getSize() {
+            return applications.size();
         }
 
         public ArrayList<InternshipApplication> getApplications() {
@@ -39,7 +48,7 @@ public class DeleteCommandTest {
 
         dummyManager.addApplication(app1);
         dummyManager.addApplication(app2);
-        assertEquals(2, dummyManager.getApplications().size());
+        assertEquals(2, dummyManager.getSize());
 
         // Delete the first application.
         DeleteCommand deleteCommand = new DeleteCommand(0);

@@ -5,14 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.duke.main.Constants;
 import seedu.duke.model.ApplicationManager;
+import seedu.duke.model.InternshipApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 public class HelpCommandTest {
 
     // Dummy ApplicationManager for testing
-    private class DummyApplicationManager extends ApplicationManager { }
+    private class DummyApplicationManager extends ApplicationManager {
+        public DummyApplicationManager() {
+            super(new ArrayList<InternshipApplication>());
+        }
+    }
 
     @Test
     void execute_printsHelpMessage() {

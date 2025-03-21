@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -45,8 +46,9 @@ class StorageTest {
         Storage storage = new StorageManager(testFilePath);
 
         File testFile = new File(testFilePath);
-        InternshipApplication[] applications = storage.readApplicationsFromFile();
-        assertEquals(Files.lines(Path.of(testFilePath)).count(), applications.length,
+        ArrayList<InternshipApplication> applications;
+        applications = storage.readApplicationsFromFile();
+        assertEquals(Files.lines(Path.of(testFilePath)).count(), applications.size(),
                 "Number of applications should be the same.");
     }
 

@@ -15,6 +15,10 @@ public class AddCommandTest {
     private class DummyApplicationManager extends ApplicationManager {
         private final ArrayList<InternshipApplication> applications = new ArrayList<>();
 
+        public DummyApplicationManager() {
+            super(new ArrayList<InternshipApplication>());
+        }
+
         @Override
         public void addApplication(InternshipApplication application) {
             applications.add(application);

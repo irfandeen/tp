@@ -1,6 +1,7 @@
 package seedu.duke.logic.commands;
 
 import seedu.duke.model.ApplicationManager;
+import seedu.duke.ui.exceptions.EmptyTableException;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -9,11 +10,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(ApplicationManager applicationManager) {
+    public void execute (ApplicationManager applicationManager) throws EmptyTableException {
         try {
             applicationManager.listApplication();
-        } catch (Exception e) {
-            System.out.println("There are no applications in the list.");
+        } catch (EmptyTableException e) {
+            throw e;
         }
     }
 }
