@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.model.InternshipApplication;
+import seedu.duke.ui.UiMain;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,8 @@ public class ExitCommandTest {
         DummyApplicationManager dummyManager = new DummyApplicationManager();
 
         // Execute the command (should do nothing but not throw an exception)
-        exitCommand.execute(dummyManager);
+        UiMain uiMain = UiMain.getInstance();
+        exitCommand.execute(dummyManager, uiMain);
 
         // isRunning should return false
         assertFalse(exitCommand.isRunning());

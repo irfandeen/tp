@@ -19,13 +19,13 @@ public class LogJob {
 
     public static void main(String[] args) {
         Storage storage = new StorageManager();
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         ArrayList<InternshipApplication> internships =  null;
 
         try {
             internships = storage.readApplicationsFromFile();
-        } catch (IOException | StorageException | InvalidDelimitedStringException e) {
-            uiMain.print(e.getMessage());
+        } catch (IOException | StorageException | InvalidDelimitedStringException exception) {
+            uiMain.handleError(exception);
         }
 
         assert internships != null;
@@ -37,11 +37,11 @@ public class LogJob {
             try {
                 String input = uiMain.readInput();
                 uiMain.showLineBreak();
-                Command c = ApplicationParser.parseCommand(input);
-                isRunning = c.isRunning();
-                c.execute(applicationManager);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Command command = ApplicationParser.parseCommand(input);
+                isRunning = command.isRunning();
+                command.execute(applicationManager, uiMain);
+            } catch (Exception exception) {
+                uiMain.handleError(exception);
             }
         }
 
@@ -49,8 +49,8 @@ public class LogJob {
         InternshipApplication[] applicationsArray = latestApplications.toArray(new InternshipApplication[0]);
         try {
             storage.storeApplicationsToFile(applicationsArray);
-        } catch (StorageException e) {
-            uiMain.print(e.getMessage());
+        } catch (StorageException exception) {
+            uiMain.handleError(exception);
         }
         uiMain.exitMessage();
     }

@@ -21,8 +21,10 @@ public final class UiTable {
      * @param data 2-d ArrayList of String.
      */
     public static String getTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
-        if (data.isEmpty()) {
-            throw new EmptyTableException("Empty table");
+        assert data != null : "Data should not be null";
+
+        if (data.size() <= 1) {
+            throw new EmptyTableException("Table is empty");
         }
 
         StringBuilder table = new StringBuilder();
@@ -96,6 +98,8 @@ public final class UiTable {
      * @param width   Maximum width needed for the current cell.
      */
     private static String getCell(String content, int width) {
+        assert content != null : "Cell content should not be null";
+
         return " " + content + " ".repeat(width - content.length()) + " |";
     }
 
