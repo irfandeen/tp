@@ -38,7 +38,7 @@ public class AddCommandTest {
 
         // Using the constructor with default status (APPLIED)
         AddCommand addCmd = new AddCommand(companyName, jobTitle);
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         addCmd.execute(dummyManager, uiMain);
 
         // Ensure one application is added
@@ -58,7 +58,7 @@ public class AddCommandTest {
 
         // Using the constructor with the custom status
         AddCommand addCmd = new AddCommand(companyName, jobTitle, customStatus);
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         addCmd.execute(dummyManager, uiMain);
 
         // Verify the application details

@@ -19,7 +19,7 @@ public class LogJob {
 
     public static void main(String[] args) {
         Storage storage = new StorageManager();
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         ArrayList<InternshipApplication> internships =  null;
 
         try {

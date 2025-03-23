@@ -1,6 +1,5 @@
 package seedu.duke.model;
 
-import seedu.duke.main.Constants;
 import seedu.duke.ui.UiMain;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
@@ -38,20 +37,7 @@ public class ApplicationManager {
      * Lists all internship applications in a table format.
      */
     public void listApplication(UiMain uiMain) throws EmptyTableException {
-        ArrayList<ArrayList<String>> applications = new ArrayList<>();
-        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
-
-        for (int i = 0; i < applicationList.size(); i++) {
-            ArrayList<String> applicationRow = new ArrayList<>();
-            applicationRow.add(Integer.toString(i));
-            applicationRow.add(applicationList.get(i).getCompanyName());
-            applicationRow.add(applicationList.get(i).getJobTitle());
-            applicationRow.add(applicationList.get(i).getStatusToString());
-            applicationRow.add("DATE_NOT_IMPLEMENTED");
-            applications.add(applicationRow);
-        }
-
-        uiMain.printApplications(applications);
+        uiMain.printApplications(this.applicationList);
     }
 
     public ArrayList<InternshipApplication> getArrayList() {

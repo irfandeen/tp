@@ -31,7 +31,7 @@ public class HelpCommandTest {
         // Execute HelpCommand
         HelpCommand helpCommand = new HelpCommand();
         DummyApplicationManager dummyManager = new DummyApplicationManager();
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         helpCommand.execute(dummyManager, uiMain);
 
         // Restore System.out

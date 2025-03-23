@@ -46,7 +46,7 @@ public class DeleteCommandTest {
         // Add two applications to the manager.
         InternshipApplication app1 = new InternshipApplication("TechCorp", "Software Engineer");
         InternshipApplication app2 = new InternshipApplication("InnovateHub", "Product Manager");
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         dummyManager.addApplication(app1, uiMain);
         dummyManager.addApplication(app2, uiMain);
         assertEquals(2, dummyManager.getSize());

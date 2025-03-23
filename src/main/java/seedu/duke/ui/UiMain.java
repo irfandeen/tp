@@ -8,13 +8,32 @@ import seedu.duke.model.InternshipApplication;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
 public class UiMain {
-    private final Scanner scan;
+    private static UiMain ui = null;
+    private final Scanner scan = new Scanner(System.in);
 
-    public UiMain() {
-        this.scan = new Scanner(System.in);
+    private UiMain() {}
+
+    public static UiMain getInstance() {
+        if(ui == null) {
+            ui = new UiMain();
+        }
+        return ui;
     }
 
-    public void printApplications(ArrayList<ArrayList<String>> applications) throws EmptyTableException {
+    public void printApplications(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
+        ArrayList<ArrayList<String>> applications = new ArrayList<>();
+        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
+
+        for (int i = 0; i < applicationList.size(); i++) {
+            ArrayList<String> applicationRow = new ArrayList<>();
+            applicationRow.add(Integer.toString(i));
+            applicationRow.add(applicationList.get(i).getCompanyName());
+            applicationRow.add(applicationList.get(i).getJobTitle());
+            applicationRow.add(applicationList.get(i).getStatusToString());
+            applicationRow.add("DATE_NOT_IMPLEMENTED");
+            applications.add(applicationRow);
+        }
+
         String table = UiTable.getTable(applications);
         System.out.println(table);
     }
@@ -25,6 +44,8 @@ public class UiMain {
                         + application.getCompanyName()
                         + " "
                         + application.getJobTitle()
+                        + " "
+                        + application.getStatusToString()
                         + " Added Successfully");
     }
 

@@ -37,7 +37,7 @@ class ApplicationManagerTest {
         InternshipApplication application =
                 new InternshipApplication(expectedCompany, expectedJobTitle, ApplicationStatus.APPLIED);
 
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         manager.addApplication(application, uiMain);
         assertEquals(1, manager.getApplications().size(), "One application should be added.");
         InternshipApplication stored = manager.getApplications().get(0);

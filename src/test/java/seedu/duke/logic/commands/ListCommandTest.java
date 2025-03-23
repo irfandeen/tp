@@ -36,7 +36,7 @@ public class ListCommandTest {
         ListCommand listCommand = new ListCommand();
 
         // Execute the ListCommand and verify listApplication is called.
-        UiMain uiMain = new UiMain();
+        UiMain uiMain = UiMain.getInstance();
         listCommand.execute(dummyManager, uiMain);
         assertTrue(dummyManager.isListCalled());
     }

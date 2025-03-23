@@ -21,7 +21,7 @@ public final class UiTable {
      * @param data 2-d ArrayList of String.
      */
     public static String getTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
-        if (data.size() == 1) {
+        if (data.size() <= 1) {
             throw new EmptyTableException("Table is empty");
         }
 
