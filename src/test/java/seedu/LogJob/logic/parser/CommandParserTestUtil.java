@@ -1,11 +1,11 @@
-package seedu.duke.logic.parser;
+package seedu.LogJob.logic.parser;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.parser.exceptions.ParseException;
+import seedu.LogJob.logic.commands.Command;
+import seedu.LogJob.logic.parser.exceptions.ParseException;
 
 public class CommandParserTestUtil {
     private static final Logger logger = Logger.getLogger(CommandParserTestUtil.class.getName());

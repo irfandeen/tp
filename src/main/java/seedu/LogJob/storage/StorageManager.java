@@ -3,6 +3,7 @@ package seedu.LogJob.storage;
 import seedu.LogJob.model.InternshipApplication;
 import seedu.LogJob.storage.exceptions.InvalidDelimitedStringException;
 import seedu.LogJob.storage.exceptions.StorageException;
+import seedu.LogJob.util.RootLogger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,12 +11,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class StorageManager implements Storage {
     private static final String DEFAULT_FILE_PATH = "data.txt";
     private final String filePath;
     private File file;
     private static final String FILE_NOT_FOUND_FAILURE = "File does not exist && StorageException not thrown";
+    private static final Logger logger = RootLogger.getLogger();
 
     public StorageManager(String filePath) {
         this.filePath = filePath;
@@ -37,6 +40,7 @@ public class StorageManager implements Storage {
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
+        logger.info("Reading applications from file " + filePath);
         Scanner fileScanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
@@ -47,6 +51,7 @@ public class StorageManager implements Storage {
         }
 
         fileScanner.close();
+        logger.info("Successfully read applications from file " + filePath);
         return applicationsList;
     }
 
@@ -54,6 +59,7 @@ public class StorageManager implements Storage {
     public void storeApplicationsToFile(InternshipApplication[] applications) throws StorageException {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
+        logger.info("Storing applications to file " + filePath);
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(file);
@@ -72,12 +78,15 @@ public class StorageManager implements Storage {
         } catch (IOException e) {
             throw new StorageException("Could not close file " + file);
         }
+        logger.info("Successfully stored applications to file " + filePath);
     }
 
     private void requireNonNullFile() throws StorageException {
         if (file.exists()) {
+            logger.info("File already exists " + filePath);
             return;
         }
+        logger.info("Creating file " + filePath);
         createUserPrefsFile();
     }
 
@@ -87,6 +96,7 @@ public class StorageManager implements Storage {
             FileWriter writer = new FileWriter(file);
             writer.close();
         } catch (IOException e) {
+            logger.warning("LogJob is unable to create file " + filePath);
             throw new StorageException("Could not create file.");
         }
     }
