@@ -4,11 +4,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import seedu.duke.model.ApplicationManager;
+import seedu.duke.model.InternshipApplication;
+
+import java.util.ArrayList;
 
 public class ExitCommandTest {
 
     // Dummy ApplicationManager for testing
-    private class DummyApplicationManager extends ApplicationManager { }
+    private class DummyApplicationManager extends ApplicationManager {
+        public DummyApplicationManager() {
+            super(new ArrayList<InternshipApplication>());
+        }
+    }
 
     @Test
     void execute_returnsNotRunning() {

@@ -32,7 +32,7 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public InternshipApplication[] readApplicationsFromFile()
+    public ArrayList<InternshipApplication> readApplicationsFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
         Scanner fileScanner = new Scanner(file);
@@ -45,7 +45,7 @@ public class StorageManager implements Storage {
         }
 
         fileScanner.close();
-        return applicationsList.toArray(new InternshipApplication[0]);
+        return applicationsList;
     }
 
     @Override
