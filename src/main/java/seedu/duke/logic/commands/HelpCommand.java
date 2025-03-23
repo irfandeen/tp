@@ -1,6 +1,5 @@
 package seedu.duke.logic.commands;
 
-import seedu.duke.main.Constants;
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.ui.UiMain;
 
