@@ -1,35 +1,57 @@
 package seedu.duke.main;
 
+import seedu.duke.model.InternshipApplication;
+import seedu.duke.storage.Storage;
+import seedu.duke.storage.StorageManager;
+import seedu.duke.storage.exceptions.InvalidDelimitedStringException;
+import seedu.duke.storage.exceptions.StorageException;
 import seedu.duke.ui.UiMain;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.parser.ApplicationParser;
-//I catch all Exceptions for easier debugging first next time change back
-//import seedu.duke.logic.parser.exceptions.ParseException;
 
-//Enable when storage is implemented
-//import seedu.duke.storage.StorageManager;
 import seedu.duke.model.ApplicationManager;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class LogJob {
 
     private static Boolean isRunning = true;
 
     public static void main(String[] args) {
-        //StorageManager storage = new StorageManager();
-        ApplicationManager applicationManager = new ApplicationManager();
-        UiMain.introMessage();
+        Storage storage = new StorageManager();
+        UiMain uiMain = UiMain.getInstance();
+        ArrayList<InternshipApplication> internships =  null;
+
+        try {
+            internships = storage.readApplicationsFromFile();
+        } catch (IOException | StorageException | InvalidDelimitedStringException exception) {
+            uiMain.handleError(exception);
+        }
+
+        assert internships != null;
+
+        ApplicationManager applicationManager = new ApplicationManager(internships);
+
+        uiMain.introMessage();
         while (isRunning) {
             try {
-                String input = UiMain.readInput();
-                UiMain.showLineBreak();
-                Command c = ApplicationParser.parseCommand(input);
-                isRunning = c.isRunning();
-                c.execute(applicationManager);
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+                String input = uiMain.readInput();
+                uiMain.showLineBreak();
+                Command command = ApplicationParser.parseCommand(input);
+                isRunning = command.isRunning();
+                command.execute(applicationManager, uiMain);
+            } catch (Exception exception) {
+                uiMain.handleError(exception);
             }
         }
 
-        UiMain.exitMessage();
+        ArrayList<InternshipApplication> latestApplications = applicationManager.getArrayList();
+        InternshipApplication[] applicationsArray = latestApplications.toArray(new InternshipApplication[0]);
+        try {
+            storage.storeApplicationsToFile(applicationsArray);
+        } catch (StorageException exception) {
+            uiMain.handleError(exception);
+        }
+        uiMain.exitMessage();
     }
 }

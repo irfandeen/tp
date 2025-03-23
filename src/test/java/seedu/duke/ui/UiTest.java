@@ -1,16 +1,19 @@
 package seedu.duke.ui;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.jupiter.api.Test;
+import seedu.duke.main.Constants;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class UiTest {
     @Test
-    void uiTable_nullInput_expectException() throws Exception {
-        ArrayList<ArrayList<String>> input = new ArrayList<>();
+    void uiTable_nullInput_expectException() {
 
-        assertThrows(Exception.class, () -> UiTable.printTable(input));
+        ArrayList<ArrayList<String>> applications = new ArrayList<>();
+        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
+
+        assertThrows(Exception.class, () -> UiTable.getTable(applications));
     }
 }

@@ -28,4 +28,8 @@ public class InternshipApplication {
     public String getStatusToString() {
         return this.status.toString();
     }
+
+    public ApplicationStatus getStatus() {
+        return this.status;
+    }
 }

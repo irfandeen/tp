@@ -5,6 +5,7 @@ import seedu.duke.storage.exceptions.InvalidDelimitedStringException;
 import seedu.duke.storage.exceptions.StorageException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public interface Storage {
     /**
@@ -21,7 +22,7 @@ public interface Storage {
      * @throws StorageException
      * @throws InvalidDelimitedStringException
      */
-    public InternshipApplication[] readApplicationsFromFile()
+    public ArrayList<InternshipApplication> readApplicationsFromFile()
             throws IOException, StorageException, InvalidDelimitedStringException;
 
     /**
