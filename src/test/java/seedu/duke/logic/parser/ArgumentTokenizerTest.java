@@ -53,11 +53,63 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
+    public void tokenize_invalidFlag_exit() {
+        String argString = " -n Goldman Sachs -j Summer Analyst Intern";
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag, jobTitleFlag, statusFlag);
+
+        assertArgumentExists(argMap, nameFlag, "Goldman Sachs");
+        assertArgumentExists(argMap, jobTitleFlag, "Summer Analyst Intern");
+        assertArgumentDoesNotExist(argMap, statusFlag);
+        assertArgumentDoesNotExist(argMap, invalidFlag);
+    }
+
+    @Test
     public void tokenize_emptyArgsString_emptyHashMap() {
         String argString = " ";
         HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, nameFlag);
         assertTrue(argMap.isEmpty());
         assertArgumentDoesNotExist(argMap, nameFlag);
+    }
+
+    @Test
+    public void tokenize_emptyArgsWithFlags_success() {
+        String argString = " -n    -j -s";
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, statusFlag, nameFlag, jobTitleFlag);
+        assertFalse(argMap.isEmpty());
+        assertArgumentExists(argMap, nameFlag, "");
+        assertArgumentExists(argMap, jobTitleFlag, "");
+        assertArgumentExists(argMap, statusFlag, "");
+
+    }
+
+    @Test
+    public void tokenize_argStringWithJoinedFlags_success() {
+        String argString = " -n Tiktok -j Software Engineer-s 0";
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, statusFlag, nameFlag, jobTitleFlag);
+        assertFalse(argMap.isEmpty());
+        assertArgumentExists(argMap, nameFlag, "Tiktok");
+        assertArgumentExists(argMap, jobTitleFlag, "Software Engineer-s 0");
+        assertArgumentDoesNotExist(argMap, statusFlag);
+    }
+
+    @Test
+    public void tokenize_noInputFlags_emptyHashMap() {
+        String argString = " -n No flags -j were input -s to tokenize this string";
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString);
+        assertTrue(argMap.isEmpty());
+        assertArgumentDoesNotExist(argMap, nameFlag);
+        assertArgumentDoesNotExist(argMap, jobTitleFlag);
+        assertArgumentDoesNotExist(argMap, statusFlag);
+    }
+
+    @Test
+    public void tokenize_argStringWithNoFlags_emptyHashMap() {
+        String argString = "This string has no flags";
+        HashMap<Flag, List<String>> argMap = ArgumentTokenizer.tokenize(argString, statusFlag, nameFlag, jobTitleFlag);
+        assertTrue(argMap.isEmpty());
+        assertArgumentDoesNotExist(argMap, nameFlag);
+        assertArgumentDoesNotExist(argMap, jobTitleFlag);
+        assertArgumentDoesNotExist(argMap, statusFlag);
     }
 
     private void assertArgumentExists(HashMap<Flag, List<String>> argMap, Flag flag, String argValue) {
