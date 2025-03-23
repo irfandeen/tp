@@ -1,6 +1,7 @@
 package seedu.duke.logic.commands;
 
 import seedu.duke.model.ApplicationManager;
+import seedu.duke.ui.UiMain;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
@@ -9,7 +10,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(ApplicationManager applicationManager) {
+    public void execute(ApplicationManager applicationManager, UiMain uiMain) {
     }
 
     @Override

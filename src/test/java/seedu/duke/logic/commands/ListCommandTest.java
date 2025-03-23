@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.model.InternshipApplication;
+import seedu.duke.ui.UiMain;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ListCommandTest {
         }
 
         @Override
-        public void listApplication() {
+        public void listApplication(UiMain uiMain) {
             listCalled = true;
         }
 
@@ -35,7 +36,8 @@ public class ListCommandTest {
         ListCommand listCommand = new ListCommand();
 
         // Execute the ListCommand and verify listApplication is called.
-        listCommand.execute(dummyManager);
+        UiMain uiMain = UiMain.getInstance();
+        listCommand.execute(dummyManager, uiMain);
         assertTrue(dummyManager.isListCalled());
     }
 }

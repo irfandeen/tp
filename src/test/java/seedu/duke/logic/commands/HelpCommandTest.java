@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.duke.main.Constants;
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.model.InternshipApplication;
+import seedu.duke.ui.UiMain;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -30,7 +31,8 @@ public class HelpCommandTest {
         // Execute HelpCommand
         HelpCommand helpCommand = new HelpCommand();
         DummyApplicationManager dummyManager = new DummyApplicationManager();
-        helpCommand.execute(dummyManager);
+        UiMain uiMain = UiMain.getInstance();
+        helpCommand.execute(dummyManager, uiMain);
 
         // Restore System.out
         System.setOut(originalOut);

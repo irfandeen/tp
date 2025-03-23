@@ -1,6 +1,5 @@
 package seedu.duke.model;
 
-import seedu.duke.main.Constants;
 import seedu.duke.ui.UiMain;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  * Manages the list of internship applications.
  */
 public class ApplicationManager {
-    private ArrayList<InternshipApplication> applicationList;
+    private final ArrayList<InternshipApplication> applicationList;
 
     public ApplicationManager(ArrayList<InternshipApplication> applicationList) {
         this.applicationList = applicationList;
@@ -20,38 +19,25 @@ public class ApplicationManager {
      * Adds a new internship application to the list.
      * @param application The application to be added.
      */
-    public void addApplication(InternshipApplication application) {
+    public void addApplication(InternshipApplication application, UiMain uiMain) {
         applicationList.add(application);
+        uiMain.addSucceedOutput(application);
     }
 
     /**
      * Deletes an internship application from the list.
      * @param index The index of the application to be deleted.
      */
-    public void deleteApplication(int index) {
+    public void deleteApplication(int index, UiMain uiMain) {
         applicationList.remove(index);
+        uiMain.deleteSucceedOutput(index);
     }
 
     /**
      * Lists all internship applications in a table format.
      */
-    public void listApplication() throws EmptyTableException {
-        UiMain uiMain = new UiMain();
-
-        ArrayList<ArrayList<String>> applications = new ArrayList<>();
-        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
-
-        for (int i = 0; i < applicationList.size(); i++) {
-            ArrayList<String> applicationRow = new ArrayList<>();
-            applicationRow.add(Integer.toString(i));
-            applicationRow.add(applicationList.get(i).getCompanyName());
-            applicationRow.add(applicationList.get(i).getJobTitle());
-            applicationRow.add(applicationList.get(i).getStatusToString());
-            applicationRow.add("DATE_NOT_IMPLEMENTED");
-            applications.add(applicationRow);
-        }
-
-        uiMain.printApplications(applications);
+    public void listApplication(UiMain uiMain) throws EmptyTableException {
+        uiMain.printApplications(this.applicationList);
     }
 
     public ArrayList<InternshipApplication> getArrayList() {

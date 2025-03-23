@@ -3,6 +3,7 @@ package seedu.duke.logic.commands;
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.model.ApplicationStatus;
 import seedu.duke.model.InternshipApplication;
+import seedu.duke.ui.UiMain;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -23,8 +24,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(ApplicationManager applicationManager) {
+    public void execute(ApplicationManager applicationManager, UiMain uiMain) {
         InternshipApplication newApplication = new InternshipApplication(companyName, jobTitle, status);
-        applicationManager.addApplication(newApplication);
+        applicationManager.addApplication(newApplication, uiMain);
     }
 }

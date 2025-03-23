@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.duke.model.InternshipApplication;
 import seedu.duke.model.ApplicationManager;
+import seedu.duke.ui.UiMain;
 
 import java.util.ArrayList;
 
@@ -19,12 +20,12 @@ public class DeleteCommandTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application) {
+        public void addApplication(InternshipApplication application, UiMain uiMain) {
             applications.add(application);
         }
 
         @Override
-        public void deleteApplication(int index) {
+        public void deleteApplication(int index, UiMain uiMain) {
             applications.remove(index);
         }
 
@@ -45,14 +46,14 @@ public class DeleteCommandTest {
         // Add two applications to the manager.
         InternshipApplication app1 = new InternshipApplication("TechCorp", "Software Engineer");
         InternshipApplication app2 = new InternshipApplication("InnovateHub", "Product Manager");
-
-        dummyManager.addApplication(app1);
-        dummyManager.addApplication(app2);
+        UiMain uiMain = UiMain.getInstance();
+        dummyManager.addApplication(app1, uiMain);
+        dummyManager.addApplication(app2, uiMain);
         assertEquals(2, dummyManager.getSize());
 
         // Delete the first application.
         DeleteCommand deleteCommand = new DeleteCommand(0);
-        deleteCommand.execute(dummyManager);
+        deleteCommand.execute(dummyManager, uiMain);
 
         // Verify the application at index 0 has been deleted and the remaining application is app2.
         ArrayList<InternshipApplication> remainingApps = dummyManager.getApplications();
