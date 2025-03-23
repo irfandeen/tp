@@ -14,4 +14,7 @@ public abstract class Command {
     public boolean isRunning() {
         return true;
     }
+
+    @Override
+    public abstract boolean equals(Object other);
 }
