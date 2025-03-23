@@ -3,7 +3,7 @@ package seedu.duke.logic.commands;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.duke.main.Constants;
+import seedu.duke.ui.UserInterfaceConstants;
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.model.InternshipApplication;
 import seedu.duke.ui.UiMain;
@@ -38,6 +38,6 @@ public class HelpCommandTest {
         System.setOut(originalOut);
 
         // Verify the output (including the new line)
-        assertEquals(Constants.HELP_MESSAGE + System.lineSeparator(), output.toString());
+        assertEquals(UserInterfaceConstants.HELP_MESSAGE + System.lineSeparator(), output.toString());
     }
 }

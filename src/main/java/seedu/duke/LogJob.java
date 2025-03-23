@@ -1,4 +1,4 @@
-package seedu.duke.main;
+package seedu.duke;
 
 import seedu.duke.model.InternshipApplication;
 import seedu.duke.storage.Storage;

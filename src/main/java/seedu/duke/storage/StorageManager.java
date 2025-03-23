@@ -15,6 +15,7 @@ public class StorageManager implements Storage {
     private static final String DEFAULT_FILE_PATH = "data.txt";
     private final String filePath;
     private File file;
+    private static final String FILE_NOT_FOUND_FAILURE = "File does not exist && StorageException not thrown";
 
     public StorageManager(String filePath) {
         this.filePath = filePath;
@@ -35,7 +36,7 @@ public class StorageManager implements Storage {
     public ArrayList<InternshipApplication> readApplicationsFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
-        assert file.exists() : "File does not exist && StorageException not thrown";
+        assert file.exists() : FILE_NOT_FOUND_FAILURE;
         Scanner fileScanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
@@ -52,7 +53,7 @@ public class StorageManager implements Storage {
     @Override
     public void storeApplicationsToFile(InternshipApplication[] applications) throws StorageException {
         requireNonNullFile();
-        assert file.exists() : "File does not exist && StorageException not thrown";
+        assert file.exists() : FILE_NOT_FOUND_FAILURE;
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(file);

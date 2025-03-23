@@ -1,7 +1,6 @@
 package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.main.Constants;
 
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ public class UiTest {
     void uiTable_nullInput_expectException() {
 
         ArrayList<ArrayList<String>> applications = new ArrayList<>();
-        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
+        applications.add(UserInterfaceConstants.TABLE_HEADER_ARRAYLIST);
 
         assertThrows(Exception.class, () -> UiTable.getTable(applications));
     }

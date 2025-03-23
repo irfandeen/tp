@@ -3,7 +3,6 @@ package seedu.duke.ui;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import seedu.duke.main.Constants;
 import seedu.duke.model.InternshipApplication;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
@@ -22,7 +21,7 @@ public class UiMain {
 
     public void printApplications(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
         ArrayList<ArrayList<String>> applications = new ArrayList<>();
-        applications.add(Constants.TABLE_HEADER_ARRAYLIST);
+        applications.add(UserInterfaceConstants.TABLE_HEADER_ARRAYLIST);
 
         for (int i = 0; i < applicationList.size(); i++) {
             ArrayList<String> applicationRow = new ArrayList<>();
@@ -54,12 +53,12 @@ public class UiMain {
     }
 
     public void helpOutput() {
-        System.out.println(Constants.HELP_MESSAGE);
+        System.out.println(UserInterfaceConstants.HELP_MESSAGE);
     }
 
     public void introMessage() {
-        System.out.println(Constants.LOGO);
-        System.out.println(Constants.INTRO_MESSAGE);
+        System.out.println(UserInterfaceConstants.LOGO);
+        System.out.println(UserInterfaceConstants.INTRO_MESSAGE);
     }
 
     public String readInput() {
@@ -75,7 +74,7 @@ public class UiMain {
     }
 
     public void showLineBreak() {
-        System.out.println(Constants.LINE_BREAK);
+        System.out.println(UserInterfaceConstants.LINE_BREAK);
     }
 
     public void exitMessage() {
