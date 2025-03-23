@@ -12,4 +12,13 @@ public class HelpCommand extends Command {
     public void execute(ApplicationManager applicationManager, UiMain uiMain) {
         uiMain.helpOutput();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other instanceof HelpCommand;
+    }
 }

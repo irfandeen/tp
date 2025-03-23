@@ -10,7 +10,7 @@ import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseSuccess
 import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 public class AddCommandParserTest {
-    private final AddCommandParser parser = new AddCommandParser();
+    private static final AddCommandParser parser = new AddCommandParser();
 
     @Test
     void parse_validArgs_returnsAddCommand() throws ParseException {

@@ -1,39 +1,39 @@
 package seedu.logjob.logic.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.logjob.logic.commands.Command;
+import seedu.logjob.logic.commands.DeleteCommand;
 import seedu.logjob.logic.parser.exceptions.ParseException;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 
 class DeleteCommandParserTest {
-
+    private static final DeleteCommandParser parser = new DeleteCommandParser();
     @Test
     // happy path
     void parse_validArgs_returnsDeleteCommand() throws ParseException {
-        String userArgs = "2";
-        DeleteCommandParser parser = new DeleteCommandParser();
-        Command deleteCommand = parser.parse(userArgs);
-        assertNotNull(deleteCommand, "Parser should return non-null Command type object.");
+        assertParseSuccess(parser, " 2", new DeleteCommand(2));
+        assertParseSuccess(parser, " 0    ", new DeleteCommand(0));
+        assertParseSuccess(parser, " -1", new DeleteCommand(-1));
+        assertParseSuccess(parser, " 0003", new DeleteCommand(3));
+        assertParseSuccess(parser, " 131", new DeleteCommand(131));
+        assertParseSuccess(parser, " -0000234  ", new DeleteCommand(-234));
+
     }
 
     @Test
     // error path
     void parse_invalidArgs_throwsParseException() {
-        DeleteCommandParser parser = new DeleteCommandParser();
-        String alphabeticalString = "this is not numeric";
-        String alphaNumericString = "321abc";
-        String symbolicString = "!@#$%";
-        String emptyString = "";
-
-        assertThrows(ParseException.class, () -> parser.parse(alphabeticalString),
-                "Parser should throw exception for alphabetic string " + alphabeticalString);
-        assertThrows(ParseException.class, () -> parser.parse(alphaNumericString),
-                "Parser should throw exception for alphanumeric string " + alphaNumericString);
-        assertThrows(ParseException.class, () -> parser.parse(symbolicString),
-                "Parser should throw an exception for symbolic string " + symbolicString);
-        assertThrows(ParseException.class, () -> parser.parse(emptyString),
-                "Parser should throw an exception for empty string.");
+        assertParseFailure(parser, " this is not numeric",
+                "Job Application Index must be numeric:  this is not numeric");
+        assertParseFailure(parser, " 321abc",
+                "Job Application Index must be numeric:  321abc");
+        assertParseFailure(parser, " !@#$%",
+                "Job Application Index must be numeric:  !@#$%");
+        assertParseFailure(parser, "",
+                "Job Application Index must be numeric: ");
+        assertParseFailure(parser, " 1.5",
+                "Job Application Index must be numeric:  1.5");
     }
 }

@@ -14,4 +14,13 @@ public class ListCommand extends Command {
     public void execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
         applicationManager.listApplication(uiMain);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other instanceof ListCommand;
+    }
 }

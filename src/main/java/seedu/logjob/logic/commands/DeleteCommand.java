@@ -19,4 +19,17 @@ public class DeleteCommand extends Command {
         }
         applicationManager.deleteApplication(commandIndex, uiMain);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof DeleteCommand otherCommand)) {
+            return false;
+        }
+
+        return commandIndex == otherCommand.commandIndex;
+    }
 }
