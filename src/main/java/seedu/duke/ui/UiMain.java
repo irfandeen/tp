@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import seedu.duke.main.Constants;
+import seedu.duke.model.InternshipApplication;
 import seedu.duke.ui.exceptions.EmptyTableException;
 
 public class UiMain {
@@ -14,13 +15,25 @@ public class UiMain {
     }
 
     public void printApplications(ArrayList<ArrayList<String>> applications) throws EmptyTableException {
-        try {
-            String table = UiTable.getTable(applications);
-            System.out.println(table);
-        } catch (EmptyTableException e) {
-            System.out.println(e.getMessage());
-        }
+        String table = UiTable.getTable(applications);
+        System.out.println(table);
+    }
 
+    public void addSucceedOutput(InternshipApplication application) {
+        System.out.println(
+                "Application: "
+                        + application.getCompanyName()
+                        + " "
+                        + application.getJobTitle()
+                        + " Added Successfully");
+    }
+
+    public void deleteSucceedOutput(int index){
+        System.out.println("Index: " + index + " Succeeds Deletion");
+    }
+
+    public void helpOutput() {
+        System.out.println(Constants.HELP_MESSAGE);
     }
 
     public void introMessage() {
@@ -36,8 +49,8 @@ public class UiMain {
         return input;
     }
 
-    public void print(String output) {
-        System.out.println(output);
+    public void handleError(Exception error) {
+        System.out.println(error.getMessage());
     }
 
     public void showLineBreak() {

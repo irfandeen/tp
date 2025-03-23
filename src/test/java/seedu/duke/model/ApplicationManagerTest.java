@@ -1,6 +1,7 @@
 package seedu.duke.model;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.ui.UiMain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +19,7 @@ class ApplicationManagerTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application) {
+        public void addApplication(InternshipApplication application, UiMain uiMain) {
             applications.add(application);
         }
 
@@ -36,7 +37,8 @@ class ApplicationManagerTest {
         InternshipApplication application =
                 new InternshipApplication(expectedCompany, expectedJobTitle, ApplicationStatus.APPLIED);
 
-        manager.addApplication(application);
+        UiMain uiMain = new UiMain();
+        manager.addApplication(application, uiMain);
         assertEquals(1, manager.getApplications().size(), "One application should be added.");
         InternshipApplication stored = manager.getApplications().get(0);
 

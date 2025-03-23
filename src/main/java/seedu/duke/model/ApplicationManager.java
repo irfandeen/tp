@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Manages the list of internship applications.
  */
 public class ApplicationManager {
-    private ArrayList<InternshipApplication> applicationList;
+    private final ArrayList<InternshipApplication> applicationList;
 
     public ApplicationManager(ArrayList<InternshipApplication> applicationList) {
         this.applicationList = applicationList;
@@ -20,24 +20,24 @@ public class ApplicationManager {
      * Adds a new internship application to the list.
      * @param application The application to be added.
      */
-    public void addApplication(InternshipApplication application) {
+    public void addApplication(InternshipApplication application, UiMain uiMain) {
         applicationList.add(application);
+        uiMain.addSucceedOutput(application);
     }
 
     /**
      * Deletes an internship application from the list.
      * @param index The index of the application to be deleted.
      */
-    public void deleteApplication(int index) {
+    public void deleteApplication(int index, UiMain uiMain) {
         applicationList.remove(index);
+        uiMain.deleteSucceedOutput(index);
     }
 
     /**
      * Lists all internship applications in a table format.
      */
-    public void listApplication() throws EmptyTableException {
-        UiMain uiMain = new UiMain();
-
+    public void listApplication(UiMain uiMain) throws EmptyTableException {
         ArrayList<ArrayList<String>> applications = new ArrayList<>();
         applications.add(Constants.TABLE_HEADER_ARRAYLIST);
 

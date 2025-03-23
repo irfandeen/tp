@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.duke.model.ApplicationManager;
 import seedu.duke.model.InternshipApplication;
 import seedu.duke.model.ApplicationStatus;
+import seedu.duke.ui.UiMain;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application) {
+        public void addApplication(InternshipApplication application, UiMain uiMain) {
             applications.add(application);
         }
 
@@ -37,7 +38,8 @@ public class AddCommandTest {
 
         // Using the constructor with default status (APPLIED)
         AddCommand addCmd = new AddCommand(companyName, jobTitle);
-        addCmd.execute(dummyManager);
+        UiMain uiMain = new UiMain();
+        addCmd.execute(dummyManager, uiMain);
 
         // Ensure one application is added
         assertEquals(1, dummyManager.getApplications().size());
@@ -56,7 +58,8 @@ public class AddCommandTest {
 
         // Using the constructor with the custom status
         AddCommand addCmd = new AddCommand(companyName, jobTitle, customStatus);
-        addCmd.execute(dummyManager);
+        UiMain uiMain = new UiMain();
+        addCmd.execute(dummyManager, uiMain);
 
         // Verify the application details
         assertEquals(1, dummyManager.getApplications().size());
