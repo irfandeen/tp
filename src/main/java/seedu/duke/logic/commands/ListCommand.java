@@ -10,11 +10,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute (ApplicationManager applicationManager) throws EmptyTableException {
-        try {
-            applicationManager.listApplication();
-        } catch (EmptyTableException e) {
-            throw e;
-        }
+    public void execute(ApplicationManager applicationManager) throws EmptyTableException {
+        applicationManager.listApplication();
     }
 }
