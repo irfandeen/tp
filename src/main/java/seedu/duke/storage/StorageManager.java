@@ -35,6 +35,7 @@ public class StorageManager implements Storage {
     public ArrayList<InternshipApplication> readApplicationsFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
+        assert file.exists() : "File does not exist && StorageException not thrown";
         Scanner fileScanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
@@ -51,6 +52,7 @@ public class StorageManager implements Storage {
     @Override
     public void storeApplicationsToFile(InternshipApplication[] applications) throws StorageException {
         requireNonNullFile();
+        assert file.exists() : "File does not exist && StorageException not thrown";
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(file);
