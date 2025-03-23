@@ -27,4 +27,19 @@ public class AddCommand extends Command {
         InternshipApplication newApplication = new InternshipApplication(companyName, jobTitle, status);
         applicationManager.addApplication(newApplication);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddCommand otherCommand)) {
+            return false;
+        }
+
+        return companyName.equals(otherCommand.companyName)
+                && jobTitle.equals(otherCommand.jobTitle)
+                && status.equals(otherCommand.status);
+    }
 }
