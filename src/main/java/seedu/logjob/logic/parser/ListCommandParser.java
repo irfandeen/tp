@@ -5,7 +5,7 @@ import seedu.logjob.logic.parser.exceptions.ParseException;
 public class ListCommandParser implements Parser<ListCommand>{
     @Override
     public ListCommand parse(String args) throws ParseException {
-        if (args != null) {
+        if (args == null || !args.trim().isEmpty()) {
             throw new ParseException("Invalid arguments: " + args);
         }
         return new ListCommand();
