@@ -18,6 +18,7 @@ public class LogJob {
     private static Boolean isRunning = true;
 
     public static void main(String[] args) {
+        ApplicationParser parser = new ApplicationParser();
         Storage storage = new StorageManager();
         UiMain uiMain = UiMain.getInstance();
         ArrayList<InternshipApplication> internships =  null;
@@ -37,7 +38,7 @@ public class LogJob {
             try {
                 String input = uiMain.readInput();
                 uiMain.showLineBreak();
-                Command command = ApplicationParser.parseCommand(input);
+                Command command = parser.parseCommand(input);
                 isRunning = command.isRunning();
                 command.execute(applicationManager, uiMain);
             } catch (Exception exception) {

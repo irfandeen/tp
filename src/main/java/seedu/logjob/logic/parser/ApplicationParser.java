@@ -13,7 +13,7 @@ import seedu.logjob.logic.parser.exceptions.ParseException;
  */
 public class ApplicationParser {
 
-    public static Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException {
         if (userInput == null || userInput.isEmpty()) {
             throw new ParseException("Empty Command.");
         }
