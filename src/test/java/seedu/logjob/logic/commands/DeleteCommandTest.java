@@ -3,10 +3,12 @@ package seedu.logjob.logic.commands;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.ui.UiMain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DeleteCommandTest {
@@ -44,8 +46,10 @@ public class DeleteCommandTest {
         DummyApplicationManager dummyManager = new DummyApplicationManager();
 
         // Add two applications to the manager.
-        InternshipApplication app1 = new InternshipApplication("TechCorp", "Software Engineer");
-        InternshipApplication app2 = new InternshipApplication("InnovateHub", "Product Manager");
+        InternshipApplication app1 = new InternshipApplication("TechCorp", "Software Engineer",
+                LocalDate.now(), ApplicationStatus.APPLIED);
+        InternshipApplication app2 = new InternshipApplication("InnovateHub", "Product Manager",
+                LocalDate.now(), ApplicationStatus.INTERVIEW);
         UiMain uiMain = UiMain.getInstance();
         dummyManager.addApplication(app1, uiMain);
         dummyManager.addApplication(app2, uiMain);

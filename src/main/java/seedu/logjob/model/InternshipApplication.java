@@ -7,18 +7,12 @@ public class InternshipApplication {
     private final ApplicationStatus status;
     private final LocalDate applicationDate;
 
-    public InternshipApplication(String companyName, String jobTitle, LocalDate applicationDate, ApplicationStatus status) {
+    public InternshipApplication (
+            String companyName, String jobTitle, LocalDate applicationDate, ApplicationStatus status) {
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.applicationDate = applicationDate;
         this.status = status;
-    }
-
-    public InternshipApplication(String companyName, String jobTitle, LocalDate applicationDate) {
-        this.companyName = companyName;
-        this.jobTitle = jobTitle;
-        this.applicationDate = applicationDate;
-        this.status = ApplicationStatus.APPLIED;
     }
 
     public String getCompanyName() {
@@ -31,6 +25,10 @@ public class InternshipApplication {
 
     public LocalDate getApplicationDate() {
         return applicationDate;
+    }
+
+    public String getApplicationDateString() {
+        return applicationDate.toString();
     }
 
     public String getStatusToString() {

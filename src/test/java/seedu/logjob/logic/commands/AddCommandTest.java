@@ -8,6 +8,7 @@ import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.ui.UiMain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AddCommandTest {
@@ -37,7 +38,7 @@ public class AddCommandTest {
         String jobTitle = "Software Engineer";
 
         // Using the constructor with default status (APPLIED)
-        AddCommand addCmd = new AddCommand(companyName, jobTitle);
+        AddCommand addCmd = new AddCommand(companyName, jobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
         UiMain uiMain = UiMain.getInstance();
         addCmd.execute(dummyManager, uiMain);
 
@@ -57,7 +58,7 @@ public class AddCommandTest {
         ApplicationStatus customStatus = ApplicationStatus.INTERVIEW;
 
         // Using the constructor with the custom status
-        AddCommand addCmd = new AddCommand(companyName, jobTitle, customStatus);
+        AddCommand addCmd = new AddCommand(companyName, jobTitle, LocalDate.now(), ApplicationStatus.INTERVIEW);
         UiMain uiMain = UiMain.getInstance();
         addCmd.execute(dummyManager, uiMain);
 

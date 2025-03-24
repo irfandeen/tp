@@ -2,8 +2,11 @@ package seedu.logjob.logic.parser;
 
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_COMPANY_NAME;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_JOB_TITLE;
+import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_DATE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_STATUS;
+import static seedu.logjob.model.ApplicationStatus.APPLIED;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -15,7 +18,7 @@ import seedu.logjob.model.ApplicationStatus;
 /**
  * Parses input arguments and creates a new {@code AddCommand} Object
  */
-public class AddCommandParser implements Parser<AddCommand>{
+public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Parses input arguments string and returns an {@code AddCommand} object.
@@ -28,21 +31,33 @@ public class AddCommandParser implements Parser<AddCommand>{
     @Override
     public AddCommand parse(String args) throws ParseException {
         HashMap<Flag, List<String>> argMap =
-                ArgumentTokenizer.tokenize(args, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_STATUS);
+                ArgumentTokenizer.tokenize(
+                        args, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
 
         containsAllFlags(argMap, FLAG_COMPANY_NAME, FLAG_JOB_TITLE);
-        containsNoDuplicateFlags(argMap, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_STATUS);
+        containsNoDuplicateFlags(
+                argMap, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
 
         String companyName = ParserUtil.parseCompanyName(argMap.get(FLAG_COMPANY_NAME).get(0));
         String jobTitle = ParserUtil.parseJobTitle(argMap.get(FLAG_JOB_TITLE).get(0));
 
         // Optional Application Status Flag
-        if (!argMap.containsKey(FLAG_APPLICATION_STATUS)) {
-            return new AddCommand(companyName, jobTitle);
-        }
-        ApplicationStatus applicationStatus = ParserUtil.parseStatus(argMap.get(FLAG_APPLICATION_STATUS).get(0));
+        LocalDate applicationDate;
+        ApplicationStatus applicationStatus;
 
-        return new AddCommand(companyName, jobTitle, applicationStatus);
+        if (argMap.containsKey(FLAG_APPLICATION_STATUS)) {
+            applicationStatus = ParserUtil.parseStatus(argMap.get(FLAG_APPLICATION_STATUS).get(0));
+        } else {
+            applicationStatus = APPLIED;
+        }
+
+        if (argMap.containsKey(FLAG_APPLICATION_DATE)) {
+            applicationDate = ParserUtil.parseApplicationDate(argMap.get(FLAG_APPLICATION_DATE).get(0));
+        } else {
+            applicationDate = LocalDate.now();
+        }
+
+        return new AddCommand(companyName, jobTitle, applicationDate, applicationStatus);
 
     }
 

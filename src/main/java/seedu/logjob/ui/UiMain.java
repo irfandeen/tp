@@ -28,7 +28,7 @@ public class UiMain {
         for (int i = 0; i < applicationList.size(); i++) {
 
             LocalDate applicationDate = applicationList.get(i).getApplicationDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             String applicationDateString = applicationDate.format(formatter);
 
             ArrayList<String> applicationRow = new ArrayList<>();
