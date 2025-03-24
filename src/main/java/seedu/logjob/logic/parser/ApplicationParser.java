@@ -1,8 +1,5 @@
 package seedu.logjob.logic.parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import seedu.logjob.logic.commands.Command;
 import seedu.logjob.logic.commands.ExitCommand;
 import seedu.logjob.logic.commands.HelpCommand;
@@ -16,17 +13,20 @@ import seedu.logjob.logic.parser.exceptions.ParseException;
  */
 public class ApplicationParser {
 
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "^(?<commandWord>\\S+)(?<arguments>.+)?$");
-
-    public static Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-
-        if (!matcher.matches()) {
-            throw new ParseException("Empty Command");
+    public Command parseCommand(String userInput) throws ParseException {
+        if (userInput == null || userInput.isEmpty()) {
+            throw new ParseException("Empty Command.");
         }
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        String trimmedInput = userInput.trim();
+        int firstSpaceIndex = trimmedInput.indexOf(' ');
+
+        String commandWord = trimmedInput; // Assume single word command
+        String arguments = "";
+
+        if (firstSpaceIndex != -1) { // Command is not single word
+            commandWord = trimmedInput.substring(0, firstSpaceIndex);
+            arguments = trimmedInput.substring(firstSpaceIndex);
+        }
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
