@@ -4,10 +4,11 @@ import static seedu.logjob.logic.parser.CliSyntax.FLAG_COMPANY_NAME;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_JOB_TITLE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_DATE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_STATUS;
+import static seedu.logjob.logic.parser.ParserUtil.containsAllFlags;
+import static seedu.logjob.logic.parser.ParserUtil.containsNoDuplicateFlags;
 import static seedu.logjob.model.ApplicationStatus.APPLIED;
 
 import java.time.LocalDate;
-import java.util.function.Predicate;
 
 import seedu.logjob.logic.commands.AddCommand;
 import seedu.logjob.logic.parser.exceptions.ParseException;
@@ -59,29 +60,5 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     }
 
-    private static void containsAllFlags(ArgumentMap argMap, Flag... flags)
-            throws ParseException {
-        validateFlags(flag -> !argMap.containsKey(flag),
-                "Missing flag(s): ", flags);
-    }
 
-    private static void containsNoDuplicateFlags(ArgumentMap argMap, Flag... flags)
-            throws ParseException {
-        validateFlags(argMap::containsMultipleValues,
-                "Duplicate flag(s): ", flags);
-    }
-
-    private static void validateFlags(Predicate<Flag> condition,
-                                      String errorMessagePrefix,
-                                      Flag... flags) throws ParseException {
-        StringBuilder errorMessage = new StringBuilder();
-        for (Flag flag : flags) {
-            if (condition.test(flag)) {
-                errorMessage.append(flag.toString()).append(" ");
-            }
-        }
-        if (!errorMessage.isEmpty()) {
-            throw new ParseException(errorMessagePrefix + errorMessage);
-        }
-    }
 }
