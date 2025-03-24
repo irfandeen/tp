@@ -24,8 +24,8 @@ class StorageTest {
 
         //TODO: The following lines must be updated whenever new fields are
         //      added to InternshipApplication class
-        writer.write("Goggle;SWE;applied\n");
-        writer.write("John Street;HWE;rejected\n");
+        writer.write("Goggle;SWE;2025-01-01;applied\n");
+        writer.write("John Street;HWE;2025-01-01;rejected\n");
         writer.close();
     }
 
