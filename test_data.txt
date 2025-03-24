@@ -1,2 +1,2 @@
-Goggle;SWE;applied
-John Street;HWE;rejected
+Goggle;SWE;2025-01-01;applied
+John Street;HWE;2025-01-01;rejected

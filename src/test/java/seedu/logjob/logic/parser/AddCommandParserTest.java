@@ -6,6 +6,8 @@ import seedu.logjob.logic.commands.AddCommand;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.logic.parser.exceptions.ParseException;
 
+import java.time.LocalDate;
+
 import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseFailure;
 
@@ -16,20 +18,20 @@ public class AddCommandParserTest {
     void parse_validArgs_returnsAddCommand() throws ParseException {
         // Standard arg order
         assertParseSuccess(parser, " -n Google -j Software Engineer -s Applied",
-                new AddCommand("Google", "Software Engineer", ApplicationStatus.APPLIED));
+                new AddCommand("Google", "Software Engineer", LocalDate.now(), ApplicationStatus.APPLIED));
 
         // Random arg order, enum status arg
         assertParseSuccess(parser, " -s 1 -j Software Engineer -n Google",
-                new AddCommand("Google", "Software Engineer", ApplicationStatus.INTERVIEW));
+                new AddCommand("Google", "Software Engineer", LocalDate.now(), ApplicationStatus.INTERVIEW));
 
         // Optional status not provided, defaults to APPLIED
         assertParseSuccess(parser, " -j Software Engineer -n Google",
-                new AddCommand("Google", "Software Engineer", ApplicationStatus.APPLIED));
+                new AddCommand("Google", "Software Engineer", LocalDate.now(), ApplicationStatus.APPLIED));
 
         // Args contain special Characters
         assertParseSuccess(parser, " -s 3 -j C++ Software Engineer -n JPMorgan Chase & Co",
                 new AddCommand("JPMorgan Chase & Co",
-                        "C++ Software Engineer",
+                        "C++ Software Engineer", LocalDate.now(),
                         ApplicationStatus.OFFERED));
     }
 

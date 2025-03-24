@@ -5,9 +5,12 @@ import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.exceptions.InvalidApplicationStatus;
 import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class ApplicationSerializer {
     private static final String DELIMITER = ";";
-    private static final int NUMBER_OF_FIELDS = 3;
+    private static final int NUMBER_OF_FIELDS = 4;
     private static final String NUM_FIELDS_ERR_MSG = "Data files contains an incorrect number of fields.";
 
     private ApplicationSerializer() {
@@ -15,7 +18,7 @@ public class ApplicationSerializer {
 
     public static String applicationToDelimitedString(InternshipApplication application) {
         return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER +
-                application.getStatusToString();
+                application.getApplicationDateString() + DELIMITER + application.getStatusToString();
     }
 
     public static InternshipApplication delimitedStringToApplication(String delimitedString)
@@ -27,11 +30,18 @@ public class ApplicationSerializer {
 
         ApplicationStatus status;
         try {
-            status = ApplicationStatus.stringToStatus(fields[2]);
+            status = ApplicationStatus.stringToStatus(fields[3]);
         } catch (InvalidApplicationStatus e) {
-            throw new InvalidDelimitedStringException("Invalid application status: " + fields[2]);
+            throw new InvalidDelimitedStringException("Invalid application status: " + fields[3]);
         }
 
-        return new InternshipApplication(fields[0], fields[1], status);
+        LocalDate applicationDate;
+        try {
+            applicationDate = LocalDate.parse(fields[2]);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDelimitedStringException("Invalid application date: " + fields[2]);
+        }
+
+        return new InternshipApplication(fields[0], fields[1], applicationDate, status);
     }
 }

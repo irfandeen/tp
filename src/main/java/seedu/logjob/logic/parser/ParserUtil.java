@@ -8,6 +8,9 @@ import seedu.logjob.logic.validator.CompanyNameValidator;
 import seedu.logjob.logic.validator.JobTitleValidator;
 import seedu.logjob.logic.validator.ApplicationStatusValidator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 
 /**
  * Contains utility methods to parse strings in various XYZParser classes
@@ -47,6 +50,15 @@ public class ParserUtil {
             throw new ParseException("Invalid Job Title: " + jobTitle);
         }
         return jobTitle.trim();
+    }
+
+    public static LocalDate parseApplicationDate(String dateString)
+            throws ParseException {
+        try {
+            return LocalDate.parse(dateString.trim());
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid Date Format: " + dateString);
+        }
     }
 
     public static ApplicationStatus parseStatus(String statusString)

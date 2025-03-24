@@ -5,13 +5,14 @@ import seedu.logjob.ui.UiMain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 class ApplicationManagerTest {
 
     // Dummy implementation of ApplicationManager with a list to store added applications.
     private class DummyApplicationManager extends ApplicationManager {
-        
+
         private final ArrayList<InternshipApplication> applications = new ArrayList<>();
 
         public DummyApplicationManager() {
@@ -34,8 +35,8 @@ class ApplicationManagerTest {
         DummyApplicationManager manager = new DummyApplicationManager();
         String expectedCompany = "ExampleCorp";
         String expectedJobTitle = "Developer";
-        InternshipApplication application =
-                new InternshipApplication(expectedCompany, expectedJobTitle, ApplicationStatus.APPLIED);
+        InternshipApplication application = new InternshipApplication(
+                expectedCompany, expectedJobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
 
         UiMain uiMain = UiMain.getInstance();
         manager.addApplication(application, uiMain);
