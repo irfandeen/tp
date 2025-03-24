@@ -14,11 +14,12 @@ public class ExitCommandParserTest {
     @Test
     public void parse_emptyArg_returnHelpCommand() throws ParseException {
         // Argument should be null as regex matcher returns null for empty string/whitespace after command word
-        assertParseSuccess(parser, null, new ExitCommand());
+        assertParseSuccess(parser, "", new ExitCommand());
+        assertParseSuccess(parser, "  ", new ExitCommand());
     }
 
     @Test void parse_nonEmptyArg_throwsParseException() {
-        assertParseFailure(parser, "", "Invalid arguments: ");
+        assertParseFailure(parser, null, "Invalid arguments: null");
         assertParseFailure(parser, " non-empty string  ", "Invalid arguments:  non-empty string  ");
     }
 
