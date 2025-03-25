@@ -1,7 +1,9 @@
 package seedu.logjob.logic.commands;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.InternshipApplication;
@@ -68,5 +70,21 @@ public class AddCommandTest {
         assertEquals(companyName, added.getCompanyName());
         assertEquals(jobTitle, added.getJobTitle());
         assertEquals(customStatus, added.getStatus());
+    }
+
+    @Test
+    void execute_nullCompanyName_assertionError() {
+        DummyApplicationManager dummyManager = new DummyApplicationManager();
+        // Passing a null company name to trigger an assertion failure
+        String companyName = null;
+        String jobTitle = "TestJob";
+        LocalDate now = LocalDate.now();
+
+        // Construct the command with a null company name
+        AddCommand addCmd = new AddCommand(companyName, jobTitle, now, ApplicationStatus.APPLIED);
+        UiMain uiMain = UiMain.getInstance();
+
+        // Expect an AssertionError during execution (make sure assertions are enabled via -ea)
+        assertThrows(AssertionError.class, () -> addCmd.execute(dummyManager, uiMain));
     }
 }
