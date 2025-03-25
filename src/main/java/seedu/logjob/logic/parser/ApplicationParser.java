@@ -7,6 +7,9 @@ import seedu.logjob.logic.commands.DeleteCommand;
 import seedu.logjob.logic.commands.AddCommand;
 import seedu.logjob.logic.commands.ListCommand;
 import seedu.logjob.logic.parser.exceptions.ParseException;
+import static seedu.logjob.logic.parser.ParserUtil.getFirstWord;
+import static seedu.logjob.logic.parser.ParserUtil.getArguments;
+
 
 /**
  * Top level class for user input parsing.
@@ -17,16 +20,8 @@ public class ApplicationParser {
         if (userInput == null || userInput.isEmpty()) {
             throw new ParseException("Empty Command.");
         }
-        String trimmedInput = userInput.trim();
-        int firstSpaceIndex = trimmedInput.indexOf(' ');
-
-        String commandWord = trimmedInput; // Assume single word command
-        String arguments = "";
-
-        if (firstSpaceIndex != -1) { // Command is not single word
-            commandWord = trimmedInput.substring(0, firstSpaceIndex);
-            arguments = trimmedInput.substring(firstSpaceIndex);
-        }
+        String commandWord = getFirstWord(userInput);
+        String arguments = getArguments(userInput);
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:

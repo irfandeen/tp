@@ -24,6 +24,28 @@ public class ParserUtil {
     private static final JobApplicationIndexValidator jobApplicationIndexValidator =
             JobApplicationIndexValidator.getInstance();
 
+    private ParserUtil() {
+        // Prevent instantiation
+    }
+
+    public static String getFirstWord(String input) {
+        String trimmedInput = input.trim();
+        int firstSpaceIndex = trimmedInput.indexOf(' ');
+        if (firstSpaceIndex == -1) {
+            return trimmedInput;
+        }
+        return trimmedInput.substring(0, firstSpaceIndex);
+    }
+
+    public static String getArguments(String input) {
+        String trimmedInput = input.trim();
+        int firstSpaceIndex = trimmedInput.indexOf(' ');
+        if (firstSpaceIndex == -1) {
+            return "";
+        }
+        return trimmedInput.substring(firstSpaceIndex);
+    }
+
     public static String parseCompanyName(String companyName)
             throws ParseException {
         if (!companyNameValidator.validate(companyName)) {
