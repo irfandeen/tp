@@ -1,5 +1,6 @@
 package seedu.logjob.logic.parser;
 
+import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_INDEX;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_COMPANY_NAME;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_JOB_TITLE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_DATE;
@@ -18,22 +19,19 @@ public class EditCommandParser implements Parser<EditCommand>{
 
     @Override
     public EditCommand parse(String args) throws ParseException {
-        // Get edit index
-        String indexString = ParserUtil.getFirstWord(args);
-        int editIndex = ParserUtil.parseJobApplicationIndex(indexString);
+        ArgumentMap argMap = ArgumentTokenizer.tokenize(args, FLAG_APPLICATION_INDEX, FLAG_COMPANY_NAME,
+                FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
 
-        // Parse edit arguments
-        String editArgs = ParserUtil.getArguments(args);
-        ArgumentMap argMap = ArgumentTokenizer.tokenize(editArgs,
-                FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
+        // Parse index to be edited
+        ParserUtil.containsAllFlags(argMap, FLAG_APPLICATION_INDEX);
+        int editIndex = ParserUtil.parseJobApplicationIndex(argMap.get(FLAG_APPLICATION_INDEX));
 
-        if (argMap.isEmpty()) {
+        // Parse fields to be edited
+        if (argMap.size() <= 1) { // Only contains Index flag
             throw new ParseException("Edit command requires at least one argument.");
         }
-
-        ParserUtil.containsNoDuplicateFlags(
-                argMap, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
-
+        ParserUtil.containsNoDuplicateFlags(argMap, FLAG_APPLICATION_INDEX, FLAG_COMPANY_NAME
+                , FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
         String companyName = null;
         String jobTitle = null;
         LocalDate applicationDate = null;

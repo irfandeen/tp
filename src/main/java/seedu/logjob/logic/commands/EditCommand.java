@@ -6,7 +6,6 @@ import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.ui.UiMain;
 
-import static java.util.Objects.equals;
 
 import java.time.LocalDate;
 
