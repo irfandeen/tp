@@ -6,6 +6,7 @@ import seedu.logjob.logic.commands.HelpCommand;
 import seedu.logjob.logic.commands.DeleteCommand;
 import seedu.logjob.logic.commands.AddCommand;
 import seedu.logjob.logic.commands.ListCommand;
+import seedu.logjob.logic.commands.EditCommand;
 import seedu.logjob.logic.parser.exceptions.ParseException;
 import static seedu.logjob.logic.parser.ParserUtil.getFirstWord;
 import static seedu.logjob.logic.parser.ParserUtil.getArguments;
@@ -35,6 +36,9 @@ public class ApplicationParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommandParser().parse(arguments);
