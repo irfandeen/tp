@@ -1,8 +1,11 @@
 package seedu.logjob.logic.parser;
 
+import seedu.logjob.logic.parser.exceptions.ParseException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * A map structure that stores multiple values for a single {@code Flag} key.
@@ -52,7 +55,7 @@ public class ArgumentMap {
      * @param key the flag to check
      * @return true if multiple values exist, false otherwise
      */
-    public boolean containsMultipleValues(Flag key) {
+    private boolean containsMultipleValues(Flag key) {
         return multiMap.containsKey(key) && multiMap.get(key).size() > 1;
     }
 
@@ -74,4 +77,30 @@ public class ArgumentMap {
     public int size() {
         return multiMap.size();
     }
+
+    /**
+     * Validates multimap to contain all input flags
+     */
+    public boolean containsAllFlags(Flag... flags) {
+        return validateFlags(flag -> !containsKey(flag), flags);
+    }
+
+    /**
+     * Validates argument map to contain no duplicate flags
+     * @throws ParseException Lists all duplicate flags
+     */
+    public boolean containsNoDuplicateFlags(Flag... flags) {
+        return validateFlags(this::containsMultipleValues, flags);
+    }
+
+    private boolean validateFlags(Predicate<Flag> condition,
+                                      Flag... flags){
+        for (Flag flag : flags) {
+            if (condition.test(flag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -79,37 +79,4 @@ public class ParserUtil {
         }
     }
 
-    /**
-     * Validates argument map to contain all input flags
-     * @throws ParseException Lists all missing flags
-     */
-    public static void containsAllFlags(ArgumentMap argMap, Flag... flags)
-            throws ParseException {
-        validateFlags(flag -> !argMap.containsKey(flag),
-                "Missing flag(s): ", flags);
-    }
-
-    /**
-     * Validates argument map to contain no duplicate flags
-     * @throws ParseException Lists all duplicate flags
-     */
-    public static void containsNoDuplicateFlags(ArgumentMap argMap, Flag... flags)
-            throws ParseException {
-        validateFlags(argMap::containsMultipleValues,
-                "Duplicate flag(s): ", flags);
-    }
-
-    private static void validateFlags(Predicate<Flag> condition,
-                                      String errorMessagePrefix,
-                                      Flag... flags) throws ParseException {
-        StringBuilder errorMessage = new StringBuilder();
-        for (Flag flag : flags) {
-            if (condition.test(flag)) {
-                errorMessage.append(flag.toString()).append(" ");
-            }
-        }
-        if (!errorMessage.isEmpty()) {
-            throw new ParseException(errorMessagePrefix + errorMessage);
-        }
-    }
 }
