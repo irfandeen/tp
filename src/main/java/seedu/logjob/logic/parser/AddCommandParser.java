@@ -4,8 +4,6 @@ import static seedu.logjob.logic.parser.CliSyntax.FLAG_COMPANY_NAME;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_JOB_TITLE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_DATE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_STATUS;
-import static seedu.logjob.logic.parser.ParserUtil.containsAllFlags;
-import static seedu.logjob.logic.parser.ParserUtil.containsNoDuplicateFlags;
 import static seedu.logjob.model.ApplicationStatus.APPLIED;
 
 import java.time.LocalDate;
@@ -18,6 +16,12 @@ import seedu.logjob.model.ApplicationStatus;
  * Parses input arguments and creates a new {@code AddCommand} Object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    private static final Flag[] MANDATORY_FLAGS = {
+        FLAG_COMPANY_NAME, FLAG_JOB_TITLE
+    };
+    private static final Flag[] ADD_FLAGS = {
+        FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS
+    };
 
     /**
      * Parses input arguments string and returns an {@code AddCommand} object.
@@ -29,13 +33,19 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     @Override
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMap argMap =
-                ArgumentTokenizer.tokenize(
-                        args, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
+        ArgumentMap argMap = ArgumentTokenizer.tokenize(args, ADD_FLAGS);
 
-        containsAllFlags(argMap, FLAG_COMPANY_NAME, FLAG_JOB_TITLE);
-        containsNoDuplicateFlags(
-                argMap, FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
+        if (argMap.missingFlags(MANDATORY_FLAGS)) {
+            throw new ParseException("Missing flag(s): " + argMap.getMissingFlags(MANDATORY_FLAGS));
+        }
+
+        if (!argMap.getPreamble().trim().isEmpty()) {
+            throw new ParseException("Add command has no preamble:" + argMap.getPreamble());
+        }
+
+        if (argMap.containsDuplicateFlags(ADD_FLAGS)) {
+            throw new ParseException("Duplicate flag(s): " + argMap.getDuplicateFlags(ADD_FLAGS));
+        }
 
         String companyName = ParserUtil.parseCompanyName(argMap.get(FLAG_COMPANY_NAME));
         String jobTitle = ParserUtil.parseJobTitle(argMap.get(FLAG_JOB_TITLE));

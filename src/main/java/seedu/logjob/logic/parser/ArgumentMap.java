@@ -1,14 +1,21 @@
 package seedu.logjob.logic.parser;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * A map structure that stores multiple values for a single {@code Flag} key.
  */
 public class ArgumentMap {
     private final HashMap<Flag, List<String>> multiMap = new HashMap<>();
+    private final String preamble;
+
+    public ArgumentMap(String preamble) {
+        this.preamble = preamble;
+    }
 
     /**
      * Adds a value to the list associated with the given flag.
@@ -47,8 +54,12 @@ public class ArgumentMap {
      * @param key the flag to check
      * @return true if multiple values exist, false otherwise
      */
-    public boolean containsMultipleValues(Flag key) {
+    private boolean containsMultipleValues(Flag key) {
         return multiMap.containsKey(key) && multiMap.get(key).size() > 1;
+    }
+
+    public String getPreamble() {
+        return this.preamble;
     }
 
     /**
@@ -65,4 +76,46 @@ public class ArgumentMap {
     public int size() {
         return multiMap.size();
     }
+
+    /**
+     * Validates multimap to contain all input flags
+     */
+    public boolean missingFlags(Flag[] flags) {
+        return anyFlagFails(flag -> !containsKey(flag), flags);
+    }
+
+    /**
+     * Validates argument map to contain no duplicate flags
+     */
+    public boolean containsDuplicateFlags(Flag[] flags) {
+        return anyFlagFails(flag -> containsMultipleValues(flag), flags);
+    }
+
+    private boolean anyFlagFails(Predicate<Flag> condition, Flag... flags){
+        for (Flag flag : flags) {
+            if (condition.test(flag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getMissingFlags(Flag[] flags) {
+        return accumulateFlags(flag -> !containsKey(flag), flags);
+    }
+
+    public String getDuplicateFlags(Flag[] flags) {
+        return accumulateFlags(flag -> containsMultipleValues(flag), flags);
+    }
+
+    private String accumulateFlags(Predicate<Flag> condition, Flag[] flags) {
+        StringBuilder accumulatedFlags = new StringBuilder();
+        for (Flag flag : flags) {
+            if (condition.test(flag)) {
+                accumulatedFlags.append(flag.flag()).append(" ");
+            }
+        }
+        return accumulatedFlags.toString();
+    }
+
 }

@@ -60,7 +60,7 @@ public class ApplicationParserTest {
 
     @Test
     public void parseCommand_validEditCommand_returnsEditCommand() throws Exception {
-        Command result = parser.parseCommand("edit -i 1 -s 1 ");
+        Command result = parser.parseCommand("edit 1 -s 1 ");
         assertInstanceOf(EditCommand.class, result);
     }
 
