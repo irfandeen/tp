@@ -57,4 +57,12 @@ public class ArgumentMap {
     public boolean isEmpty() {
         return multiMap.isEmpty();
     }
+
+    /**
+     * Returns number of key-value pairs in argument map
+     * @return number of key value pairs
+     */
+    public int size() {
+        return multiMap.size();
+    }
 }

@@ -24,6 +24,10 @@ public class ParserUtil {
     private static final JobApplicationIndexValidator jobApplicationIndexValidator =
             JobApplicationIndexValidator.getInstance();
 
+    private ParserUtil() {
+        // Prevent instantiation
+    }
+
     public static String parseCompanyName(String companyName)
             throws ParseException {
         if (!companyNameValidator.validate(companyName)) {
