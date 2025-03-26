@@ -1,6 +1,5 @@
 package seedu.logjob.logic.parser;
 
-import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_INDEX;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_COMPANY_NAME;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_JOB_TITLE;
 import static seedu.logjob.logic.parser.CliSyntax.FLAG_APPLICATION_DATE;
@@ -16,22 +15,28 @@ import seedu.logjob.model.ApplicationStatus;
 import java.time.LocalDate;
 
 public class EditCommandParser implements Parser<EditCommand>{
+    private static final Flag[] EDIT_FLAGS = {
+        FLAG_COMPANY_NAME, FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS
+    };
 
     @Override
     public EditCommand parse(String args) throws ParseException {
-        ArgumentMap argMap = ArgumentTokenizer.tokenize(args, FLAG_APPLICATION_INDEX, FLAG_COMPANY_NAME,
-                FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
+        ArgumentMap argMap = ArgumentTokenizer.tokenize(args, EDIT_FLAGS);
 
         // Parse index to be edited
-        ParserUtil.containsAllFlags(argMap, FLAG_APPLICATION_INDEX);
-        int editIndex = ParserUtil.parseJobApplicationIndex(argMap.get(FLAG_APPLICATION_INDEX));
+        String editIndexString = argMap.getPreamble().trim();
+        if (editIndexString.isEmpty()) {
+            throw new ParseException("Edit command requires an index.");
+        }
+        int editIndex = ParserUtil.parseJobApplicationIndex(editIndexString);
 
         // Parse fields to be edited
-        if (argMap.size() <= 1) { // Only contains Index flag
+        if (argMap.isEmpty()) {
             throw new ParseException("Edit command requires at least one argument.");
         }
-        ParserUtil.containsNoDuplicateFlags(argMap, FLAG_APPLICATION_INDEX, FLAG_COMPANY_NAME
-                , FLAG_JOB_TITLE, FLAG_APPLICATION_DATE, FLAG_APPLICATION_STATUS);
+        if (argMap.containsDuplicateFlags(EDIT_FLAGS)) {
+            throw new ParseException("Duplicate flag(s): " + argMap.getDuplicateFlags(EDIT_FLAGS));
+        }
         String companyName = null;
         String jobTitle = null;
         LocalDate applicationDate = null;
