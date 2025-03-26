@@ -9,6 +9,12 @@ public class InternshipApplication {
 
     public InternshipApplication (
             String companyName, String jobTitle, LocalDate applicationDate, ApplicationStatus status) {
+
+        assert companyName != null && !companyName.isEmpty() : "companyName should not be null or empty";
+        assert jobTitle != null && !jobTitle.isEmpty() : "jobTitle should not be null or empty";
+        assert applicationDate != null : "applicationDate should not be null";
+        assert status != null : "status should not be null";
+
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.applicationDate = applicationDate;

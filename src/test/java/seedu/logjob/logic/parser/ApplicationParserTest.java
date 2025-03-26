@@ -14,6 +14,7 @@ import seedu.logjob.logic.commands.DeleteCommand;
 import seedu.logjob.logic.commands.ExitCommand;
 import seedu.logjob.logic.commands.HelpCommand;
 import seedu.logjob.logic.commands.ListCommand;
+import seedu.logjob.logic.commands.EditCommand;
 
 
 public class ApplicationParserTest {
@@ -55,6 +56,12 @@ public class ApplicationParserTest {
     public void parseCommand_validExitCommand_returnsExitCommand() throws Exception {
         Command result = parser.parseCommand("exit");
         assertInstanceOf(ExitCommand.class, result);
+    }
+
+    @Test
+    public void parseCommand_validEditCommand_returnsEditCommand() throws Exception {
+        Command result = parser.parseCommand("edit 1 -s 1 ");
+        assertInstanceOf(EditCommand.class, result);
     }
 
     @Test

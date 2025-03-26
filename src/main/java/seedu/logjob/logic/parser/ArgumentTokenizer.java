@@ -56,8 +56,15 @@ public class ArgumentTokenizer {
 
 
     private static ArgumentMap extractArguments(String arguments, List<FlagPosition> flagPositions) {
-        ArgumentMap argumentMap = new ArgumentMap();
         flagPositions.sort(Comparator.comparingInt(FlagPosition::startIndex));
+
+        // Parse Preamble
+        String preamble = arguments;
+        if (!flagPositions.isEmpty()) {
+            FlagPosition first = flagPositions.get(0);
+            preamble = arguments.substring(0, first.startIndex());
+        }
+        ArgumentMap argumentMap = new ArgumentMap(preamble);
 
         // Dummy end position to represent end of the String
         FlagPosition endPositionMarker = new FlagPosition(new Flag(""), arguments.length());
@@ -67,7 +74,6 @@ public class ArgumentTokenizer {
             FlagPosition currPosition = flagPositions.get(i);
             FlagPosition nextPosition = flagPositions.get(i + 1);
             String argumentValue = getArgumentValue(arguments, currPosition, nextPosition);
-
             argumentMap.put(currPosition.flag(), argumentValue);
         }
 

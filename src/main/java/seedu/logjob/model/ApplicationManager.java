@@ -25,6 +25,25 @@ public class ApplicationManager {
     }
 
     /**
+     * Returns existing internship application object at index
+     * @param index Index of application to be viewed
+     * @return Reference to existing object
+     */
+    public InternshipApplication getApplication(int index) {
+        return applicationList.get(index);
+    }
+
+    /**
+     * Replaces the internship application at the specified index with a new application.
+     *
+     * @param index       The index of the application to be replaced.
+     * @param application The new application to replace the existing one.
+     */
+    public void updateApplication(int index, InternshipApplication application) {
+        applicationList.set(index, application);
+    }
+
+    /**
      * Deletes an internship application from the list.
      * @param index The index of the application to be deleted.
      */

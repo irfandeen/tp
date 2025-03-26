@@ -55,6 +55,17 @@ public class UiMain {
                         + " Added Successfully");
     }
 
+    public void editSucceedOutput(InternshipApplication application) {
+        System.out.println(
+                "Application: "
+                        + application.getCompanyName()
+                        + " "
+                        + application.getJobTitle()
+                        + " "
+                        + application.getStatusToString()
+                        + " Edited Successfully");
+    }
+
     public void deleteSucceedOutput(int index){
         System.out.println("Index: " + index + " Succeeds Deletion");
     }
