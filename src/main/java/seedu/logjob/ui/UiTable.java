@@ -1,7 +1,10 @@
 package seedu.logjob.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 
@@ -16,23 +19,38 @@ import seedu.logjob.ui.exceptions.EmptyTableException;
  */
 public final class UiTable {
     /**
-     * Takes a 2-dimensional array of strings and print the data as a table on the CLI, row by row.
+     * Takes an array of applications and return the data as a table on the CLI.
      *
-     * @param data 2-d ArrayList of String.
+     * @param applicationList ArrayList of applications.
      */
-    public static String getTable(ArrayList<ArrayList<String>> data) throws EmptyTableException {
-        assert data != null : "Data should not be null";
-
-        if (data.size() <= 1) {
+    public static String getTable(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
+        assert applicationList != null : "Data should not be null";
+        if (applicationList.isEmpty()) {
             throw new EmptyTableException("Table is empty");
         }
 
+        ArrayList<ArrayList<String>> applications = new ArrayList<>();
+        applications.add(UiConstants.TABLE_HEADER_ARRAYLIST);
+        for (int i = 0; i < applicationList.size(); i++) {
+            LocalDate applicationDate = applicationList.get(i).getApplicationDate();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            String applicationDateString = applicationDate.format(formatter);
+
+            ArrayList<String> applicationRow = new ArrayList<>();
+            applicationRow.add(Integer.toString(i));
+            applicationRow.add(applicationList.get(i).getCompanyName());
+            applicationRow.add(applicationList.get(i).getJobTitle());
+            applicationRow.add(applicationList.get(i).getStatusToString());
+            applicationRow.add(applicationDateString);
+            applications.add(applicationRow);
+        }
+
         StringBuilder table = new StringBuilder();
-        int[] columnWidths = getColumnWidths(data);
+        int[] columnWidths = getColumnWidths(applications);
         table.append(getHorizontalBorder(columnWidths));
 
-        for (ArrayList<String> datum : data) {
-            table.append(getRow(datum, columnWidths));
+        for (ArrayList<String> application : applications) {
+            table.append(getRow(application, columnWidths));
             table.append(getHorizontalBorder(columnWidths));
         }
 
