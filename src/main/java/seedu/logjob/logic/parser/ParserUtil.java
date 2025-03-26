@@ -10,7 +10,6 @@ import seedu.logjob.logic.validator.ApplicationStatusValidator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.function.Predicate;
 
 
 /**

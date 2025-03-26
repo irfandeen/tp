@@ -1,6 +1,5 @@
 package seedu.logjob.logic.parser;
 
-import seedu.logjob.logic.parser.exceptions.ParseException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,26 +80,42 @@ public class ArgumentMap {
     /**
      * Validates multimap to contain all input flags
      */
-    public boolean containsAllFlags(Flag... flags) {
-        return validateFlags(flag -> !containsKey(flag), flags);
+    public boolean missingFlags(Flag[] flags) {
+        return anyFlagFails(flag -> !containsKey(flag), flags);
     }
 
     /**
      * Validates argument map to contain no duplicate flags
-     * @throws ParseException Lists all duplicate flags
      */
-    public boolean containsNoDuplicateFlags(Flag... flags) {
-        return validateFlags(this::containsMultipleValues, flags);
+    public boolean containsDuplicateFlags(Flag[] flags) {
+        return anyFlagFails(flag -> containsMultipleValues(flag), flags);
     }
 
-    private boolean validateFlags(Predicate<Flag> condition,
-                                      Flag... flags){
+    private boolean anyFlagFails(Predicate<Flag> condition, Flag... flags){
         for (Flag flag : flags) {
             if (condition.test(flag)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public String getMissingFlags(Flag[] flags) {
+        return accumulateFlags(flag -> !containsKey(flag), flags);
+    }
+
+    public String getDuplicateFlags(Flag[] flags) {
+        return accumulateFlags(flag -> containsMultipleValues(flag), flags);
+    }
+
+    private String accumulateFlags(Predicate<Flag> condition, Flag[] flags) {
+        StringBuilder accumulatedFlags = new StringBuilder();
+        for (Flag flag : flags) {
+            if (condition.test(flag)) {
+                accumulatedFlags.append(flag.flag()).append(" ");
+            }
+        }
+        return accumulatedFlags.toString();
     }
 
 }
