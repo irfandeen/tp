@@ -9,6 +9,11 @@ import java.util.List;
  */
 public class ArgumentMap {
     private final HashMap<Flag, List<String>> multiMap = new HashMap<>();
+    private final String preamble;
+
+    public ArgumentMap(String preamble) {
+        this.preamble = preamble;
+    }
 
     /**
      * Adds a value to the list associated with the given flag.
@@ -49,6 +54,10 @@ public class ArgumentMap {
      */
     public boolean containsMultipleValues(Flag key) {
         return multiMap.containsKey(key) && multiMap.get(key).size() > 1;
+    }
+
+    public String getPreamble() {
+        return this.preamble;
     }
 
     /**
