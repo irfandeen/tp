@@ -29,7 +29,7 @@ public class AddCommandParserTest {
                 new AddCommand("Google", "Software Engineer", LocalDate.now(), ApplicationStatus.APPLIED));
 
         // Args contain special Characters
-        assertParseSuccess(parser, " -s 3 -j C++ Software Engineer -n JPMorgan Chase & Co",
+        assertParseSuccess(parser, "      -s 3 -j C++ Software Engineer -n JPMorgan Chase & Co",
                 new AddCommand("JPMorgan Chase & Co",
                         "C++ Software Engineer", LocalDate.now(),
                         ApplicationStatus.OFFERED));
@@ -50,6 +50,12 @@ public class AddCommandParserTest {
                 "Missing flag(s): -n ");
         assertParseFailure(parser, " -j Software Engineer -j AI/ML Engineer",
                 "Missing flag(s): -n ");
+
+        // contains preamble
+        assertParseFailure(parser, " this job -j Software Engineer -n TechCompany",
+                "Add command has no preamble: this job ");
+        assertParseFailure(parser, " Hello Hello -j AI/ML Engineer -j Test Engineer -n Bing",
+                "Add command has no preamble: Hello Hello ");
 
         // single duplicate flag
         assertParseFailure(parser, " -n Yahoo -n Bing -j Software Engineer",
