@@ -2,6 +2,7 @@ package seedu.logjob.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
@@ -68,5 +69,39 @@ public class DeleteCommandTest {
 
     @Test
     // Error
-    void execute_ValidIndex_throws
+    void execute_indexOutOfBounds_throwsIndexOutOfBoundsException() {
+        DummyApplicationManager dummyManager = new DummyApplicationManager();
+
+        // Has only 1 instance ata index 0
+        dummyManager.addApplication(new InternshipApplication("Google", "SWE", LocalDate.now(),
+                ApplicationStatus.APPLIED), UiMain.getInstance());
+
+        DeleteCommand deleteCommandPositiveInvalid = new DeleteCommand(1);
+        DeleteCommand deleteCommandNegativeInvalid = new DeleteCommand(-1);
+        DeleteCommand deleteCommandLargePositive = new DeleteCommand(99999999);
+        DeleteCommand deleteCommandLargeNegative = new DeleteCommand(-9999999);
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandPositiveInvalid.execute(dummyManager,
+                UiMain.getInstance()), "Deleting out of bounds should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandNegativeInvalid.execute(dummyManager,
+                        UiMain.getInstance()), "Deleting a negative index should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandLargePositive.execute(dummyManager,
+                UiMain.getInstance()), "Deleting a large and invalid index should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandLargeNegative.execute(dummyManager,
+                        UiMain.getInstance()),
+                "Deleting a large negative index should throw an IndexOutOfBoundsException.");
+
+    }
+
+    @Test
+    void execute_deleteFromEmptyApplicationManager_throwsIndexOutOfBoundsException() {
+        DummyApplicationManager dummyManager = new DummyApplicationManager();
+
+        DeleteCommand deleteCommand = new DeleteCommand(0);
+        DeleteCommand deleteCommandNonZero = new DeleteCommand(1);
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommand.execute(dummyManager, UiMain.getInstance()),
+                "Deleting empty application manager should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandNonZero.execute(dummyManager,
+                        UiMain.getInstance()),
+                "Deleting a non-zero index on an empty application manager should throw an IndexOutOfBoundsException.");
+    }
 }
