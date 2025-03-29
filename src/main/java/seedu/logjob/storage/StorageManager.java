@@ -31,11 +31,6 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public String getFilePath() {
-        return filePath;
-    }
-
-    @Override
     public ArrayList<InternshipApplication> readApplicationsFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();

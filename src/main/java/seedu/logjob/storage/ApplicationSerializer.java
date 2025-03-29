@@ -13,8 +13,7 @@ public class ApplicationSerializer {
     private static final int NUMBER_OF_FIELDS = 4;
     private static final String NUM_FIELDS_ERR_MSG = "Data files contains an incorrect number of fields.";
 
-    private ApplicationSerializer() {
-    }
+    private ApplicationSerializer() {}
 
     public static String applicationToDelimitedString(InternshipApplication application) {
         return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER +
