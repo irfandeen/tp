@@ -54,6 +54,12 @@ public class UiMain {
         System.out.println("Index: " + index + " Succeeds Deletion");
     }
 
+    public void sortSucceedOutput(String sortBy) {
+        assert sortBy != null : "sortBy should not be null";
+
+        System.out.println("Applications Successfully Sorted By: " + sortBy);
+    }
+
     public void helpOutput() {
         System.out.println(UiConstants.HELP_MESSAGE);
     }
