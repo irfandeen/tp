@@ -21,3 +21,4 @@ data.txt
 
 # Log Files
 *.log
+*.lck
