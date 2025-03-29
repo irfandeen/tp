@@ -10,49 +10,61 @@ import seedu.logjob.logic.commands.Command;
 import seedu.logjob.logic.parser.ApplicationParser;
 
 import seedu.logjob.model.ApplicationManager;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class LogJob {
+    private Boolean isRunning = true;
+    private ApplicationParser parser;
+    private Storage storage;
+    private UiMain ui;
+    private ApplicationManager applicationManager;
 
-    private static Boolean isRunning = true;
+    private LogJob() {
+        parser = new ApplicationParser();
+        storage = new StorageManager();
+        ui = UiMain.getInstance();
 
-    public static void main(String[] args) {
-        ApplicationParser parser = new ApplicationParser();
-        Storage storage = new StorageManager();
-        UiMain uiMain = UiMain.getInstance();
-        ArrayList<InternshipApplication> internships =  null;
-
+        ArrayList<InternshipApplication> internships = null;
         try {
             internships = storage.readApplicationsFromFile();
         } catch (IOException | StorageException | InvalidDelimitedStringException exception) {
-            uiMain.handleError(exception);
+            ui.handleError(exception);
         }
 
-        assert internships != null;
+        applicationManager = new ApplicationManager(internships);
+    }
 
-        ApplicationManager applicationManager = new ApplicationManager(internships);
-
-        uiMain.introMessage();
+    public void run() {
+        ui.introMessage();
         while (isRunning) {
             try {
-                String input = uiMain.readInput();
-                uiMain.showLineBreak();
+                String input = ui.readInput();
+                ui.showLineBreak();
                 Command command = parser.parseCommand(input);
                 isRunning = command.isRunning();
-                command.execute(applicationManager, uiMain);
+                command.execute(applicationManager, ui);
             } catch (Exception exception) {
-                uiMain.handleError(exception);
+                ui.handleError(exception);
             }
         }
+        exit();
+    }
 
-        ArrayList<InternshipApplication> latestApplications = applicationManager.getArrayList();
-        InternshipApplication[] applicationsArray = latestApplications.toArray(new InternshipApplication[0]);
+    private void exit() {
+        ArrayList<InternshipApplication> internships = applicationManager.getArrayList();
+        InternshipApplication[] applicationsArray = internships.toArray(new InternshipApplication[0]);
         try {
             storage.storeApplicationsToFile(applicationsArray);
         } catch (StorageException exception) {
-            uiMain.handleError(exception);
+            ui.handleError(exception);
         }
-        uiMain.exitMessage();
+        ui.exitMessage();
+    }
+
+    public static void main(String[] args) {
+        LogJob logJob = new LogJob();
+        logJob.run();
     }
 }

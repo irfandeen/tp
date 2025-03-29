@@ -9,12 +9,6 @@ import java.util.ArrayList;
 
 public interface Storage {
     /**
-     * Returns file location of data file in computer
-     * @return Relative file path
-     */
-    public String getFilePath();
-
-    /**
      * Reads data file from memory and loads it into program.
      *
      * @return Array of InternshipApplication objects
