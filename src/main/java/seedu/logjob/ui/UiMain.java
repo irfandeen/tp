@@ -1,7 +1,5 @@
 package seedu.logjob.ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,29 +20,13 @@ public class UiMain {
     }
 
     public void printApplications(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
-        ArrayList<ArrayList<String>> applications = new ArrayList<>();
-        applications.add(UiConstants.TABLE_HEADER_ARRAYLIST);
-
-        for (int i = 0; i < applicationList.size(); i++) {
-
-            LocalDate applicationDate = applicationList.get(i).getApplicationDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            String applicationDateString = applicationDate.format(formatter);
-
-            ArrayList<String> applicationRow = new ArrayList<>();
-            applicationRow.add(Integer.toString(i));
-            applicationRow.add(applicationList.get(i).getCompanyName());
-            applicationRow.add(applicationList.get(i).getJobTitle());
-            applicationRow.add(applicationList.get(i).getStatusToString());
-            applicationRow.add(applicationDateString);
-            applications.add(applicationRow);
-        }
-
-        String table = UiTable.getTable(applications);
+        assert applicationList != null : "Data should not be null";
+        String table = UiTable.getTable(applicationList);
         System.out.println(table);
     }
 
     public void addSucceedOutput(InternshipApplication application) {
+        assert application != null : "Data should not be null";
         System.out.println(
                 "Application: "
                         + application.getCompanyName()
@@ -56,6 +38,7 @@ public class UiMain {
     }
 
     public void editSucceedOutput(InternshipApplication application) {
+        assert application != null : "Data should not be null";
         System.out.println(
                 "Application: "
                         + application.getCompanyName()
@@ -67,6 +50,7 @@ public class UiMain {
     }
 
     public void deleteSucceedOutput(int index){
+        assert index >= 0 : "index should not be negative";
         System.out.println("Index: " + index + " Succeeds Deletion");
     }
 
@@ -88,6 +72,7 @@ public class UiMain {
     }
 
     public void handleError(Exception error) {
+        assert error != null : "Error should not be null";
         System.out.println(error.getMessage());
     }
 
