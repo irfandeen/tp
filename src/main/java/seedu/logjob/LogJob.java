@@ -48,11 +48,13 @@ public class LogJob {
             } catch (Exception exception) {
                 ui.handleError(exception);
             }
+
+            saveState();
         }
         exit();
     }
 
-    private void exit() {
+    private void saveState() {
         ArrayList<InternshipApplication> internships = applicationManager.getArrayList();
         InternshipApplication[] applicationsArray = internships.toArray(new InternshipApplication[0]);
         try {
@@ -60,6 +62,10 @@ public class LogJob {
         } catch (StorageException exception) {
             ui.handleError(exception);
         }
+    }
+
+    private void exit() {
+        saveState();
         ui.exitMessage();
     }
 
