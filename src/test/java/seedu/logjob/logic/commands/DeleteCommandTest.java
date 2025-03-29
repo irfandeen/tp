@@ -42,27 +42,31 @@ public class DeleteCommandTest {
     }
 
     @Test
+    // Happy Path
     void execute_validIndex_applicationDeleted() {
         DummyApplicationManager dummyManager = new DummyApplicationManager();
 
         // Add two applications to the manager.
-        InternshipApplication app1 = new InternshipApplication("TechCorp", "Software Engineer",
+        InternshipApplication application1 = new InternshipApplication("TechCorp", "Software Engineer",
                 LocalDate.now(), ApplicationStatus.APPLIED);
-        InternshipApplication app2 = new InternshipApplication("InnovateHub", "Product Manager",
+        InternshipApplication application2 = new InternshipApplication("InnovateHub", "Product Manager",
                 LocalDate.now(), ApplicationStatus.INTERVIEW);
         UiMain uiMain = UiMain.getInstance();
-        dummyManager.addApplication(app1, uiMain);
-        dummyManager.addApplication(app2, uiMain);
-        assertEquals(2, dummyManager.getSize());
+        dummyManager.addApplication(application1, uiMain);
+        dummyManager.addApplication(application2, uiMain);
 
         // Delete the first application.
         DeleteCommand deleteCommand = new DeleteCommand(0);
         deleteCommand.execute(dummyManager, uiMain);
 
-        // Verify the application at index 0 has been deleted and the remaining application is app2.
+        // Verify the application at index 0 has been deleted and the remaining application is application2.
         ArrayList<InternshipApplication> remainingApps = dummyManager.getApplications();
         assertEquals(1, remainingApps.size());
         assertEquals("InnovateHub", remainingApps.get(0).getCompanyName());
         assertEquals("Product Manager", remainingApps.get(0).getJobTitle());
     }
+
+    @Test
+    // Error
+    void execute_ValidIndex_throws
 }

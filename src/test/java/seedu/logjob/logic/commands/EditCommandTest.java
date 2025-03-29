@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import seedu.logjob.logic.commands.exceptions.EditIndexOutOfBoundsException;
+import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationStatus;
@@ -35,7 +35,7 @@ public class EditCommandTest {
     }
 
     @Test
-    void execute_oneFieldEdited_applicationUpdated() throws EditIndexOutOfBoundsException {
+    void execute_oneFieldEdited_applicationUpdated() throws IndexOutOfBoundsException {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
@@ -62,7 +62,7 @@ public class EditCommandTest {
     }
 
     @Test
-    void execute_allFieldEdited_applicationUpdated() throws EditIndexOutOfBoundsException {
+    void execute_allFieldEdited_applicationUpdated() throws IndexOutOfBoundsException {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
@@ -89,7 +89,7 @@ public class EditCommandTest {
     }
 
     @Test
-    void execute_invalidEditIndex_throwsException() throws EditIndexOutOfBoundsException {
+    void execute_invalidEditIndex_throwsException() throws IndexOutOfBoundsException {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
@@ -104,7 +104,7 @@ public class EditCommandTest {
                 null,
                 null
         );
-        assertThrows(EditIndexOutOfBoundsException.class, () -> editCmd.execute(manager, UiMain.getInstance()));
+        assertThrows(IndexOutOfBoundsException.class, () -> editCmd.execute(manager, UiMain.getInstance()));
 
     }
 }
