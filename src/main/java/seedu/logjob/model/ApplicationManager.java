@@ -4,6 +4,7 @@ import seedu.logjob.ui.UiMain;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Manages the list of internship applications.
@@ -57,6 +58,16 @@ public class ApplicationManager {
      */
     public void listApplication(UiMain uiMain) throws EmptyTableException {
         uiMain.printApplications(this.applicationList);
+    }
+
+    public void sortApplication(String sortBy, UiMain uiMain) {
+        if(sortBy.equals("Company Name")) {
+            applicationList.sort(Comparator.comparing(InternshipApplication::getCompanyName));
+        } else {
+            applicationList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
+        }
+
+        uiMain.sortSucceedOutput(sortBy);
     }
 
     public ArrayList<InternshipApplication> getArrayList() {
