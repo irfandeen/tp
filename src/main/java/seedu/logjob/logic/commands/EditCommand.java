@@ -1,6 +1,6 @@
 package seedu.logjob.logic.commands;
 
-import seedu.logjob.logic.commands.exceptions.EditIndexOutOfBoundsException;
+import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
@@ -28,9 +28,9 @@ public class EditCommand extends Command {
 
     @Override
     public void execute(ApplicationManager applicationManager, UiMain uiMain)
-            throws EditIndexOutOfBoundsException {
+            throws IndexOutOfBoundsException {
         if (editIndex < 0 || editIndex >= applicationManager.getSize()) {
-            throw new EditIndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
+            throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
         }
 
         InternshipApplication existingApplication = applicationManager.getApplication(editIndex);
