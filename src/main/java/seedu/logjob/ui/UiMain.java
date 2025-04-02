@@ -29,41 +29,6 @@ public class UiMain {
         System.out.println(table);
     }
 
-    public void addSucceedOutput(InternshipApplication application) {
-        assert application != null : "Data should not be null";
-        System.out.println(
-                "Application: "
-                        + application.getCompanyName()
-                        + " "
-                        + application.getJobTitle()
-                        + " "
-                        + application.getStatusToString()
-                        + " Added Successfully");
-    }
-
-    public void editSucceedOutput(InternshipApplication application) {
-        assert application != null : "Data should not be null";
-        System.out.println(
-                "Application: "
-                        + application.getCompanyName()
-                        + " "
-                        + application.getJobTitle()
-                        + " "
-                        + application.getStatusToString()
-                        + " Edited Successfully");
-    }
-
-    public void deleteSucceedOutput(int index){
-        assert index >= 0 : "index should not be negative";
-        System.out.println("Index: " + index + " Succeeds Deletion");
-    }
-
-    public void sortSucceedOutput(String sortBy) {
-        assert sortBy != null : "sortBy should not be null";
-
-        System.out.println("Applications Successfully Sorted By: " + sortBy);
-    }
-
     public void helpOutput() {
         System.out.println(UiConstants.HELP_MESSAGE);
     }

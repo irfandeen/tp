@@ -22,7 +22,15 @@ public class ApplicationManager {
      */
     public void addApplication(InternshipApplication application, UiMain uiMain) {
         applicationList.add(application);
-        uiMain.addSucceedOutput(application);
+        uiMain.printMessage(
+                "Application: "
+                        + application.getCompanyName()
+                        + " "
+                        + application.getJobTitle()
+                        + " "
+                        + application.getStatusToString()
+                        + " Added Successfully"
+        );
     }
 
     /**
@@ -50,7 +58,7 @@ public class ApplicationManager {
      */
     public void deleteApplication(int index, UiMain uiMain) {
         applicationList.remove(index);
-        uiMain.deleteSucceedOutput(index);
+        uiMain.printMessage("Index: " + index + " Succeeds Deletion");
     }
 
     /**
@@ -72,7 +80,7 @@ public class ApplicationManager {
         ApplicationManager copy = new ApplicationManager(copyList); // Pass the sorted copy to a new ApplicationManager
         copy.listApplication(uiMain);
 
-        uiMain.sortSucceedOutput(sortBy);
+        uiMain.printMessage("Applications Successfully Sorted By: " + sortBy);
     }
 
     public ArrayList<InternshipApplication> findApplications(String searchTerm) {
