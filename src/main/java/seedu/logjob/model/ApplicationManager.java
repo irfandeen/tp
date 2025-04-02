@@ -60,12 +60,17 @@ public class ApplicationManager {
         uiMain.printApplications(this.applicationList);
     }
 
-    public void sortApplication(String sortBy, UiMain uiMain) {
-        if(sortBy.equals("Company Name")) {
-            applicationList.sort(Comparator.comparing(InternshipApplication::getCompanyName));
+    public void sortApplication(String sortBy, UiMain uiMain) throws EmptyTableException {
+        ArrayList<InternshipApplication> copyList = new ArrayList<>(applicationList); // Create a copy of the list
+
+        if (sortBy.equals("Company Name")) {
+            copyList.sort(Comparator.comparing(InternshipApplication::getCompanyName));
         } else {
-            applicationList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
+            copyList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
         }
+
+        ApplicationManager copy = new ApplicationManager(copyList); // Pass the sorted copy to a new ApplicationManager
+        copy.listApplication(uiMain);
 
         uiMain.sortSucceedOutput(sortBy);
     }
