@@ -19,6 +19,10 @@ public class UiMain {
         return ui;
     }
 
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
     public void printApplications(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
         assert applicationList != null : "Data should not be null";
         String table = UiTable.getTable(applicationList);

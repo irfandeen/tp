@@ -70,6 +70,17 @@ public class ApplicationManager {
         uiMain.sortSucceedOutput(sortBy);
     }
 
+    public ArrayList<InternshipApplication> findApplications(String searchTerm) {
+        ArrayList<InternshipApplication> applications = new ArrayList<>();
+        for (InternshipApplication application : applicationList) {
+            String applicationString = application.toString().toLowerCase();
+            if (applicationString.contains(searchTerm.toLowerCase())) {
+                applications.add(application);
+            }
+        }
+        return applications;
+    }
+
     public ArrayList<InternshipApplication> getArrayList() {
         return applicationList;
     }
