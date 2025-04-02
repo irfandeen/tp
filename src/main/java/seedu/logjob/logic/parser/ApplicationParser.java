@@ -1,6 +1,14 @@
 package seedu.logjob.logic.parser;
 
-import seedu.logjob.logic.commands.*;
+import seedu.logjob.logic.commands.AddCommand;
+import seedu.logjob.logic.commands.DeleteCommand;
+import seedu.logjob.logic.commands.EditCommand;
+import seedu.logjob.logic.commands.ExitCommand;
+import seedu.logjob.logic.commands.FindCommand;
+import seedu.logjob.logic.commands.HelpCommand;
+import seedu.logjob.logic.commands.ListCommand;
+import seedu.logjob.logic.commands.SortCommand;
+import seedu.logjob.logic.commands.Command;
 import seedu.logjob.logic.parser.exceptions.ParseException;
 
 
@@ -54,6 +62,5 @@ public class ApplicationParser {
         }
 
     }
-
 
 }
