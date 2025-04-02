@@ -44,4 +44,8 @@ public class InternshipApplication {
     public ApplicationStatus getStatus() {
         return this.status;
     }
+
+    public String toString() {
+        return companyName + ", " + jobTitle + ", " + applicationDate.toString() + ", " + status;
+    }
 }
