@@ -2,9 +2,43 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
+# LogJob Developer Guide
+
+* Table of Contents
+* [LogJob Developer Guide](#logjob-developer-guide)
+  * [**Acknowledgements**](#Acknowledgements) 
+  * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+  * [**Implementation**](#implementation)
+    * [Add an internship application](#add-an-internship-application)
+    * [Edit an internship application](#edit-an-internship-application)
+    * [Delete an internship application](#delete-an-internship-application)
+    * [List all internship applications](#list-all-internship-applications)
+    * [Sort internship applications by field](#sort-internship-applications-by-field)
+    * [Find an internship application](#find-an-internship-application)
+    * [Help command](#help-command)
+    * [Exit the application](#exit-the-application)
+* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+  * [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch](#launch)
+    * [Adding an internship application](#adding-an-internship-application)
+    * [Editing an internship application](#editing-an-internship-application)
+    * [Deleting an internship application](#deleting-an-internship-application)
+    * [Listing applications](#listing-applications)
+    * [Help](#help)
+    * [Exit](#exit)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -145,15 +179,23 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
-
-Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
+### Add an internship application
+### Edit an internship application
+### Delete an internship application
+### List all internship applications
+### Sort internship applications by field
+### Find an internship application
+### Help command
+### Exit the application
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -339,7 +381,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch
 
 1. Initial launch
 
@@ -356,7 +398,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Getting Help
+1. Instructions on how to get help on commands
+
+### Adding an internship application
+1. Instructions for adding an internship application
+
+
+### Editing an internship application
+1. Instructions for editing an internship application
+
+### Listing applications
+1. Instructions for listing all applications
+
+
+
+### Deleting an internship application
 
 1. Deleting a person while all persons are being shown
 
@@ -380,3 +437,6 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Exit
+1. Exiting the application
