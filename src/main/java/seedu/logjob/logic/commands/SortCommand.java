@@ -2,6 +2,7 @@ package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.ui.UiMain;
+import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
@@ -12,7 +13,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public void execute(ApplicationManager applicationManager, UiMain uiMain) {
+    public void execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
         applicationManager.sortApplication(this.sortBy, uiMain);
     }
 

@@ -2,32 +2,42 @@
 
 ## Introduction
 
-{Give a product intro}
+LogJob (LJ) is a desktop app for managing job applications, optimized for use via a Command Line Interface (CLI). If you can type fast, LJ can get your job application management tasks done faster than traditional GUI apps.
 
+---
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `LogJob` from [here](https://github.com/AY2425S2-CS2113-T11a-2/tp/releases).
+3. On the same directory, using a terminal, run java -jar LogJob.jar
+---
+## Features
 
-## Features 
+### Listing the application: `list`
+List the job applications to the command line interface.
 
-{Give detailed description of each feature}
+Format: `list`
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+* no other argument is expected
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Example of usage:
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+`list`
 
-Example of usage: 
+### Sort the application: `sort`
+Sort the job applications and output the sorted list onto the command line interface.
 
-`todo n/Write the rest of the User Guide d/next week`
+Format: `list -n/-d`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+* `-d` Sort the list based on the date of application
+* `-n` Sort the list based on the name of company
+
+Example of usage:
+
+`list -n`
+
+`list -d`
+
 
 ## FAQ
 
@@ -39,4 +49,5 @@ Example of usage:
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* List applications `list`
+* Sort applications `sort -n/-d`

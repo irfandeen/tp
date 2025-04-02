@@ -42,7 +42,15 @@ public class EditCommand extends Command {
         );
 
         applicationManager.updateApplication(editIndex, editedApplication);
-        uiMain.editSucceedOutput(editedApplication);
+        uiMain.printMessage(
+                "Application: "
+                        + editedApplication.getCompanyName()
+                        + " "
+                        + editedApplication.getJobTitle()
+                        + " "
+                        + editedApplication.getStatusToString()
+                        + " Edited Successfully"
+        );
     }
 
     @Override
