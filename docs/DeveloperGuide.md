@@ -151,7 +151,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="450" />≤
 
 
 The `Model` component,
@@ -172,7 +172,8 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+Here is a draft of Storage Component
+![Class Diagram of Storage](diagrams/class-diagrams/storageclass.png)
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -190,9 +191,14 @@ This section describes some noteworthy details on how certain features are imple
 ### Add an internship application
 ### Edit an internship application
 ### Delete an internship application
+![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
 ### Sort internship applications by field
 ### Find an internship application
+Here is a drafted sequence diagram of the find command and its execution.
+
+![Sequence diagram of find command](diagrams/sequence-diagrams/find-sequence.png)
+
 ### Help command
 ### Exit the application
 
