@@ -5,7 +5,10 @@ import seedu.logjob.model.ApplicationStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
+import java.time.format.DateTimeFormatter;
 
 
 public class ParserUtilsTest {
@@ -59,5 +62,22 @@ public class ParserUtilsTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseStatus("-1")); // Negative index
         assertThrows(ParseException.class, () -> ParserUtil.parseStatus("")); // Empty input
         assertThrows(ParseException.class, () -> ParserUtil.parseStatus(" ")); // Only spaces
+    }
+
+    @Test
+    void parseApplicationDate_validDate_returnsParsedDate() throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        assertEquals("2025-10-01", ParserUtil.parseApplicationDate("2025-10-01").format(formatter));
+        assertEquals("2025-09-15", ParserUtil.parseApplicationDate("2025-09-15").format(formatter));
+        assertEquals("2025-08-30", ParserUtil.parseApplicationDate("2025-08-30").format(formatter));
+    }
+
+    @Test
+    void parseApplicationDate_invalidDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseApplicationDate(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseApplicationDate(" "));
+        assertThrows(ParseException.class, () -> ParserUtil.parseApplicationDate("2025-13-01"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseApplicationDate("2025-02-30"));
     }
 }
