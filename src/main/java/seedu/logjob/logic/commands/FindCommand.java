@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     private final String searchTerm;
 
     public FindCommand(String searchTerm) {
-        this.searchTerm = searchTerm;
+        this.searchTerm = searchTerm.toLowerCase();
     }
 
     public void execute(ApplicationManager applicationManager, UiMain ui)

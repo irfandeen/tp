@@ -102,20 +102,17 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`UiMain.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/ui/UiMain.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![UML Diagram](./diagrams/UI.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `UiMain` that handles the direct interactions between the user and the program logic.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
-
-The `UI` component,
-
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+The `UI` component is called by the ApplicationManager,
+* Receive command from the user on the CLI.
+* Outputs the list of applications on the CLI.
+* Outputs the responses of the program to the user.
+* Outputs the error message that is thrown by the program.
 
 ### Logic component
 
@@ -151,7 +148,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="450" />≤
 
 
 The `Model` component,
@@ -172,7 +169,8 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+Here is a draft of Storage Component
+![Class Diagram of Storage](diagrams/class-diagrams/storageclass.png)
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -190,9 +188,14 @@ This section describes some noteworthy details on how certain features are imple
 ### Add an internship application
 ### Edit an internship application
 ### Delete an internship application
+![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
 ### Sort internship applications by field
 ### Find an internship application
+Here is a drafted sequence diagram of the find command and its execution.
+
+![Sequence diagram of find command](diagrams/sequence-diagrams/find-sequence.png)
+
 ### Help command
 ### Exit the application
 

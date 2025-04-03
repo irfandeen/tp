@@ -53,9 +53,9 @@ public class AddCommandParserTest {
 
         // contains preamble
         assertParseFailure(parser, " this job -j Software Engineer -n TechCompany",
-                "Add command has no preamble: this job ");
+                "Add command has no preamble: this job");
         assertParseFailure(parser, " Hello Hello -j AI/ML Engineer -j Test Engineer -n Bing",
-                "Add command has no preamble: Hello Hello ");
+                "Add command has no preamble: Hello Hello");
 
         // single duplicate flag
         assertParseFailure(parser, " -n Yahoo -n Bing -j Software Engineer",

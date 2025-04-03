@@ -64,6 +64,7 @@ public class ArgumentTokenizer {
             FlagPosition first = flagPositions.get(0);
             preamble = arguments.substring(0, first.startIndex());
         }
+        preamble = preamble.trim();
         ArgumentMap argumentMap = new ArgumentMap(preamble);
 
         // Dummy end position to represent end of the String
