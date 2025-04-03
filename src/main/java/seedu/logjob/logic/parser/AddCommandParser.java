@@ -40,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         if (!argMap.getPreamble().trim().isEmpty()) {
-            throw new ParseException("Add command has no preamble:" + argMap.getPreamble());
+            throw new ParseException("Add command has no preamble: " + argMap.getPreamble());
         }
 
         if (argMap.containsDuplicateFlags(ADD_FLAGS)) {
