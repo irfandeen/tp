@@ -46,6 +46,6 @@ public class InternshipApplication {
     }
 
     public String toString() {
-        return companyName + ", " + jobTitle + ", " + applicationDate.toString() + ", " + status;
+        return companyName + ", " + jobTitle + ", " + applicationDate.toString() + ", " + status.toString();
     }
 }
