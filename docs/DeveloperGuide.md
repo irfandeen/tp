@@ -62,7 +62,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="./diagrams/class-diagrams/ArchitectureDiagram.png" alt="Architecture Diagram" width = 300 />
+<img src="diagrams/architecture-diagrams/ArchitectureDiagram.png" alt="Architecture Diagram" width = 300 />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 Given below is a quick overview of main components and how they interact with each other.
@@ -84,7 +84,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="diagrams/sequence-diagrams/ArchitectureSequenceDiagram.png" alt="Architecture Sequence Diagram" width="750" />
+<img src="diagrams/architecture-diagrams/ArchitectureSequenceDiagram.png" alt="Architecture Sequence Diagram" width="750" />
 
 For the two main components [`Model`](...) and [`Storage`](...) dealing with application state,
 
@@ -99,7 +99,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`UiMain.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/ui/UiMain.java)
 
-![UML Diagram](./diagrams/UI.png)
+![UML Diagram](diagrams/class-diagrams/UI.png)
 
 The UI consists of a `UiMain` that handles the direct interactions between the user and the program logic.
 
@@ -111,7 +111,7 @@ The `UI` component is called by the ApplicationManager,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`]
 
 Here's a (partial) class diagram of the `Logic` component:
 
