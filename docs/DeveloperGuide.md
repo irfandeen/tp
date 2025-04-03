@@ -62,7 +62,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="./diagrams/class-diagrams/ArchitectureDiagram.png" width = 300 />
+<img src="./diagrams/class-diagrams/ArchitectureDiagram.png" alt="Architecture Diagram" width = 300 />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 Given below is a quick overview of main components and how they interact with each other.
@@ -76,7 +76,7 @@ Given below is a quick overview of main components and how they interact with ea
 The bulk of the app's work is done by the following four components:
 
 * [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
+* [**`Logic`**](#logic-component): The command parser/executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
@@ -84,16 +84,14 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="diagrams/sequence-diagrams/ArchitectureSequenceDiagram.png" alt="Architecture Sequence Diagram" width="750" />
 
-Each of the four main components (also shown in the diagram above),
+For the two main components [`Model`](...) and [`Storage`](...) dealing with application state,
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-
-<img src="images/ComponentManagers.png" width="300" />
+For example, the [`Storage`](...) component defines its API in the [`Storage.java`](...) interface. It implements this interface via the [`StorageManager.java`](...) class. Other components interact through this interface rather than a concrete calss to prevent other components being coupled to the implementation. 
 
 The sections below give more details of each component.
 
