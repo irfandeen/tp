@@ -38,7 +38,6 @@ Example of usage:
 
 `list -d`
 
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
