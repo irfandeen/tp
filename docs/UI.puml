@@ -1,11 +1,14 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+skinparam classBackgroundColor green
+skinparam classBorderColor black
+skinparam classArrowColor darkgreen
+skinparam classFontColor white
+hide circle
 
-autonumber
+package  UI {
+    class UiMain
+    class UiTable
+    class UiConstant
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
 @enduml
