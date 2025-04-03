@@ -8,6 +8,9 @@ import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseFailure
 import static seedu.logjob.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 class FindCommandParserTest {
+    private static final String EMPTY_PREAMBLE =
+            "Find command expects search term as preamble.\nExample usage: find ABC Bank";
+
     @Test
     // happy path
     void parse_validArgs_throwsParseException() throws ParseException {
@@ -20,8 +23,6 @@ class FindCommandParserTest {
     @Test
     // error path
     void parse_emptyArgs_throwsParseException() {
-        String EMPTY_PREAMBLE =
-                "Find command expects search term as preamble.\nExample usage: find ABC Bank";
         FindCommandParser parser = new FindCommandParser();
         assertParseFailure(parser, "", EMPTY_PREAMBLE);
         assertParseFailure(parser, "    ", EMPTY_PREAMBLE);
