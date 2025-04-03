@@ -39,7 +39,7 @@ Example of usage:
 `list -d`
 
 ### Delete an application
-Delete applications by index
+Delete applications by index.
  * No flags taken
  * Index is provided as preamble (as shown below)
 
@@ -50,6 +50,8 @@ Example of usage:
 `delete 3`
 
 ### Find an application by keyword
+Finds applications with the given keyword as a substring.
+
 * No flags given
 * Non-empty preamble required with search term (shown below)
 
@@ -59,11 +61,25 @@ Example of usage:
 
 `find applied`
 
+### Exit from the application
+Exits from LogJob.
+
+* No flags given
+* No preamble given
+
+Example usage:
+
+`exit`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
 **A**: You can simply move over data.txt to the same directory as LogJob.jar anywhere, and LogJob will be synchronised!
+
+**Q**: How do I save my data?
+
+**A**: No need to manually save your data! LogJob will automatically save your data to your computer whenever you exit the application.
 
 ## Command Summary
 
