@@ -1,0 +1,37 @@
+@startuml ArchitectureDiagram
+
+' Define styles
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam arrowColor Black
+skinparam shadowing true
+
+' User actor
+actor User
+
+' Define components
+package " " {
+    [UI] <<component>> #green
+    [Logic] <<component>> #blue
+    [Model] <<component>> #firebrick
+    [Storage] <<component>> #darkgoldenrod
+    [Main] <<component>> #gray
+}
+
+' External file storage
+rectangle "File" as File #palegreen
+
+' Relationships
+User --> UI
+UI --> Logic
+UI --> Model
+Logic --> Model
+Logic --> Storage
+Model --> Storage
+Main --> UI
+Main --> Logic
+Main --> Model
+Main --> Storage
+Storage --> File
+
+@enduml

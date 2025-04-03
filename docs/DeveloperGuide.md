@@ -62,7 +62,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+![Architecture](diagrams/ArchitectureDiagram.puml)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
