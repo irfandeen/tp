@@ -21,7 +21,7 @@ public class SortCommandParser implements Parser<SortCommand>{
             throw new ParseException("sort command requires no preamble");
         }
         if((argMap.containsKey(FLAG_COMPANY_NAME) && !argMap.get(FLAG_COMPANY_NAME).trim().isEmpty())
-        || (argMap.containsKey(FLAG_APPLICATION_DATE) && !argMap.get(FLAG_APPLICATION_DATE).trim().isEmpty())) {
+            || (argMap.containsKey(FLAG_APPLICATION_DATE) && !argMap.get(FLAG_APPLICATION_DATE).trim().isEmpty())) {
             throw new ParseException("sort command requires no arguments");
         }
         if(argMap.containsKey(FLAG_APPLICATION_DATE)){
