@@ -38,11 +38,32 @@ Example of usage:
 
 `list -d`
 
+### Delete an application
+Delete applications by index
+ * No flags taken
+ * Index is provided as preamble (as shown below)
+
+Example of usage:
+
+`delete 0`
+
+`delete 3`
+
+### Find an application by keyword
+* No flags given
+* Non-empty preamble required with search term (shown below)
+
+Example of usage:
+
+`find engineer`
+
+`find applied`
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: You can simply move over data.txt to the same directory as LogJob.jar anywhere, and LogJob will be synchronised!
 
 ## Command Summary
 
@@ -50,3 +71,5 @@ Example of usage:
 
 * List applications `list`
 * Sort applications `sort -n/-d`
+* Delete applications `delete <index>`
+* Find applications `find <keyword>`
