@@ -14,10 +14,16 @@ public class SortCommandParser implements Parser<SortCommand>{
         String sortBy = "null";
         ArgumentMap argMap = ArgumentTokenizer.tokenize(args, SORT_FLAGS);
 
-        if(argMap.size() != 1){
+        if(argMap.size() != 1) {
             throw new ParseException("sort command requires exactly one argument: -n or -d");
         }
-
+        if(!argMap.getPreamble().trim().isEmpty()) {
+            throw new ParseException("sort command requires no preamble");
+        }
+        if((argMap.containsKey(FLAG_COMPANY_NAME) && !argMap.get(FLAG_COMPANY_NAME).trim().isEmpty())
+            || (argMap.containsKey(FLAG_APPLICATION_DATE) && !argMap.get(FLAG_APPLICATION_DATE).trim().isEmpty())) {
+            throw new ParseException("sort command requires no arguments");
+        }
         if(argMap.containsKey(FLAG_APPLICATION_DATE)){
             sortBy = "Application Date";
         } else if(argMap.containsKey(FLAG_COMPANY_NAME)){

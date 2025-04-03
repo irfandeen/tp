@@ -1,0 +1,14 @@
+@startuml
+skinparam classBackgroundColor green
+skinparam classBorderColor black
+skinparam classArrowColor darkgreen
+skinparam classFontColor white
+hide circle
+
+package  UI {
+    class UiMain
+    class UiTable
+    class UiConstant
+}
+
+@enduml
