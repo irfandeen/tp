@@ -191,6 +191,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add an internship application
 ### Edit an internship application
 ### Delete an internship application
+![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
 ### Sort internship applications by field
 ### Find an internship application
