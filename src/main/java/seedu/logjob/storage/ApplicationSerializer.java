@@ -10,14 +10,14 @@ import java.time.format.DateTimeParseException;
 
 public class ApplicationSerializer {
     private static final String DELIMITER = ";";
-    private static final int NUMBER_OF_FIELDS = 4;
+    private static final int NUMBER_OF_FIELDS = 5;
     private static final String NUM_FIELDS_ERR_MSG = "Data files contains an incorrect number of fields.";
 
     private ApplicationSerializer() {}
 
     public static String applicationToDelimitedString(InternshipApplication application) {
         return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER +
-                application.getApplicationDateString() + DELIMITER + application.getStatusToString();
+                application.getApplicationDateString() + DELIMITER + application.getStatusToString() + DELIMITER + application.getId();
     }
 
     public static InternshipApplication delimitedStringToApplication(String delimitedString)
@@ -41,6 +41,13 @@ public class ApplicationSerializer {
             throw new InvalidDelimitedStringException("Invalid application date: " + fields[2]);
         }
 
-        return new InternshipApplication(fields[0], fields[1], applicationDate, status);
+        int id = -1;
+        try{
+            id = Integer.parseInt(fields[4]);
+        } catch (NumberFormatException e) {
+            throw new InvalidDelimitedStringException("Invalid application id: " + fields[4]);
+        }
+
+        return new InternshipApplication(fields[0], fields[1], applicationDate, status, id);
     }
 }

@@ -29,7 +29,7 @@ public class DeleteCommandTest {
 
         @Override
         public void deleteApplication(int index, UiMain uiMain) {
-            applications.remove(index);
+            applications.remove(index - 1);
         }
 
         @Override
@@ -49,15 +49,15 @@ public class DeleteCommandTest {
 
         // Add two applications to the manager.
         InternshipApplication application1 = new InternshipApplication("TechCorp", "Software Engineer",
-                LocalDate.now(), ApplicationStatus.APPLIED);
+                LocalDate.now(), ApplicationStatus.APPLIED, 1);
         InternshipApplication application2 = new InternshipApplication("InnovateHub", "Product Manager",
-                LocalDate.now(), ApplicationStatus.INTERVIEW);
+                LocalDate.now(), ApplicationStatus.INTERVIEW, 2);
         UiMain uiMain = UiMain.getInstance();
         dummyManager.addApplication(application1, uiMain);
         dummyManager.addApplication(application2, uiMain);
 
         // Delete the first application.
-        DeleteCommand deleteCommand = new DeleteCommand(0);
+        DeleteCommand deleteCommand = new DeleteCommand(1);
         deleteCommand.execute(dummyManager, uiMain);
 
         // Verify the application at index 0 has been deleted and the remaining application is application2.
@@ -74,9 +74,9 @@ public class DeleteCommandTest {
 
         // Has only 1 instance ata index 0
         dummyManager.addApplication(new InternshipApplication("Google", "SWE", LocalDate.now(),
-                ApplicationStatus.APPLIED), UiMain.getInstance());
+                ApplicationStatus.APPLIED, 1), UiMain.getInstance());
 
-        DeleteCommand deleteCommandPositiveInvalid = new DeleteCommand(1);
+        DeleteCommand deleteCommandPositiveInvalid = new DeleteCommand(0);
         DeleteCommand deleteCommandNegativeInvalid = new DeleteCommand(-1);
         DeleteCommand deleteCommandLargePositive = new DeleteCommand(99999999);
         DeleteCommand deleteCommandLargeNegative = new DeleteCommand(-9999999);

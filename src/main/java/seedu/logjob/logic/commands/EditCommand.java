@@ -11,15 +11,15 @@ import java.time.LocalDate;
 
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
-    private final int editIndex;
+    private final int editId;
     private final String companyName;
     private final String jobTitle;
     private final LocalDate applicationDate;
     private final ApplicationStatus applicationStatus;
 
-    public EditCommand(int editIndex, String companyName, String jobTitle,
+    public EditCommand(int editId, String companyName, String jobTitle,
                        LocalDate applicationDate, ApplicationStatus status) {
-        this.editIndex = editIndex;
+        this.editId = editId;
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.applicationDate = applicationDate;
@@ -29,19 +29,20 @@ public class EditCommand extends Command {
     @Override
     public void execute(ApplicationManager applicationManager, UiMain uiMain)
             throws IndexOutOfBoundsException {
-        if (editIndex < 0 || editIndex >= applicationManager.getSize()) {
+        if (editId < 1 || editId > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
         }
 
-        InternshipApplication existingApplication = applicationManager.getApplication(editIndex);
+        InternshipApplication existingApplication = applicationManager.getApplication(editId - 1);
         InternshipApplication editedApplication = new InternshipApplication(
                 (companyName != null) ? companyName : existingApplication.getCompanyName(),
                 (jobTitle != null) ? jobTitle : existingApplication.getJobTitle(),
                 (applicationDate != null) ? applicationDate : existingApplication.getApplicationDate(),
-                (applicationStatus != null) ? applicationStatus : existingApplication.getStatus()
+                (applicationStatus != null) ? applicationStatus : existingApplication.getStatus(),
+                existingApplication.getId()
         );
 
-        applicationManager.updateApplication(editIndex, editedApplication);
+        applicationManager.updateApplication(editId, editedApplication);
         uiMain.printMessage(
                 "Application: "
                         + editedApplication.getCompanyName()
@@ -63,7 +64,7 @@ public class EditCommand extends Command {
             return false;
         }
 
-        return editIndex == otherCommand.editIndex
+        return editId == otherCommand.editId
                 && java.util.Objects.equals(companyName, otherCommand.companyName)
                 && java.util.Objects.equals(jobTitle, otherCommand.jobTitle)
                 && java.util.Objects.equals(applicationDate, otherCommand.applicationDate)
