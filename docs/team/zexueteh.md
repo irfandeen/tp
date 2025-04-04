@@ -1,4 +1,4 @@
-# Irfan Deen - Project Portfolio Page
+# Teh Ze Xue - Project Portfolio Page
 
 ## 📌 Overview
 LogJob (LJ) is a desktop app for managing job applications, optimized for use via a Command Line Interface (CLI)
