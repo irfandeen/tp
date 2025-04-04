@@ -54,7 +54,7 @@ public class EditCommandTest {
         editCmd.execute(manager, UiMain.getInstance());
 
         // Ensure one Field is edited
-        InternshipApplication edited = manager.getApplication(0);
+        InternshipApplication edited = manager.getApplication(1);
         assertEquals("NewCompany", edited.getCompanyName());
         assertEquals(original.getJobTitle(), edited.getJobTitle());
         assertEquals(original.getApplicationDate(), edited.getApplicationDate());
@@ -81,7 +81,7 @@ public class EditCommandTest {
         editCmd.execute(manager, UiMain.getInstance());
 
         // Ensure one Field is edited
-        InternshipApplication edited = manager.getApplication(0);
+        InternshipApplication edited = manager.getApplication(1);
         assertEquals("NewCompany", edited.getCompanyName());
         assertEquals("NewRole", edited.getJobTitle());
         assertEquals(LocalDate.of(2025, 3, 25), edited.getApplicationDate());

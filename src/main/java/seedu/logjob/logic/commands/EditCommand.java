@@ -30,10 +30,10 @@ public class EditCommand extends Command {
     public void execute(ApplicationManager applicationManager, UiMain uiMain)
             throws IndexOutOfBoundsException {
         if (editId < 1 || editId > applicationManager.getSize()) {
-            throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
+            throw new IndexOutOfBoundsException("Invalid ID. Please enter a valid ID in the list.");
         }
 
-        InternshipApplication existingApplication = applicationManager.getApplication(editId - 1);
+        InternshipApplication existingApplication = applicationManager.getApplication(editId);
         InternshipApplication editedApplication = new InternshipApplication(
                 (companyName != null) ? companyName : existingApplication.getCompanyName(),
                 (jobTitle != null) ? jobTitle : existingApplication.getJobTitle(),

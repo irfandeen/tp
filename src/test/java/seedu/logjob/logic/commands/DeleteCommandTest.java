@@ -28,8 +28,8 @@ public class DeleteCommandTest {
         }
 
         @Override
-        public void deleteApplication(int index, UiMain uiMain) {
-            applications.remove(index - 1);
+        public void deleteApplication(int id, UiMain uiMain) {
+            applications.remove(id - 1);
         }
 
         @Override
