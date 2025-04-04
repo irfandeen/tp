@@ -1,0 +1,18 @@
+@startuml
+
+participant LogJob
+participant AddCommandParser
+participant AddCommand
+participant ApplicationManager
+participant UI
+
+LogJob -> AddCommandParser: parse(args)
+AddCommandParser --> LogJob: AddCommand
+LogJob -> AddCommand: execute()
+AddCommand -> ApplicationManager: add(application)
+ApplicationManager --> AddCommand: void
+AddCommand -> UI: printMessage(addSuccess)
+AddCommand --> LogJob: void
+
+
+@enduml

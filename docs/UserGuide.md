@@ -23,6 +23,17 @@ Example of usage:
 
 Note that `-s` and `-d` flags are optional, if blank, will default to `APPLIED` and `Today's date`
 
+### Editing an application: `edit`
+Edits an existing Internship Application on the list at position INDEX
+
+Format `edit INDEX [-n COMPANY NAME] [-j JOB TITLE] [-s APPLICATION STATUS] [-d DATE]`
+
+Example of usage:
+`edit 0 -s OFFERED -d 2025-04-01`
+
+Note that INDEX has to be an integer from `0` to `n-1`, where `n`  is the total number of applications.
+Edit must also contain at least one flag.
+
 
 ### Listing the application: `list`
 List the job applications to the command line interface.
@@ -71,6 +82,16 @@ Example of usage:
 `find engineer`
 
 `find applied`
+
+### Getting help
+Get help on command syntax. Prints a help message onto the terminal.
+
+* No flags given
+* No preamble given
+
+Example usage:
+
+`help`
 
 ### Exit from the application
 Exits from LogJob.
