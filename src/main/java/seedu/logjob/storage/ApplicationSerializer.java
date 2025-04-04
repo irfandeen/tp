@@ -17,7 +17,8 @@ public class ApplicationSerializer {
 
     public static String applicationToDelimitedString(InternshipApplication application) {
         return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER +
-                application.getApplicationDateString() + DELIMITER + application.getStatusToString() + DELIMITER + application.getId();
+                application.getApplicationDateString() + DELIMITER + application.getStatusToString() +
+                DELIMITER + application.getId();
     }
 
     public static InternshipApplication delimitedStringToApplication(String delimitedString)
