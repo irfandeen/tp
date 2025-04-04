@@ -1,0 +1,17 @@
+@startuml
+
+participant LogJob
+participant FindCommandParser
+participant FindCommand
+participant ApplicationManager
+participant UI
+
+LogJob -> FindCommandParser: parse()
+FindCommandParser --> LogJob: FindCommand
+LogJob -> FindCommand: execute()
+FindCommand -> ApplicationManager: find(keyword)
+ApplicationManager --> FindCommand: ArrayList<InternshipApplication>
+FindCommand -> UI: print(ArrayList<InternshipApplication>)
+FindCommand --> LogJob: void
+
+@enduml

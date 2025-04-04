@@ -1,0 +1,57 @@
+@startuml
+!include ../../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{abstract}\nCommand" as Command
+Class XYZCommand
+
+package "Parser classes"{
+Class "<<interface>>\nParser" as Parser
+Class AddressBookParser
+Class XYZCommandParser
+Class CliSyntax
+Class ParserUtil
+Class ArgumentMultimap
+Class ArgumentTokenizer
+Class Prefix
+
+}
+
+Package "Validator classes" as ValidatorPackage{
+Class "<<interface>>\nValidator" as Validator
+Class ApplicationStatusValidator
+Class CompanyNameValidator
+Class JobApplicationIndexValidator
+Class JobTitleValidator
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> AddressBookParser
+
+'Parser Dependencies
+AddressBookParser .down.> XYZCommandParser: <<create>>
+XYZCommandParser ..> XYZCommand : <<create>>
+AddressBookParser ..> Command : <<use>>
+XYZCommandParser .up.|> Parser
+XYZCommandParser ..> ArgumentMultimap
+XYZCommandParser ..> ArgumentTokenizer
+ArgumentTokenizer .left.> ArgumentMultimap
+XYZCommandParser ..> CliSyntax
+CliSyntax ..> Prefix
+CliSyntax .[hidden] ParserUtil
+XYZCommandParser ..> ParserUtil
+ParserUtil .down.> Prefix
+ParserUtil .down..> Validator
+ArgumentTokenizer .down.> Prefix
+XYZCommand -up-|> Command
+
+'Validator Dependencies
+ApplicationStatusValidator .right.|> Validator
+CompanyNameValidator .up.|> Validator
+JobApplicationIndexValidator .up.|> Validator
+JobTitleValidator .left.|> Validator
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+participant LogJob
+participant DeleteCommandParser
+participant DeleteCommand
+participant ApplicationManager
+participant UI
+
+LogJob -> DeleteCommandParser: parse(args)
+DeleteCommandParser --> LogJob: DeleteCommand
+LogJob -> DeleteCommand: execute()
+DeleteCommand -> ApplicationManager: delete(index)
+ApplicationManager --> DeleteCommand: void
+DeleteCommand -> UI: printMessage(deleteSuccess)
+DeleteCommand --> LogJob: void
+
+@enduml

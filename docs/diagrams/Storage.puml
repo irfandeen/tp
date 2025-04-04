@@ -1,0 +1,17 @@
+@startuml
+
+package seedu.logjob.storage {
+
+interface Storage {
+    +readApplicationsFromFile(): ArrayList<InternshipApplication> throws IOException, StorageException, InvalidDelimitedStringException
+    +storeApplicationsToFile(applications: InternshipApplication[]): void throws StorageException
+}
+
+class StorageManager implements Storage {
+    +readApplicationsFromFile(): ArrayList<InternshipApplication> throws IOException, StorageException, InvalidDelimitedStringException
+    +storeApplicationsToFile(applications: InternshipApplication[]): void throws StorageException
+}
+
+}
+
+@enduml
