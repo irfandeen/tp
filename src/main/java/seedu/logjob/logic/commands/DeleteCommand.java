@@ -5,18 +5,18 @@ import seedu.logjob.ui.UiMain;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    private final int commandIndex;
+    private final int commandId;
 
-    public DeleteCommand(int commandIndex) {
-        this.commandIndex = commandIndex;
+    public DeleteCommand(int commandId) {
+        this.commandId = commandId;
     }
 
     @Override
     public void execute(ApplicationManager applicationManager, UiMain uiMain) throws IndexOutOfBoundsException {
-        if (commandIndex < 1 || commandIndex > applicationManager.getSize()) {
+        if (commandId < 1 || commandId > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
         }
-        applicationManager.deleteApplication(commandIndex, uiMain);
+        applicationManager.deleteApplication(commandId, uiMain);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class DeleteCommand extends Command {
             return false;
         }
 
-        return commandIndex == otherCommand.commandIndex;
+        return commandId == otherCommand.commandId;
     }
 }
