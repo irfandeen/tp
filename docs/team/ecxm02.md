@@ -28,7 +28,5 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
 ### User Guide Contributions
 - **User Instructions 📖:**  
   Crafted clear, step-by-step guides for adding new internship applications, making the setup process straightforward for users.
-- **Feature Demonstrations 🎥:**  
-  Developed walkthroughs and illustrative examples to effectively demonstrate LogJob’s core functionalities and assist users in navigating the app.
 
 ---
