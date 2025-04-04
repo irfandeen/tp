@@ -16,6 +16,8 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
   Helped integrate core components by contributing to the [`LogJob`](src/main/java/seedu/logjob/LogJob.java) main class, which coordinates the application's lifecycle and interaction between modules.
 - **Basic Integration 🛠:**  
   Assisted in ensuring smooth interoperability between UI, logic, and model components.
+- **Date Time Integration 📅:**  
+  Integrated Java's DateTime API into the model and parser to handle new date functionalities, enhancing the application's capability to manage application dates.
 - **Comprehensive Testing ✅:**  
   Contributed to adding JUnit tests for command classes and model components, ensuring rigorous and reliable code quality.
 
