@@ -1,0 +1,36 @@
+@startuml
+!include ../../style.puml
+
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Logic as LogicPackage {
+Class "{abstract}\nCommand" as Command
+Class XYZCommand
+Class ApplicationParser
+package "Parser" as ParserPackage{}
+}
+
+
+package Model {}
+package Storage {}
+
+Class HiddenDestination #FFFFFF
+Class HiddenSource #FFFFFF
+HiddenDestination .left[hidden] HiddenSource
+
+HiddenSource .down.> ApplicationParser
+ApplicationParser ..> ParserPackage
+ParserPackage .left.> XYZCommand: <<create>>
+XYZCommand -up-|> Command
+Command .up.> HiddenDestination
+
+
+Command -down> Model
+Command -down> Storage
+Model --[hidden] Storage
+
+
+
+@enduml

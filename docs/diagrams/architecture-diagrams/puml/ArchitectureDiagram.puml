@@ -1,0 +1,32 @@
+@startuml ArchitectureDiagram
+
+!include ../../style.puml
+
+
+' Define components with default styles
+package " "{
+    [UI] UI_COLOR
+    [Logic]LOGIC_COLOR
+    [Model]MODEL_COLOR
+    [Storage]STORAGE_COLOR
+    [Main]#grey
+}
+
+' External file storage
+rectangle "File" as File #palegreen
+
+' Relationships
+User -left-> UI
+Main -> UI
+Main --> Logic
+Main --> Model
+Main --> Storage
+UI -[UI_COLOR]-> Logic
+UI -[UI_COLOR]-> Model
+Logic -[LOGIC_COLOR]-> Storage
+Logic -[LOGIC_COLOR]-> Model
+Storage -up[STORAGE_COLOR].> Model
+Storage -right[STORAGE_COLOR].> File
+
+
+@enduml
