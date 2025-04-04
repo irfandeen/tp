@@ -13,6 +13,17 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
 ---
 ## Features
 
+### Adding an application: `add`
+Adds a new Internship Application into the list
+
+Format `add -n [COMPANY NAME] -j [JOB TITLE] -s [APPLICATION STATUS] -d[DATE]`
+
+Example of usage:
+`add -n Goggle -j SWE -s INTERVIEW -d 2025-01-01`
+
+Note that `-s` and `-d` flags are optional, if blank, will default to `APPLIED` and `Today's date`
+
+
 ### Listing the application: `list`
 List the job applications to the command line interface.
 
@@ -85,6 +96,7 @@ Example usage:
 
 {Give a 'cheat sheet' of commands here}
 
+* Add application `add -n [COMPANY NAME] -j [JOB TITLE] -s [APPLICATION STATUS] -d[DATE]`
 * List applications `list`
 * Sort applications `sort -n/-d`
 * Delete applications `delete <index>`
