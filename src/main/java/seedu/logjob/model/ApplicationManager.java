@@ -72,7 +72,7 @@ public class ApplicationManager {
         ArrayList<InternshipApplication> copyList = new ArrayList<>(applicationList); // Create a copy of the list
 
         if (sortBy.equals("Company Name")) {
-            copyList.sort(Comparator.comparing(InternshipApplication::getCompanyName));
+            copyList.sort(Comparator.comparing(InternshipApplication::getCompanyName, String.CASE_INSENSITIVE_ORDER));
         } else {
             copyList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
         }

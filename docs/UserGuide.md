@@ -27,16 +27,16 @@ Example of usage:
 ### Sort the application: `sort`
 Sort the job applications and output the sorted list onto the command line interface.
 
-Format: `list -n/-d`
+Format: `sort -n/-d`
 
 * `-d` Sort the list based on the date of application
 * `-n` Sort the list based on the name of company
 
 Example of usage:
 
-`list -n`
+`sort -n`
 
-`list -d`
+`sort -d`
 
 ### Delete an application
 Delete applications by index.
