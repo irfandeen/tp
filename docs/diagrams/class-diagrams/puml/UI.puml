@@ -11,6 +11,7 @@ package Model {
     class ApplicationManager
 }
 
+
 package UI as UiPackage {
     class UiMain {
         - ui : UiMain

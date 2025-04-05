@@ -193,6 +193,11 @@ The `AddCommand` handles the creation of new internship applications from user i
 ### Delete an internship application
 ![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
+![Sequence diagram of list command](diagrams/sequence-diagrams/list-sequence.png)
+
+After the input is read and parsed by the parser, the main program calls execute which will then be identified to call the listApplication() method.
+The listApplication method calls the printApplications() of the UiMain class, passing in the list of application. UI will do the job of printing the table of applications onto the CLI.
+
 ### Sort internship applications by field
 ### Find an internship application
 Here is a drafted sequence diagram of the find command and its execution.
