@@ -1,14 +1,37 @@
 @startuml
+
+skinparam ClassAttributeIconSize 0
 skinparam classBackgroundColor green
 skinparam classBorderColor black
 skinparam classArrowColor darkgreen
 skinparam classFontColor white
 hide circle
 
-package  UI {
-    class UiMain
-    class UiTable
-    class UiConstant
+package Model {
+    class ApplicationManager
 }
+
+
+package UI as UiPackage {
+    class UiMain {
+        - ui : UiMain
+        - scan : Scanner
+
+        + UiMain()
+        + getInstance()
+    }
+    class UiTable {
+        <u> + getTable() : String
+    }
+    class UiConstants {
+        <u> + TABLE_HEADER_ARRAYLIST : ArrayList<String>
+    }
+}
+
+ApplicationManager << (X,#FFFFFF) >>
+ApplicationManager --> UiMain : getInstance()
+
+UiMain ..> UiTable
+UiMain ..> UiConstants
 
 @enduml

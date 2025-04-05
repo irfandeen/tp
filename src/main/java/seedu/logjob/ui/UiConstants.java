@@ -52,10 +52,8 @@ public class UiConstants {
                     \\|_______|\\|_______|\\|_______|\\|________|\\|_______|\\|_______|
                 """;
 
-    public static final List<String> TABLE_HEADERS =
-            List.of("ID", "Company", "Job Title", "Status", "Date of Application");
-
-    public static final ArrayList<String> TABLE_HEADER_ARRAYLIST = new ArrayList<>(UiConstants.TABLE_HEADERS);
+    public static final ArrayList<String> TABLE_HEADER_ARRAYLIST = new ArrayList<>(
+            List.of("ID", "Company", "Job Title", "Status", "Date of Application"));
 
     public static final String LINE_BREAK = "----------------------------------------";
 }

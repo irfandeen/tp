@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant LogJob
+participant ListCommand
+participant ApplicationManager
+participant ListCommandParser
+participant UI
+
+LogJob -> UI: readInput()
+activate LogJob
+activate UI
+UI --> LogJob: input: string
+deactivate
+
+LogJob -> ListCommandParser: parse(input)
+activate ListCommandParser
+ListCommandParser --> LogJob: command: ListCommand
+deactivate
+
+LogJob -> ListCommand: execute(command)
+activate ListCommand
+ListCommand -> ApplicationManager: listApplications()
+deactivate
+activate ApplicationManager
+ApplicationManager -> UI: printApplications(<InternshipApplication>)
+deactivate
+activate UI
+UI ->
+deactivate
+
+@enduml

@@ -109,6 +109,13 @@ The `UI` component is called by the ApplicationManager,
 * Outputs the responses of the program to the user.
 * Outputs the error message that is thrown by the program.
 
+The Class UiMain is a Singleton that only the ApplicationManager gets an Instance of the class.
+
+The UiMain also calls the methods in the Utility class UiTable to generate the table for the list of application.
+The getTable() method will return the full string of the application table to the UiMain.
+
+The UiMain also access constants specified in the UiConstants class.
+
 ### Logic component
 
 **API** : [`Logic.java`]
@@ -186,6 +193,11 @@ The `AddCommand` handles the creation of new internship applications from user i
 ### Delete an internship application
 ![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
+![Sequence diagram of list command](diagrams/sequence-diagrams/list-sequence.png)
+
+After the input is read and parsed by the parser, the main program calls execute which will then be identified to call the listApplication() method.
+The listApplication method calls the printApplications() of the UiMain class, passing in the list of application. UI will do the job of printing the table of applications onto the CLI.
+
 ### Sort internship applications by field
 ### Find an internship application
 Here is a drafted sequence diagram of the find command and its execution.
