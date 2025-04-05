@@ -18,28 +18,12 @@ package UI as UiPackage {
 
         + UiMain()
         + getInstance()
-        + readInput() : String
-        + introMessage()
-        + helpOutput()
-        + printApplications()
-        + handleError()
-        + showLineBreak()
-        + exitMessage()
     }
     class UiTable {
         <u> + getTable() : String
-        <u> - getColumnWidths() : int[]
-        <u> - getHorizontalBorder() : String
-        <u> - getRow() : String
-        <u> - getCell() : String
-
     }
     class UiConstants {
-        <u> + INTRO_MESSAGE : String
-        <u> + HELP_MESSAGE : String
-        <u> + LOGO : String
         <u> + TABLE_HEADER_ARRAYLIST : ArrayList<String>
-        <u> + LINE_BREAK : String
     }
 }
 
