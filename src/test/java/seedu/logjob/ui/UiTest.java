@@ -24,7 +24,7 @@ public class UiTest {
     void uiTable_oneApplication_expectOneRow() throws EmptyTableException {
         ArrayList<InternshipApplication> applications = new ArrayList<>();
         InternshipApplication application = new InternshipApplication(
-                "Google", "SWE", LocalDate.now(), ApplicationStatus.ACCEPTED);
+                "Google", "SWE", LocalDate.now(), ApplicationStatus.ACCEPTED, 1);
         applications.add(application);
 
         String table = UiTable.getTable(applications);
@@ -38,7 +38,7 @@ public class UiTest {
         // Arrange: Set up applications
         ArrayList<InternshipApplication> applications = new ArrayList<>();
         InternshipApplication application = new InternshipApplication(
-                "Google", "SWE", LocalDate.now(), ApplicationStatus.ACCEPTED);
+                "Google", "SWE", LocalDate.now(), ApplicationStatus.ACCEPTED, 1);
         applications.add(application);
         UiMain ui = UiMain.getInstance();
 

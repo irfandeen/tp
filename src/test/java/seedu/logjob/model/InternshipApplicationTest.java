@@ -13,7 +13,7 @@ public class InternshipApplicationTest {
         String company = "TestCompany";
         String jobTitle = "TestJob";
         InternshipApplication app =
-                new InternshipApplication(company, jobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
+                new InternshipApplication(company, jobTitle, LocalDate.now(), ApplicationStatus.APPLIED, 1);
 
         // Verify that the constructor sets each field properly
         assertEquals(company, app.getCompanyName());

@@ -39,12 +39,12 @@ public class EditCommandTest {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
-                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
+                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED, 1);
         initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                0,
+                1,
                 "NewCompany",
                 null,
                 null,
@@ -54,7 +54,7 @@ public class EditCommandTest {
         editCmd.execute(manager, UiMain.getInstance());
 
         // Ensure one Field is edited
-        InternshipApplication edited = manager.getApplication(0);
+        InternshipApplication edited = manager.getApplication(1);
         assertEquals("NewCompany", edited.getCompanyName());
         assertEquals(original.getJobTitle(), edited.getJobTitle());
         assertEquals(original.getApplicationDate(), edited.getApplicationDate());
@@ -66,12 +66,12 @@ public class EditCommandTest {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
-                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
+                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED, 1);
         initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                0,
+                1,
                 "NewCompany",
                 "NewRole",
                 LocalDate.of(2025, 3, 25),
@@ -81,7 +81,7 @@ public class EditCommandTest {
         editCmd.execute(manager, UiMain.getInstance());
 
         // Ensure one Field is edited
-        InternshipApplication edited = manager.getApplication(0);
+        InternshipApplication edited = manager.getApplication(1);
         assertEquals("NewCompany", edited.getCompanyName());
         assertEquals("NewRole", edited.getJobTitle());
         assertEquals(LocalDate.of(2025, 3, 25), edited.getApplicationDate());
@@ -93,12 +93,12 @@ public class EditCommandTest {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
-                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
+                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED, 1);
         initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                1, // Edit Index out of bounds
+                0, // Edit Index out of bounds
                 "New Company",
                 null,
                 null,

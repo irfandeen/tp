@@ -6,19 +6,22 @@ public class InternshipApplication {
     private final String jobTitle;
     private final ApplicationStatus status;
     private final LocalDate applicationDate;
+    private final int id;
 
     public InternshipApplication (
-            String companyName, String jobTitle, LocalDate applicationDate, ApplicationStatus status) {
+            String companyName, String jobTitle, LocalDate applicationDate, ApplicationStatus status, int id) {
 
         assert companyName != null && !companyName.isEmpty() : "companyName should not be null or empty";
         assert jobTitle != null && !jobTitle.isEmpty() : "jobTitle should not be null or empty";
         assert applicationDate != null : "applicationDate should not be null";
         assert status != null : "status should not be null";
+        assert id >= 1 : "id should be greater than 1";
 
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.applicationDate = applicationDate;
         this.status = status;
+        this.id = id;
     }
 
     public String getCompanyName() {
@@ -47,5 +50,9 @@ public class InternshipApplication {
 
     public String toString() {
         return companyName + ", " + jobTitle + ", " + applicationDate.toString() + ", " + status.toString();
+    }
+
+    public int getId() {
+        return id;
     }
 }
