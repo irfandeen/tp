@@ -109,6 +109,13 @@ The `UI` component is called by the ApplicationManager,
 * Outputs the responses of the program to the user.
 * Outputs the error message that is thrown by the program.
 
+The Class UiMain is a Singleton that only the ApplicationManager gets an Instance of the class.
+
+The UiMain also calls the methods in the Utility class UiTable to generate the table for the list of application.
+The getTable() method will return the full string of the application table to the UiMain.
+
+The UiMain also access constants specified in the UiConstants class.
+
 ### Logic component
 
 **API** : [`Logic.java`]
