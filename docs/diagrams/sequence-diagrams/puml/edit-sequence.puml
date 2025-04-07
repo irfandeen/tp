@@ -1,0 +1,17 @@
+@startuml
+
+participant LogJob
+participant EditCommandParser
+participant EditCommand
+participant ApplicationManager
+participant UI
+
+LogJob -> EditCommandParser: parse(args)
+EditCommandParser --> LogJob: EditCommand
+LogJob -> EditCommand: execute()
+EditCommand -> ApplicationManager: edit(index, newName, newRole, newStatus, newDate)
+ApplicationManager --> EditCommand: void
+EditCommand -> UI: printMessage(editSuccess)
+EditCommand --> LogJob: void
+
+@enduml

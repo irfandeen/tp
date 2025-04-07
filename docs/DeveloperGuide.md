@@ -184,6 +184,7 @@ The `AddCommand` handles the creation of new internship applications from user i
 
 
 ### Edit an internship application
+![Sequence diagram of edit command](diagrams/sequence-diagrams/edit-sequence.png)
 ### Delete an internship application
 ![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
