@@ -37,7 +37,7 @@ public final class UiTable {
             String applicationDateString = applicationDate.format(formatter);
 
             ArrayList<String> applicationRow = new ArrayList<>();
-            applicationRow.add(String.valueOf(applicationList.get(i).getId()));
+            applicationRow.add(Integer.toString(i));
             applicationRow.add(applicationList.get(i).getCompanyName());
             applicationRow.add(applicationList.get(i).getJobTitle());
             applicationRow.add(applicationList.get(i).getStatusToString());

@@ -34,31 +34,31 @@ public class ApplicationManager {
     }
 
     /**
-     * Returns existing internship application of the ID
-     * @param id ID of application to be viewed
+     * Returns existing internship application object at index
+     * @param index Index of application to be viewed
      * @return Reference to existing object
      */
-    public InternshipApplication getApplication(int id) {
-        return applicationList.get(id - 1);
+    public InternshipApplication getApplication(int index) {
+        return applicationList.get(index);
     }
 
     /**
-     * Replaces the internship application of the specified ID with a new application.
+     * Replaces the internship application at the specified index with a new application.
      *
-     * @param id       The id of the application to be replaced.
+     * @param index       The index of the application to be replaced.
      * @param application The new application to replace the existing one.
      */
-    public void updateApplication(int id, InternshipApplication application) {
-        applicationList.set(id - 1, application);
+    public void updateApplication(int index, InternshipApplication application) {
+        applicationList.set(index, application);
     }
 
     /**
      * Deletes an internship application from the list.
-     * @param id The ID of the application to be deleted.
+     * @param index The index of the application to be deleted.
      */
-    public void deleteApplication(int id, UiMain uiMain) {
-        applicationList.remove(id - 1);
-        uiMain.printMessage("ID: " + id + " Deleted Successfully");
+    public void deleteApplication(int index, UiMain uiMain) {
+        applicationList.remove(index);
+        uiMain.printMessage("Index: " + index + " Succeeds Deletion");
     }
 
     /**

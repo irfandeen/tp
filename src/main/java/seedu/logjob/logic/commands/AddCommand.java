@@ -24,8 +24,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(ApplicationManager applicationManager, UiMain uiMain) {
         InternshipApplication newApplication =
-                new InternshipApplication(
-                        companyName, jobTitle, applicationDate, applicationStatus, applicationManager.getSize() + 1);
+                new InternshipApplication(companyName, jobTitle, applicationDate, applicationStatus);
         applicationManager.addApplication(newApplication, uiMain);
     }
 
