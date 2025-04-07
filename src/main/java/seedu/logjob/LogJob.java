@@ -5,14 +5,13 @@ import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.Storage;
 import seedu.logjob.storage.StorageManager;
-import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
-import seedu.logjob.storage.exceptions.StorageException;
 import seedu.logjob.ui.UiMain;
-import seedu.logjob.logic.commands.Command;
 import seedu.logjob.logic.parser.ApplicationParser;
 import seedu.logjob.logic.Logic;
 import seedu.logjob.model.ApplicationManager;
 
+import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
+import seedu.logjob.storage.exceptions.StorageException;
 import java.io.IOException;
 import java.util.ArrayList;
 

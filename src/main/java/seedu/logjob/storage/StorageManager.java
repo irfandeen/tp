@@ -16,7 +16,8 @@ import java.util.logging.Logger;
 public class StorageManager implements Storage {
     private static final String DEFAULT_FILE_PATH = "data.txt";
     private static final String FILE_NOT_FOUND_FAILURE = "File does not exist && StorageException not thrown";
-    private static final String CHECKSUM_FAILURE = "Data file has been modified externally. LogJob will start from a blank slate.";
+    private static final String CHECKSUM_FAILURE = "Data file has been modified externally. " +
+            "LogJob will start from a blank slate.";
     private static final Logger logger = RootLogger.getLogger();
     private final String filePath;
     private File file;

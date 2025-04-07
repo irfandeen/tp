@@ -26,7 +26,8 @@ class StorageTest {
         File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
-        writer.write(HashUtil.generateHash(new StringBuilder("Goggle;SWE;2025-01-01;APPLIED").append("John Street;HWE;2025-01-01;REJECTED")) + "\n");
+        writer.write(HashUtil.generateHash(new StringBuilder("Goggle;SWE;2025-01-01;APPLIED")
+                .append("John Street;HWE;2025-01-01;REJECTED")) + "\n");
         writer.write("Goggle;SWE;2025-01-01;APPLIED\n");
         writer.write("John Street;HWE;2025-01-01;REJECTED\n");
         writer.close();
@@ -41,7 +42,8 @@ class StorageTest {
         writer.close();
     }
 
-    private boolean isSameApplications(ArrayList<InternshipApplication> expected, ArrayList<InternshipApplication> actual) {
+    private boolean isSameApplications(ArrayList<InternshipApplication> expected,
+            ArrayList<InternshipApplication> actual) {
         if (expected.size() != actual.size()) {
             return false;
         }
@@ -87,11 +89,12 @@ class StorageTest {
         assertEquals(2, applications.size(),
                 "Number of applications should be the same.");
         ArrayList<InternshipApplication> expected = new ArrayList();
-        expected.add(new InternshipApplication("Google", "SWE", LocalDate.ofYearDay(2025, 1),
-                ApplicationStatus.APPLIED));
-        expected.add(new InternshipApplication("John Street", "HWE", LocalDate.ofYearDay(2025, 1),
-                ApplicationStatus.REJECTED));
-        assertTrue(isSameApplications(expected, applications), "Expected applications differ from applications read");
+        expected.add(new InternshipApplication("Google", "SWE",
+                LocalDate.ofYearDay(2025, 1), ApplicationStatus.APPLIED));
+        expected.add(new InternshipApplication("John Street", "HWE",
+                LocalDate.ofYearDay(2025, 1), ApplicationStatus.REJECTED));
+        assertTrue(isSameApplications(expected, applications),
+                "Expected applications differ from applications read");
     }
 
     @Test
@@ -122,7 +125,9 @@ class StorageTest {
         File testFile = new File(TEST_FILE_PATH);
         File comparisonFile = new File(COMPARISON_FILE_PATH);
         FileWriter writer = new FileWriter(comparisonFile);
-        writer.write(HashUtil.generateHash(new StringBuilder().append("Google;SWE;2025-01-01;APPLIED").append("Google;SRE;2025-01-01;REJECTED")) + "\n");
+        writer.write(HashUtil.generateHash(new StringBuilder()
+                .append("Google;SWE;2025-01-01;APPLIED")
+                .append("Google;SRE;2025-01-01;REJECTED")) + "\n");
         writer.write("Google;SWE;2025-01-01;APPLIED\n");
         writer.write("Google;SRE;2025-01-01;REJECTED\n");
         writer.close();
@@ -142,6 +147,7 @@ class StorageTest {
         InternshipApplication[] applications = {};
         storage.storeToFile(applications);
 
-        assertEquals(0, testFile.length(), "Storage should store empty file when there are no applications.");
+        assertEquals(0, testFile.length(),
+                "Storage should store empty file when there are no applications.");
     }
 }

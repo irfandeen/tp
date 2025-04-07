@@ -8,7 +8,6 @@ import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationStatus;
-import seedu.logjob.ui.UiMain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -2,11 +2,9 @@ package seedu.logjob.storage;
 
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
-import seedu.logjob.model.exceptions.InvalidApplicationStatus;
 import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class ApplicationSerializer {
     private static final String DELIMITER = ";";
