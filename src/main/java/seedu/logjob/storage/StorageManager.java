@@ -16,9 +16,19 @@ import java.util.logging.Logger;
 public class StorageManager implements Storage {
     private static final String DEFAULT_FILE_PATH = "data.txt";
     private static final String FILE_NOT_FOUND_FAILURE = "File does not exist && StorageException not thrown";
+    private static final String CHECKSUM_FAILURE = "Data file has been modified externally. LogJob will start from a blank slate.";
     private static final Logger logger = RootLogger.getLogger();
     private final String filePath;
     private File file;
+
+    private boolean isValidHash(String hashString, StringBuilder totalString) {
+        try {
+            int hashCodeTemp = totalString.toString().hashCode();
+            return hashString.equals(String.valueOf(totalString.toString().hashCode()));
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     public StorageManager(String filePath) {
         this.filePath = filePath;
@@ -33,19 +43,37 @@ public class StorageManager implements Storage {
     @Override
     public ArrayList<InternshipApplication> readFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
+        // Defensive Checks
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
         logger.info("Reading applications from file " + filePath);
+
         Scanner fileScanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
+        // Read checksum
+        if (!fileScanner.hasNextLine()) {
+            logger.info("No data found in file " + filePath);
+            fileScanner.close();
+            return applicationsList;
+        }
+        String checkSum = fileScanner.nextLine().trim();
+        StringBuilder totalString = new StringBuilder();
+
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine().trim();
+
             InternshipApplication application = ApplicationSerializer.delimitedStringToApplication(line);
             applicationsList.add(application);
+            totalString.append(line);
         }
 
         fileScanner.close();
+
+        if (!isValidHash(checkSum, totalString)) {
+            throw new StorageException(CHECKSUM_FAILURE);
+        }
+
         logger.info("Successfully read applications from file " + filePath);
         return applicationsList;
     }
@@ -55,17 +83,46 @@ public class StorageManager implements Storage {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
         logger.info("Storing applications to file " + filePath);
-        FileWriter fileWriter = null;
+        FileWriter fileWriter;
+
         try {
             fileWriter = new FileWriter(file);
         } catch (IOException e) {
             throw new StorageException("Could not open file " + filePath);
         }
 
-        // Serialize to storage friendly format, then store
+        // Check if list has more than one application
+        if (applications.length == 0) {
+            logger.info("No data found in file " + filePath);
+            try {
+                fileWriter.close();
+            } catch (IOException e) {
+                throw new StorageException("Could not close file " + filePath);
+            }
+            return;
+        }
+
+        // Serialize to storage friendly format
+        ArrayList<String> printStrings = new ArrayList<>();
+        StringBuilder totalString = new StringBuilder();
         for (InternshipApplication application : applications) {
             String applicationStorageString = ApplicationSerializer.applicationToDelimitedString(application);
-            writeToFile(applicationStorageString, fileWriter);
+            printStrings.add(applicationStorageString);
+            totalString.append(applicationStorageString.trim());
+        }
+
+        // Compute checksum
+        String checkSumString = String.valueOf(totalString.toString().hashCode());
+        System.out.println("Here is the full string with no endlines: " + totalString.toString());
+        //System.out.println("And here is its hash: " + checkSumString);
+        System.out.println("And here is the total hash: " + totalString.toString().hashCode());
+
+        // Write checksum
+        writeToFile(checkSumString, fileWriter);
+
+        // Write strings
+        for (String printString : printStrings) {
+            writeToFile(printString, fileWriter);
         }
 
         try {

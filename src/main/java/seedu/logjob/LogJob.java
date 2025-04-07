@@ -32,12 +32,12 @@ public class LogJob {
         ArrayList<InternshipApplication> internships = null;
         try {
             internships = storage.readFromFile();
-        } catch (InvalidDelimitedStringException exception) {
+        } catch (InvalidDelimitedStringException | StorageException exception) {
             ui.showLineBreak();
             ui.handleError(exception);
             ui.showLineBreak();
             internships = new ArrayList<InternshipApplication>();
-        } catch (IOException | StorageException exception) {
+        } catch (IOException exception) {
             ui.handleError(exception);
         }
 
