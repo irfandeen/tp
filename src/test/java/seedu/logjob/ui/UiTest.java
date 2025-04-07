@@ -3,6 +3,7 @@ package seedu.logjob.ui;
 import org.junit.jupiter.api.Test;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 import java.io.ByteArrayOutputStream;
@@ -16,16 +17,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class UiTest {
     @Test
     void uiTable_nullInput_expectException() {
-        ArrayList<InternshipApplication> applications = new ArrayList<>();
+        ArrayList<ReadOnlyApplication> applications = new ArrayList<>();
         assertThrows(Exception.class, () -> UiTable.getTable(applications));
     }
 
     @Test
     void uiTable_oneApplication_expectOneRow() throws EmptyTableException {
-        ArrayList<InternshipApplication> applications = new ArrayList<>();
+        ArrayList<ReadOnlyApplication> applications = new ArrayList<>();
         InternshipApplication application = new InternshipApplication(
                 "Google", "SWE", LocalDate.now(), ApplicationStatus.ACCEPTED);
-        applications.add(application);
+        ReadOnlyApplication applicationReadOnly = new ReadOnlyApplication(
+                0,
+                application
+        );
+        applications.add(applicationReadOnly);
 
         String table = UiTable.getTable(applications);
         assertTrue(table.contains("Google"));
@@ -36,10 +41,15 @@ public class UiTest {
     @Test
     void printApplications_oneApplication_printsTable() throws EmptyTableException {
         // Arrange: Set up applications
-        ArrayList<InternshipApplication> applications = new ArrayList<>();
+        ArrayList<ReadOnlyApplication> applications = new ArrayList<>();
         InternshipApplication application = new InternshipApplication(
                 "Google", "SWE", LocalDate.now(), ApplicationStatus.ACCEPTED);
-        applications.add(application);
+        ReadOnlyApplication applicationReadOnly = new ReadOnlyApplication(
+                0,
+                application
+        );
+        applications.add(applicationReadOnly);
+
         UiMain ui = UiMain.getInstance();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

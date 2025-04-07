@@ -1,7 +1,5 @@
 package seedu.logjob.model;
 
-import seedu.logjob.ui.exceptions.EmptyTableException;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -14,6 +12,7 @@ public class ApplicationManager {
 
     public ApplicationManager(ArrayList<InternshipApplication> applicationList) {
         this.applicationList = applicationList;
+        this.observableList = copyApplicationToObservableList();
     }
 
     public void addApplication(InternshipApplication application) {
@@ -42,7 +41,7 @@ public class ApplicationManager {
         observableList = copyApplicationToObservableList();
     }
 
-    public void sortApplication(String sortBy) throws EmptyTableException {
+    public void sortApplication(String sortBy) {
         assert sortBy != null : "sortBy cannot be empty";
 
         observableList = copyApplicationToObservableList();

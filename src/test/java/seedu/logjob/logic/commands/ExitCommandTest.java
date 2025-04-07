@@ -25,7 +25,7 @@ public class ExitCommandTest {
 
         // Execute the command (should do nothing but not throw an exception)
         UiMain uiMain = UiMain.getInstance();
-        exitCommand.execute(dummyManager, uiMain);
+        exitCommand.execute(dummyManager);
 
         // isRunning should return false
         assertFalse(exitCommand.isRunning());
