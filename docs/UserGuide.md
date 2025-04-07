@@ -49,16 +49,16 @@ Example of usage:
 ### Sort the application: `sort`
 Sort the job applications and output the sorted list onto the command line interface.
 
-Format: `sort -n/-d`
+Format: `list -n/-d`
 
 * `-d` Sort the list based on the date of application
 * `-n` Sort the list based on the name of company
 
 Example of usage:
 
-`sort -n`
+`list -n`
 
-`sort -d`
+`list -d`
 
 ### Delete an application
 Delete applications by index.
