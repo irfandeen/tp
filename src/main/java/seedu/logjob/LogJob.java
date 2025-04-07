@@ -28,7 +28,7 @@ public class LogJob {
 
         ArrayList<InternshipApplication> internships = null;
         try {
-            internships = storage.readApplicationsFromFile();
+            internships = storage.readFromFile();
         } catch (IOException | StorageException | InvalidDelimitedStringException exception) {
             ui.handleError(exception);
         }
@@ -58,7 +58,7 @@ public class LogJob {
         ArrayList<InternshipApplication> internships = applicationManager.getArrayList();
         InternshipApplication[] applicationsArray = internships.toArray(new InternshipApplication[0]);
         try {
-            storage.storeApplicationsToFile(applicationsArray);
+            storage.storeToFile(applicationsArray);
         } catch (StorageException exception) {
             ui.handleError(exception);
         }

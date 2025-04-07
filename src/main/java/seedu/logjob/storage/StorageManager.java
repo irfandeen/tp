@@ -31,7 +31,7 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public ArrayList<InternshipApplication> readApplicationsFromFile()
+    public ArrayList<InternshipApplication> readFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
@@ -51,7 +51,7 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void storeApplicationsToFile(InternshipApplication[] applications) throws StorageException {
+    public void storeToFile(InternshipApplication[] applications) throws StorageException {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
         logger.info("Storing applications to file " + filePath);

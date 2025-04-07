@@ -16,7 +16,7 @@ public interface Storage {
      * @throws StorageException
      * @throws InvalidDelimitedStringException
      */
-    public ArrayList<InternshipApplication> readApplicationsFromFile()
+    public ArrayList<InternshipApplication> readFromFile()
             throws IOException, StorageException, InvalidDelimitedStringException;
 
     /**
@@ -26,5 +26,5 @@ public interface Storage {
      * @throws IOException is thrown when program is unable to write to file.
      * @throws StorageException is thrown when program cannot find file.
      */
-    public void storeApplicationsToFile(InternshipApplication[] applications) throws StorageException;
+    public void storeToFile(InternshipApplication[] applications) throws StorageException;
 }
