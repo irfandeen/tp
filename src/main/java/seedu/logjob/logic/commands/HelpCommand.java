@@ -1,7 +1,6 @@
 package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.ui.UiConstants;
 
 
 public class HelpCommand extends Command {

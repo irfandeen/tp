@@ -3,7 +3,6 @@ package seedu.logjob.ui;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 

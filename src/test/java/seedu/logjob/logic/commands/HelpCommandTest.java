@@ -2,9 +2,7 @@ package seedu.logjob.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import seedu.logjob.ui.UiConstants;
 import seedu.logjob.model.ApplicationManager;
 import java.util.ArrayList;
 

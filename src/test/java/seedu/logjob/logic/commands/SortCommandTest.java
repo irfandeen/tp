@@ -3,13 +3,10 @@ package seedu.logjob.logic.commands;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationStatus;
-import seedu.logjob.ui.UiMain;
-import seedu.logjob.ui.exceptions.EmptyTableException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

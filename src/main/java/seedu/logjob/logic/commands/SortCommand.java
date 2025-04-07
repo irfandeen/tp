@@ -1,7 +1,6 @@
 package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";

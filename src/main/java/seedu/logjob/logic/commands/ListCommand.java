@@ -1,7 +1,6 @@
 package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -11,7 +10,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager) throws EmptyTableException {
+    public CommandResult execute(ApplicationManager applicationManager) {
         applicationManager.listApplications();
         return new CommandResult(
                 String.format(MESSAGE_LIST_SUCCESS, applicationManager.getSize()),

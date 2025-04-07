@@ -6,8 +6,9 @@ import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
+    private static final String MESSAGE_FIND_SUCCESS = "%d Applications found";
+
     private final String searchTerm;
-    private final String MESSAGE_FIND_SUCCESS = "%d Applications found";
 
     public FindCommand(String searchTerm) {
         this.searchTerm = searchTerm.toLowerCase();

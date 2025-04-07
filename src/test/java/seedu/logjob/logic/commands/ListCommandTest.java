@@ -1,13 +1,11 @@
 package seedu.logjob.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
-import seedu.logjob.ui.UiMain;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 import java.time.LocalDate;
