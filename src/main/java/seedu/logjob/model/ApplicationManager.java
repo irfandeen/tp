@@ -58,7 +58,7 @@ public class ApplicationManager {
     }
 
     public void findApplications(String searchTerm) {
-        observableList = new ArrayList<ReadOnlyApplication>();
+        observableList = new ArrayList<>();
 
         for (int i = 0; i < applicationList.size(); i++) {
             String applicationString = applicationList.get(i).toString().toLowerCase();
