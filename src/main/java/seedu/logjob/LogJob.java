@@ -27,6 +27,10 @@ public class LogJob {
     private ApplicationManager applicationManager;
     private Logic logic;
 
+    /**
+     * Private constructor that initializes all necessary components of the application.
+     * Handles file loading and error recovery if any issues occur during startup.
+     */
     private LogJob() {
         storage = new StorageManager();
         ui = UiMain.getInstance();
