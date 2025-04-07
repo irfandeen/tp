@@ -107,12 +107,6 @@ public class ApplicationManager {
         return observableList.size();
     }
 
-    /**
-     * Returns existing internship application object at index
-     *
-     * @param index Index of application to be viewed
-     * @return Reference to existing object
-     */
 
     /**
      * Returns the internship application at the specified index.
