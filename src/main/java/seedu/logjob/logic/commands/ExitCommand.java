@@ -1,6 +1,7 @@
 package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
+import seedu.logjob.ui.UiMain;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
@@ -10,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(ApplicationManager applicationManager) {
-        return null;
+        return new CommandResult("", false, true);
     }
 
     @Override

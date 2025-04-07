@@ -10,6 +10,9 @@ import java.time.LocalDate;
 
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
+    private static final String MESSAGE_EDIT_SUCCESS = "Application: %s %s %s Edited Successfully";
+    private static final String MESSAGE_OUT_OF_BOUNDS = "Invalid index. Please enter a valid index in the list.";
+
     private final int editIndex;
     private final String companyName;
     private final String jobTitle;
@@ -29,7 +32,7 @@ public class EditCommand extends Command {
     public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (editIndex <= 0 || editIndex > applicationManager.getSize()) {
-            throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
+            throw new IndexOutOfBoundsException(MESSAGE_OUT_OF_BOUNDS);
         }
 
         InternshipApplication existingApplication = applicationManager.getApplication(editIndex - 1);
@@ -41,17 +44,12 @@ public class EditCommand extends Command {
         );
 
         applicationManager.updateApplication(editIndex, editedApplication);
-        uiMain.printMessage(
-                "Application: "
-                        + editedApplication.getCompanyName()
-                        + " "
-                        + editedApplication.getJobTitle()
-                        + " "
-                        + editedApplication.getStatusToString()
-                        + " Edited Successfully"
-        );
 
-        return null;
+        return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS,
+                editedApplication.getCompanyName(),
+                editedApplication.getJobTitle(),
+                editedApplication.getStatusToString()),
+                false, false);
     }
 
     @Override

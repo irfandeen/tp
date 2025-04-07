@@ -2,6 +2,7 @@ package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
 
+
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
@@ -9,8 +10,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(ApplicationManager applicationManager) {
-        uiMain.helpOutput();
-        return null;
+        return new CommandResult("", true, false);
     }
 
     @Override

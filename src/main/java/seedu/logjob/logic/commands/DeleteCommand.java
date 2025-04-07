@@ -4,6 +4,9 @@ import seedu.logjob.model.ApplicationManager;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+    private static final String MESSAGE_DELETE_SUCCESS = "ID: %d Deleted Successfully";
+    private static final String MESSAGE_OUT_OF_BOUNDS = "Invalid index. Please enter a valid index in the list.";
+
     private final int commandIndex;
 
     public DeleteCommand(int commandIndex) {
@@ -14,12 +17,12 @@ public class DeleteCommand extends Command {
     public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (commandIndex <= 0 || commandIndex > applicationManager.getSize()) {
-            throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
+            throw new IndexOutOfBoundsException(MESSAGE_OUT_OF_BOUNDS);
         }
       
         applicationManager.deleteApplication(commandIndex);
       
-        return null;
+        return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, commandIndex), false, false);
     }
 
     @Override
