@@ -1,0 +1,64 @@
+@startuml
+
+!include ../../style.puml
+
+participant LogJob #grey
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ApplicationParser" as ApplicationParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ApplicationManager" as ApplicationManager MODEL_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant ":UI" as ui UI_COLOR
+end box
+
+LogJob -> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> ApplicationParser: parseCommand(args)
+activate ApplicationParser
+
+create AddCommandParser
+ApplicationParser -> AddCommandParser
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+AddCommand --> AddCommandParser
+deactivate
+
+AddCommandParser --> ApplicationParser
+deactivate AddCommandParser
+ApplicationParser -> LogicManager
+
+destroy AddCommandParser
+deactivate ApplicationParser
+
+LogicManager -> AddCommand: execute()
+activate AddCommand
+AddCommand -> ApplicationManager: add(application) \nif not duplicate
+activate ApplicationManager
+ApplicationManager --> AddCommand
+deactivate ApplicationManager
+AddCommand --> LogicManager: commandResult
+deactivate AddCommand
+destroy AddCommand
+
+LogicManager -> ui: printMessage(addSuccess)
+activate ui
+ui --> LogicManager
+deactivate ui
+deactivate AddCommand
+LogicManager --> LogJob
+
+
+
+@enduml
