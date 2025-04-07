@@ -6,6 +6,7 @@ import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
+    private static final String MESSAGE_SUCCESS = "Applications successfully sorted by %s";
     private final String sortBy;
 
     public SortCommand(String sortBy) {
@@ -13,10 +14,13 @@ public class SortCommand extends Command {
     }
 
     @Override
-
-    public void execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
+    public CommandResult execute(ApplicationManager applicationManager) throws EmptyTableException {
         applicationManager.sortApplication(this.sortBy);
-        return null;
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, this.sortBy),
+                false, false,
+                applicationManager.getArrayList()
+        );
 
     }
 

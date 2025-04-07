@@ -30,7 +30,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain)
+    public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (editIndex <= 0 || editIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException(MESSAGE_OUT_OF_BOUNDS);
