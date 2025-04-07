@@ -59,7 +59,7 @@ class StorageTest {
                 return false;
             }
 
-            if (!scannegirA.hasNextLine() && scannerB.hasNextLine()) {
+            if (!scannerA.hasNextLine() && scannerB.hasNextLine()) {
                 return false;
             }
         }
