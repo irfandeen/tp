@@ -15,14 +15,15 @@ public class JobTitleValidatorTest {
         assertTrue(validator.validate("Product Manager, Growth"));
         assertTrue(validator.validate("C++ Developer"));
         assertTrue(validator.validate("CEO/Founder"));
+        assertTrue(validator.validate("Software! Engineer"));
     }
 
     @Test
-    void validate_invalidStatusArg_returnsFalse() {
-        assertFalse(validator.validate("@job title"));
-        assertFalse(validator.validate("__title__"));
-        assertFalse(validator.validate("??? job"));
-        assertFalse(validator.validate("JOB!TITLE!"));
+    void validate_invalidJobTitleArg_returnsFalse() {
+        assertFalse(validator.validate("软件工程师"));
+        assertFalse(validator.validate("Ingénieur logiciel"));
+        assertFalse(validator.validate("மென்பொருள் பொறியாள"));
+        assertFalse(validator.validate("ソフトウェアエンジニア"));
     }
 
     @Test
@@ -30,5 +31,10 @@ public class JobTitleValidatorTest {
         assertFalse(validator.validate(""));
         assertFalse(validator.validate("  "));
         assertThrows(NullPointerException.class, () -> validator.validate(null));
+    }
+
+    @Test
+    void validate_overFiftyCharacters_returnsFalse() throws NullPointerException {
+        assertFalse(validator.validate("123456789012345678901234567890123456789012345678901"));
     }
 }

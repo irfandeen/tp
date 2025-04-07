@@ -72,8 +72,8 @@ public class AddCommandParserTest {
         // Invalid argument: Company Name
         assertParseFailure(parser, " -n    -j Software Engineer" ,
                 "Invalid Company Name: ");
-        assertParseFailure(parser, " -n *Invalid Company -j Software Engineer" ,
-                "Invalid Company Name: *Invalid Company");
+        assertParseFailure(parser, " -n 谷歌 -j Software Engineer" ,
+                "Invalid Company Name: 谷歌");
 
         // Invalid argument: Job Title
         assertParseFailure(parser, " -n Google -j" ,
