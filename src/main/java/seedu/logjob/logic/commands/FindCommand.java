@@ -2,11 +2,7 @@ package seedu.logjob.logic.commands;
 
 import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.model.InternshipApplication;
-import seedu.logjob.ui.UiMain;
 import seedu.logjob.ui.exceptions.EmptyTableException;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";

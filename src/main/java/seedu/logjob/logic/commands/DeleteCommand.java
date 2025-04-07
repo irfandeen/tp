@@ -1,7 +1,6 @@
 package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.ui.UiMain;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
