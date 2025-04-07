@@ -26,9 +26,8 @@ class StorageTest {
         File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
-        writer.write(HashUtil.generateHash(new StringBuilder("Goggle;SWE;2025-01-01;APPLIED")
-                .append("John Street;HWE;2025-01-01;REJECTED")) + "\n");
-        writer.write("Goggle;SWE;2025-01-01;APPLIED\n");
+        writer.write(HashUtil.generateHash(new StringBuilder("Google;SWE;2025-01-01;APPLIED").append("John Street;HWE;2025-01-01;REJECTED")) + "\n");
+        writer.write("Google;SWE;2025-01-01;APPLIED\n");
         writer.write("John Street;HWE;2025-01-01;REJECTED\n");
         writer.close();
     }
@@ -37,7 +36,7 @@ class StorageTest {
         File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
-        writer.write("Goggle;SWE;2025-01-01;APPLIED\n");
+        writer.write("Google;SWE;2025-01-01;APPLIED\n");
         writer.write("John Street;2025-01-01;REJECTED\n");
         writer.close();
     }

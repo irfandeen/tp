@@ -48,8 +48,17 @@ public class LogicManager implements Logic {
             ui.printApplications(result.getObservableList());
         }
 
-        // Save application state to storage
-        // TO BE IMPLEMENTED
+        saveState();
+    }
+
+    private void saveState() {
+        ArrayList<ReadOnlyApplication> internships = model.getArrayList();
+
+        try {
+            storage.storeToFile(internships);
+        } catch (StorageException exception) {
+            ui.handleError(exception);
+        }
     }
 
     public boolean getIsRunning() {
