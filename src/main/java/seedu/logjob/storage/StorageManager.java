@@ -40,7 +40,7 @@ public class StorageManager implements Storage {
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
         while (fileScanner.hasNextLine()) {
-            String line = fileScanner.nextLine();
+            String line = fileScanner.nextLine().trim();
             InternshipApplication application = ApplicationSerializer.delimitedStringToApplication(line);
             applicationsList.add(application);
         }

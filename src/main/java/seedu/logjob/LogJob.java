@@ -28,10 +28,16 @@ public class LogJob {
         storage = new StorageManager();
         ui = UiMain.getInstance();
 
+        ui.introMessage();
         ArrayList<InternshipApplication> internships = null;
         try {
             internships = storage.readFromFile();
-        } catch (IOException | StorageException | InvalidDelimitedStringException exception) {
+        } catch (InvalidDelimitedStringException exception) {
+            ui.showLineBreak();
+            ui.handleError(exception);
+            ui.showLineBreak();
+            internships = new ArrayList<InternshipApplication>();
+        } catch (IOException | StorageException exception) {
             ui.handleError(exception);
         }
 
@@ -39,7 +45,6 @@ public class LogJob {
     }
 
     public void run() {
-        ui.introMessage();
         while (isRunning) {
             try {
                 String input = ui.readInput();
