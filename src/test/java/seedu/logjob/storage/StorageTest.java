@@ -7,7 +7,6 @@ import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 import seedu.logjob.storage.exceptions.StorageException;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +15,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class StorageTest {
     private static final String TEST_FILE_PATH = "test_data.txt";
@@ -52,10 +54,12 @@ class StorageTest {
             if (!lineA.equals(lineB)) {
                 return false;
             }
-            else if (scannerA.hasNextLine() && !scannerB.hasNextLine()) {
+
+            if (scannerA.hasNextLine() && !scannerB.hasNextLine()) {
                 return false;
             }
-            else if (!scannerA.hasNextLine() && scannerB.hasNextLine()) {
+
+            if (!scannegirA.hasNextLine() && scannerB.hasNextLine()) {
                 return false;
             }
         }
