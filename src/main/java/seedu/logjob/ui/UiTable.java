@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 
@@ -23,7 +24,7 @@ public final class UiTable {
      *
      * @param applicationList ArrayList of applications.
      */
-    public static String getTable(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
+    public static String getTable(ArrayList<ReadOnlyApplication> applicationList) throws EmptyTableException {
         assert applicationList != null : "Data should not be null";
         if (applicationList.isEmpty()) {
             throw new EmptyTableException("Table is empty");
@@ -31,16 +32,18 @@ public final class UiTable {
 
         ArrayList<ArrayList<String>> applications = new ArrayList<>();
         applications.add(UiConstants.TABLE_HEADER_ARRAYLIST);
-        for (int i = 0; i < applicationList.size(); i++) {
-            LocalDate applicationDate = applicationList.get(i).getApplicationDate();
+        for (ReadOnlyApplication readOnlyApplication : applicationList) {
+            InternshipApplication application = readOnlyApplication.getApplication();
+            int index = readOnlyApplication.getIndex();
+            LocalDate applicationDate = application.getApplicationDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String applicationDateString = applicationDate.format(formatter);
 
             ArrayList<String> applicationRow = new ArrayList<>();
-            applicationRow.add(Integer.toString(i + 1));
-            applicationRow.add(applicationList.get(i).getCompanyName());
-            applicationRow.add(applicationList.get(i).getJobTitle());
-            applicationRow.add(applicationList.get(i).getStatusToString());
+            applicationRow.add(Integer.toString(index + 1));
+            applicationRow.add(application.getCompanyName());
+            applicationRow.add(application.getJobTitle());
+            applicationRow.add(application.getStatusToString());
             applicationRow.add(applicationDateString);
             applications.add(applicationRow);
         }
