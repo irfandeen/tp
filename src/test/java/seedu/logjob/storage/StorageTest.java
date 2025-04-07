@@ -7,21 +7,23 @@ import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 import seedu.logjob.storage.exceptions.StorageException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
-    private static final String testFilePath = "test_data.txt";
+    private static final String TEST_FILE_PATH = "test_data.txt";
+    private static final String COMPARISON_FILE_PATH = "comparison_data.txt";
 
     private void writeToFileValidJobApplications() throws IOException {
-        File file = new File(testFilePath);
+        File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
         //TODO: The following lines must be updated whenever new fields are
@@ -32,7 +34,7 @@ class StorageTest {
     }
 
     private void writeToFileInvalidJobApplications() throws IOException {
-        File file = new File(testFilePath);
+        File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
         writer.write("Goggle;SWE;applied\n");
@@ -40,17 +42,38 @@ class StorageTest {
         writer.close();
     }
 
+    private boolean isFileContentSame(File fileA, File fileB) throws IOException {
+        Scanner scannerA = new Scanner(fileA);
+        Scanner scannerB = new Scanner(fileB);
+
+        while (scannerA.hasNextLine() && scannerB.hasNextLine()) {
+            String lineA = scannerA.nextLine();
+            String lineB = scannerB.nextLine();
+            if (!lineA.equals(lineB)) {
+                return false;
+            }
+            else if (scannerA.hasNextLine() && !scannerB.hasNextLine()) {
+                return false;
+            }
+            else if (!scannerA.hasNextLine() && scannerB.hasNextLine()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Test
     // Happy path
     void readApplicationsFromFile_readCorrectNumberOfApplications_expectsEqualLinesAnd()
             throws IOException, InvalidDelimitedStringException, StorageException {
         writeToFileValidJobApplications();
-        Storage storage = new StorageManager(testFilePath);
+        Storage storage = new StorageManager(TEST_FILE_PATH);
 
-        File testFile = new File(testFilePath);
+        File testFile = new File(TEST_FILE_PATH);
         ArrayList<InternshipApplication> applications;
         applications = storage.readFromFile();
-        assertEquals(Files.lines(Path.of(testFilePath)).count(), applications.size(),
+        assertEquals(Files.lines(Path.of(TEST_FILE_PATH)).count(), applications.size(),
                 "Number of applications should be the same.");
     }
 
@@ -58,7 +81,7 @@ class StorageTest {
     // Error path
     void readFromFile_invalidStorageFormat_throwsInvalidDelimitedString() throws IOException {
         writeToFileInvalidJobApplications();
-        Storage storage = new StorageManager(testFilePath);
+        Storage storage = new StorageManager(TEST_FILE_PATH);
 
         assertThrows(InvalidDelimitedStringException.class, storage::readFromFile,
                 "Invalid storage format throws InvalidDelimitedStringException.");
@@ -68,13 +91,24 @@ class StorageTest {
     @Test
     // happy path
     void storeToFile_allInOrder_success() throws IOException, StorageException {
-        Storage storage = new StorageManager(testFilePath);
+        Storage storage = new StorageManager(TEST_FILE_PATH);
 
         InternshipApplication application1 = new InternshipApplication("Google", "SWE",
-                LocalDate.now(), ApplicationStatus.APPLIED);
+                LocalDate.ofYearDay(2025, 1), ApplicationStatus.APPLIED);
+        InternshipApplication application2 = new InternshipApplication("Google", "SRE",
+                LocalDate.ofYearDay(2025, 1), ApplicationStatus.REJECTED);
+        InternshipApplication[] applications = {application1, application2};
+        storage.storeToFile(applications);
 
+        File testFile = new File(TEST_FILE_PATH);
+        File comparisonFile = new File(COMPARISON_FILE_PATH);
+        FileWriter writer = new FileWriter(comparisonFile);
+        writer.write("Google;SWE;2025-01-01;APPLIED\n");
+        writer.write("Google;SRE;2025-01-01;REJECTED\n");
+        writer.close();
 
-        storage.storeToFile();
-
+        assertDoesNotThrow(() -> isFileContentSame(testFile, comparisonFile), "File comparison failed.");
+        assertTrue(isFileContentSame(comparisonFile, testFile),
+                "File contents different. Storage does not store as expected.");
     }
 }
