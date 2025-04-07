@@ -143,7 +143,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />≤
+<img src="diagrams/class-diagrams/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component
@@ -153,13 +153,7 @@ The `Model` component
   - Status is implemented using an enumeration `ApplicationStatus` which helps restrict statuses to a few valid values.
 * Handles the actual manipulation of data through the `Application Manager` class.
 ** It recieves the appropriate command and data from the command classes, and executes the relevant methods. 
-* Does not depend on any of the other structures of the program, as it's designed to be a black box to manipulate, store and handle data. 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* Does not depend on any of the other structures of the program, as it's designed to be a black box to manipulate, store and handle data.
 
 
 ### Storage component
