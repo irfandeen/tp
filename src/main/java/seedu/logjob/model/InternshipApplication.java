@@ -66,7 +66,7 @@ public class InternshipApplication {
                 this.status.equals(((InternshipApplication) other).getStatus())) {
             return true;
         }
-        
+
         return false;
     }
 }

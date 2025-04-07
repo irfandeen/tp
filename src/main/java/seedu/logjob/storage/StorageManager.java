@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class StorageManager implements Storage {
     private static final String DEFAULT_FILE_PATH = "data.txt";
     private static final String FILE_NOT_FOUND_FAILURE = "File does not exist && StorageException not thrown";
+    private static final String CHECKSUM_FAILURE = "Data file has been modified externally. LogJob will start from a blank slate.";
     private static final Logger logger = RootLogger.getLogger();
     private final String filePath;
     private File file;
@@ -33,19 +34,36 @@ public class StorageManager implements Storage {
     @Override
     public ArrayList<InternshipApplication> readFromFile()
             throws StorageException, InvalidDelimitedStringException, FileNotFoundException {
+        // Defensive Checks
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
         logger.info("Reading applications from file " + filePath);
+
         Scanner fileScanner = new Scanner(file);
         ArrayList<InternshipApplication> applicationsList = new ArrayList<>();
 
+        // Read checksum
+        if (!fileScanner.hasNextLine()) {
+            logger.info("No data found in file " + filePath);
+            fileScanner.close();
+            return applicationsList;
+        }
+        String sourceCheckSum = fileScanner.nextLine().trim();
+        StringBuilder totalString = new StringBuilder();
+
         while (fileScanner.hasNextLine()) {
-            String line = fileScanner.nextLine();
+            String line = fileScanner.nextLine().trim();
             InternshipApplication application = ApplicationSerializer.delimitedStringToApplication(line);
             applicationsList.add(application);
+            totalString.append(line);
         }
 
         fileScanner.close();
+
+        if (!HashUtil.isValidHash(sourceCheckSum, totalString)) {
+            throw new StorageException(CHECKSUM_FAILURE);
+        }
+
         logger.info("Successfully read applications from file " + filePath);
         return applicationsList;
     }
@@ -55,24 +73,29 @@ public class StorageManager implements Storage {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
         logger.info("Storing applications to file " + filePath);
-        FileWriter fileWriter = null;
-        try {
-            fileWriter = new FileWriter(file);
-        } catch (IOException e) {
-            throw new StorageException("Could not open file " + filePath);
+        FileWriter fileWriter = openWriter(file);
+
+        if (applications.length == 0) {
+            logger.info("No data found in file " + filePath);
+            closeWriter(fileWriter);
+            return;
         }
 
-        // Serialize to storage friendly format, then store
+        ArrayList<String> printStrings = new ArrayList<>();
+        StringBuilder totalString = new StringBuilder();
         for (InternshipApplication application : applications) {
             String applicationStorageString = ApplicationSerializer.applicationToDelimitedString(application);
-            writeToFile(applicationStorageString, fileWriter);
+            printStrings.add(applicationStorageString);
+            totalString.append(applicationStorageString.trim());
         }
 
-        try {
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new StorageException("Could not close file " + file);
+        String checkSumString = HashUtil.generateHash(totalString);
+        writeToFile(checkSumString, fileWriter);
+        for (String printString : printStrings) {
+            writeToFile(printString, fileWriter);
         }
+
+        closeWriter(fileWriter);
         logger.info("Successfully stored applications to file " + filePath);
     }
 
@@ -102,6 +125,22 @@ public class StorageManager implements Storage {
             writer.write("\n");
         } catch (IOException e) {
             throw new StorageException("Could not write to file.");
+        }
+    }
+
+    private void closeWriter(FileWriter writer) throws StorageException {
+        try {
+            writer.close();
+        } catch (IOException e) {
+            throw new StorageException("Could not close file " + file);
+        }
+    }
+
+    private FileWriter openWriter(File file) throws StorageException {
+        try {
+            return new FileWriter(file);
+        } catch (IOException e) {
+            throw new StorageException("Could not open file " + file);
         }
     }
 }

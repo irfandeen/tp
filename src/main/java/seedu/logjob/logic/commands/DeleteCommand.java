@@ -19,9 +19,9 @@ public class DeleteCommand extends Command {
         if (commandIndex <= 0 || commandIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException(MESSAGE_OUT_OF_BOUNDS);
         }
-      
+
         applicationManager.deleteApplication(commandIndex);
-      
+
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, commandIndex), false, false);
     }
 
