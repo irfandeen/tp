@@ -10,8 +10,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
-        uiMain.helpOutput();
-        return null;
+        return new CommandResult("", true, false);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
-        return null;
+        return new CommandResult("", false, true);
     }
 
     @Override
