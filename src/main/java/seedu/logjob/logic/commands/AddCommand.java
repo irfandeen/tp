@@ -1,5 +1,6 @@
 package seedu.logjob.logic.commands;
 
+import seedu.logjob.logic.commands.exceptions.DuplicateApplicationException;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
@@ -24,9 +25,15 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager) {
+    public CommandResult execute(ApplicationManager applicationManager)
+            throws DuplicateApplicationException {
         InternshipApplication newApplication =
                 new InternshipApplication(companyName, jobTitle, applicationDate, applicationStatus);
+
+        if (applicationManager.contains(newApplication)) {
+            throw new DuplicateApplicationException(MESSAGE_ADD_DUPLICATE);
+        }
+
         applicationManager.addApplication(newApplication);
 
         return new CommandResult(String.format(MESSAGE_ADD_SUCCESS,
@@ -48,6 +55,7 @@ public class AddCommand extends Command {
 
         return companyName.equals(otherCommand.companyName)
                 && jobTitle.equals(otherCommand.jobTitle)
-                && applicationStatus.equals(otherCommand.applicationStatus);
+                && applicationStatus.equals(otherCommand.applicationStatus)
+                && applicationDate.equals(otherCommand.applicationDate);
     }
 }
