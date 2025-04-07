@@ -12,7 +12,7 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
     - [Editing an application: edit](#editing-an-application-edit)
     - [Listing the application: list](#listing-the-application-list)
     - [Sort the application: sort](#sort-the-application-sort)
-    - [Delete an application: delete](#delete-an-application)
+    - [Delete an application: delete](#delete-an-application-delete)
     - [Find an application by keyword: find](#find-an-application-by-keyword)
     - [Getting help](#getting-help)
     - [Exit from the application](#exit-from-the-application)
