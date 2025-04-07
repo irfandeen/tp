@@ -58,7 +58,7 @@ public class ApplicationManager {
      */
     public void deleteApplication(int index, UiMain uiMain) {
         applicationList.remove(index);
-        uiMain.printMessage("Index: " + index + " Succeeds Deletion");
+        uiMain.printMessage("Index: " + index + " Successful Deletion");
     }
 
     /**

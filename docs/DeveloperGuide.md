@@ -315,67 +315,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-
-</div>
-
 ### Launch
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   2. Open the terminal and navigate to the folder.
+   3. Type `java -jar LogJob.jar` and press enter.
+   4. Adjust the terminal size as necessary to prevent the text from wrapping.
+   5. Test the commands below to ensure the application is working as expected.
 
 ### Getting Help
-1. Instructions on how to get help on commands
+1. Input: `help`<br>
+2. Expected: Shows a table of commands and their usage
+
 
 ### Adding an internship application
-1. Instructions for adding an internship application
-
+1. Input: `add -n Goggle -j SWE -s APPLIED -d 2025-01-01`<br>
+   Expected: `Application: Goggle SWE APPLIED Added Successfully`
 
 ### Editing an internship application
-1. Instructions for editing an internship application
+1. Input: `edit 1 -n Goggle -j HWE -s INTERVIEW -d 2025-02-02`<br>
+2. Expected: `Application: Goggle HWE INTERVIEW Edited Successfully`
 
 ### Listing applications
-1. Instructions for listing all applications
+1. Input: `list`
+2. Expected: Table with all current internship applications.<br>
+   - The table should be formatted with the following columns:
+     - Index
+     - Company Name
+     - Job Title
+     - Application Status
+     - Date of Application
 
 
+### Sort the internship applications
+1. Input: `sort -n/-d`<br>
+2. Expected: Use `list` command to ensure that the list is sorted by <br>
+    - `-n` : Company Name
+    - `-d` : Date of Application
+
+### Find an internship application
+1. Input: `find <keyword>`<br>
+2. Expected: Applications that contain the keyword in their company name, job title, status or date are displayed.<br>
 
 ### Deleting an internship application
+1. Input: `delete 1`<br>
+2. Expected: `Index: 1 Successful Deletion`<br>
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ### Exit
-1. Exiting the application
+1. Input: `exit`<br>
+2. Expected: The application closes<br>
+
+### Data Persistence
+1. Input: Exit the program and restart the program. <br>
+2. Expected: The data from the previous session is retained. Use `list` command to verify.
