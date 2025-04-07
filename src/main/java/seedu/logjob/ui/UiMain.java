@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class UiMain {
@@ -23,7 +24,7 @@ public class UiMain {
         System.out.println(message);
     }
 
-    public void printApplications(ArrayList<InternshipApplication> applicationList) throws EmptyTableException {
+    public void printApplications(ArrayList<ReadOnlyApplication> applicationList) throws EmptyTableException {
         assert applicationList != null : "Data should not be null";
         String table = UiTable.getTable(applicationList);
         System.out.println(table);

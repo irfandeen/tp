@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain)
+    public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (commandIndex <= 0 || commandIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
