@@ -89,7 +89,7 @@ public class ApplicationManager {
     }
 
     private ArrayList <ReadOnlyApplication> copyApplicationToObservableList() {
-        observableList = new ArrayList<ReadOnlyApplication>();
+        observableList = new ArrayList<>();
         for (int i = 0; i < applicationList.size(); i++) {
             observableList.add(new ReadOnlyApplication(i, applicationList.get(i)));
         }
