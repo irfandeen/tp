@@ -4,7 +4,6 @@ import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
 
-
 import java.time.LocalDate;
 
 public class AddCommand extends Command {
