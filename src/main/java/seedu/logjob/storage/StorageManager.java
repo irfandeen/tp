@@ -1,6 +1,7 @@
 package seedu.logjob.storage;
 
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 import seedu.logjob.storage.exceptions.StorageException;
 import seedu.logjob.util.RootLogger;
@@ -70,13 +71,13 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void storeToFile(InternshipApplication[] applications) throws StorageException {
+    public void storeToFile(ArrayList<ReadOnlyApplication> applications) throws StorageException {
         requireNonNullFile();
         assert file.exists() : FILE_NOT_FOUND_FAILURE;
         logger.info("Storing applications to file " + filePath);
         FileWriter fileWriter = openWriter(file);
 
-        if (applications.length == 0) {
+        if (applications.isEmpty()) {
             logger.info("No data found in file " + filePath);
             closeWriter(fileWriter);
             return;
@@ -84,7 +85,8 @@ public class StorageManager implements Storage {
 
         ArrayList<String> printStrings = new ArrayList<>();
         StringBuilder totalString = new StringBuilder();
-        for (InternshipApplication application : applications) {
+        for (ReadOnlyApplication readOnlyApplication : applications) {
+            InternshipApplication application = readOnlyApplication.getApplication();
             String applicationStorageString = ApplicationSerializer.applicationToDelimitedString(application);
             printStrings.add(applicationStorageString);
             totalString.append(applicationStorageString.trim());

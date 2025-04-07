@@ -63,7 +63,7 @@ public class InternshipApplication {
         if (this.companyName.equals(((InternshipApplication) other).getCompanyName()) &&
                 this.jobTitle.equals(((InternshipApplication) other).getJobTitle()) &&
                 this.applicationDate.equals(((InternshipApplication) other).getApplicationDate()) &&
-                this.status.equals(((InternshipApplication) other).getStatus())) {
+                this.getStatusToString().equals(((InternshipApplication) other).getStatusToString())) {
             return true;
         }
 

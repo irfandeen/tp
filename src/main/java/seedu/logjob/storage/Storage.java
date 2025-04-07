@@ -1,6 +1,7 @@
 package seedu.logjob.storage;
 
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 import seedu.logjob.storage.exceptions.StorageException;
 
@@ -26,5 +27,5 @@ public interface Storage {
      * @throws IOException is thrown when program is unable to write to file.
      * @throws StorageException is thrown when program cannot find file.
      */
-    public void storeToFile(InternshipApplication[] applications) throws StorageException;
+    public void storeToFile(ArrayList<ReadOnlyApplication> applications) throws StorageException;
 }

@@ -2,7 +2,6 @@ package seedu.logjob;
 
 import seedu.logjob.logic.LogicManager;
 import seedu.logjob.model.InternshipApplication;
-import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.Storage;
 import seedu.logjob.storage.StorageManager;
 import seedu.logjob.ui.UiMain;
@@ -35,7 +34,7 @@ public class LogJob {
             ui.showLineBreak();
             ui.handleError(exception);
             ui.showLineBreak();
-            internships = new ArrayList<InternshipApplication>();
+            internships = new ArrayList<>();
         } catch (IOException exception) {
             ui.handleError(exception);
         }
@@ -50,30 +49,14 @@ public class LogJob {
                 String input = ui.readInput();
                 logic.execute(input);
                 isRunning = logic.getIsRunning();
-
             } catch (Exception exception) {
                 ui.handleError(exception);
             }
-
-            //saveState();
         }
-        exit();
-    }
 
-    private void saveState() {
-        ArrayList<ReadOnlyApplication> internships = applicationManager.getArrayList();
-        InternshipApplication[] applicationsArray = internships.toArray(new InternshipApplication[0]);
-        try {
-            storage.storeToFile(applicationsArray);
-        } catch (StorageException exception) {
-            ui.handleError(exception);
-        }
-    }
-
-    private void exit() {
-        saveState();
         ui.exitMessage();
     }
+
 
     public static void main(String[] args) {
         LogJob logJob = new LogJob();
