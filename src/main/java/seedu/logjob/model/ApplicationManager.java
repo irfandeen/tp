@@ -96,4 +96,8 @@ public class ApplicationManager {
         }
         return observableList;
     }
+
+    public void listApplications(){
+        observableList = copyApplicationToObservableList();
+    }
 }

@@ -27,7 +27,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain)
+    public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (editIndex <= 0 || editIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
