@@ -24,3 +24,8 @@ public class InternshipApplicationTest {
         assertEquals("APPLIED", app.getStatusToString());
     }
 }
+
+
+
+
+
