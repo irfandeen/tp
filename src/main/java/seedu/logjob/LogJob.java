@@ -13,7 +13,6 @@ import seedu.logjob.logic.parser.ApplicationParser;
 import seedu.logjob.model.ApplicationManager;
 
 import java.io.IOException;
-import java.nio.file.ReadOnlyFileSystemException;
 import java.util.ArrayList;
 
 public class LogJob {
@@ -28,10 +27,16 @@ public class LogJob {
         storage = new StorageManager();
         ui = UiMain.getInstance();
 
+        ui.introMessage();
         ArrayList<InternshipApplication> internships = null;
         try {
             internships = storage.readFromFile();
-        } catch (IOException | StorageException | InvalidDelimitedStringException exception) {
+        } catch (InvalidDelimitedStringException | StorageException exception) {
+            ui.showLineBreak();
+            ui.handleError(exception);
+            ui.showLineBreak();
+            internships = new ArrayList<InternshipApplication>();
+        } catch (IOException exception) {
             ui.handleError(exception);
         }
 
@@ -39,7 +44,6 @@ public class LogJob {
     }
 
     public void run() {
-        ui.introMessage();
         while (isRunning) {
             try {
                 String input = ui.readInput();
