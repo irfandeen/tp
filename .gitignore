@@ -18,7 +18,10 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Data files
 data.txt
+test_data.txt
+comparison_data.txt
 
 # Log Files
 *.log
 *.lck
+*.log.*
