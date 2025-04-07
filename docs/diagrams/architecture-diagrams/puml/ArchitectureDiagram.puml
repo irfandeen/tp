@@ -4,7 +4,7 @@
 
 
 ' Define components with default styles
-package " "{
+package LogJob{
     [UI] UI_COLOR
     [Logic]LOGIC_COLOR
     [Model]MODEL_COLOR
@@ -27,6 +27,13 @@ Logic -[LOGIC_COLOR]-> Storage
 Logic -[LOGIC_COLOR]-> Model
 Storage -up[STORAGE_COLOR].> Model
 Storage -right[STORAGE_COLOR].> File
+
+' Define legend as a separate box
+rectangle "===Legend\n→ : Direct call / invocation\n--> : Data transfer" as LEGEND #lightgrey
+
+' Invisible layout link to push legend to the right
+UI -[hidden]-> LEGEND
+
 
 
 @enduml
