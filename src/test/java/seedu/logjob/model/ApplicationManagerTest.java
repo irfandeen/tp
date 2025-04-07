@@ -36,7 +36,7 @@ class ApplicationManagerTest {
         String expectedCompany = "ExampleCorp";
         String expectedJobTitle = "Developer";
         InternshipApplication application = new InternshipApplication(
-                expectedCompany, expectedJobTitle, LocalDate.now(), ApplicationStatus.APPLIED, 1);
+                expectedCompany, expectedJobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
 
         UiMain uiMain = UiMain.getInstance();
         manager.addApplication(application, uiMain);

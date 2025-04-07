@@ -39,12 +39,12 @@ public class EditCommandTest {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
-                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED, 1);
+                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
         initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                1,
+                0,
                 "NewCompany",
                 null,
                 null,
@@ -66,12 +66,12 @@ public class EditCommandTest {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
-                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED, 1);
+                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
         initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                1,
+                0,
                 "NewCompany",
                 "NewRole",
                 LocalDate.of(2025, 3, 25),
@@ -93,12 +93,12 @@ public class EditCommandTest {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
-                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED, 1);
+                LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
         initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                0, // Edit Index out of bounds
+                1, // Edit Index out of bounds
                 "New Company",
                 null,
                 null,
