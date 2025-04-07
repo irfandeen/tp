@@ -72,7 +72,8 @@ public class ApplicationManager {
         assert sortBy != null : "sortBy cannot be empty";
 
         if (sortBy.equals("Company Name")) {
-            applicationList.sort(Comparator.comparing(InternshipApplication::getCompanyName, String.CASE_INSENSITIVE_ORDER));
+            applicationList.sort(
+                    Comparator.comparing(InternshipApplication::getCompanyName, String.CASE_INSENSITIVE_ORDER));
         } else {
             applicationList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
         }
