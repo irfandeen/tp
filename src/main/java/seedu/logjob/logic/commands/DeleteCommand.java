@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
         if (commandIndex <= 0 || commandIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
         }
-        applicationManager.deleteApplication(commandIndex, uiMain);
+        applicationManager.deleteApplication(commandIndex);
     }
 
     @Override
