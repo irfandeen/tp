@@ -107,7 +107,7 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_emptyArgsWithFlags_success() {
         // Happy path for Sorting Commands, takes flags but no arguments
-        String argString = " -n    -j -s";
+        String argString = " -n    -j -s ";
         ArgumentMap argMap = ArgumentTokenizer.tokenize(argString, statusFlag, nameFlag, jobTitleFlag);
         assertTrue(argMap.getPreamble().isEmpty());
         assertFalse(argMap.isEmpty());
@@ -141,6 +141,16 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_argStringWithNoFlags_emptyHashMap() {
         String argString = "This string has no flags";
+        ArgumentMap argMap = ArgumentTokenizer.tokenize(argString, statusFlag, nameFlag, jobTitleFlag);
+        assertTrue(argMap.isEmpty());
+        assertArgumentDoesNotExist(argMap, nameFlag);
+        assertArgumentDoesNotExist(argMap, jobTitleFlag);
+        assertArgumentDoesNotExist(argMap, statusFlag);
+    }
+
+    @Test
+    public void tokenize_argStringJoinedToFlags_emptyHashMap() {
+        String argString = " -s0 -nGoggle -jSoftware Engineer";
         ArgumentMap argMap = ArgumentTokenizer.tokenize(argString, statusFlag, nameFlag, jobTitleFlag);
         assertTrue(argMap.isEmpty());
         assertArgumentDoesNotExist(argMap, nameFlag);

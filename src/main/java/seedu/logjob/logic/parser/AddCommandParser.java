@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMap argMap = ArgumentTokenizer.tokenize(args, ADD_FLAGS);
 
         if (argMap.missingFlags(MANDATORY_FLAGS)) {
-            throw new ParseException("Missing flag(s): " + argMap.getMissingFlags(MANDATORY_FLAGS));
+            throw new ParseException("Missing or Empty flag(s): " + argMap.getMissingFlags(MANDATORY_FLAGS));
         }
 
         if (!argMap.getPreamble().trim().isEmpty()) {

@@ -36,7 +36,7 @@ public class ArgumentTokenizer {
     private static List<FlagPosition> getAllFlagPositions(String arguments, Flag... flags) {
         List<Flag> allFlags = Arrays.asList(flags);
         return  allFlags.stream()
-                .flatMap(flag -> getOneFlagPositions(arguments, flag).stream())
+                .flatMap(flag -> getOneFlagPositions(arguments + " ", flag).stream())
                 .collect(Collectors.toList());
     }
 
@@ -83,7 +83,8 @@ public class ArgumentTokenizer {
 
 
     private static int getFlagIndex(String arguments, Flag flag, int startIndex) {
-        int index = arguments.indexOf(" " + flag.flag(), startIndex);
+        // Flag should have leading and trailing whitespace to be detected.
+        int index = arguments.indexOf(" " + flag.flag() + " ", startIndex);
         return (index == -1) ? -1 : index + 1;
     }
 
