@@ -9,6 +9,9 @@ import java.time.LocalDate;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
+    public static final String MESSAGE_ADD_SUCCESS = "Application: %s %s %s Added Successfully";
+    public static final String MESSAGE_ADD_DUPLICATE = "Add failed. This application already exists.";
+
     private final String companyName;
     private final String jobTitle;
     private final LocalDate applicationDate;
@@ -22,10 +25,16 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(ApplicationManager applicationManager, UiMain uiMain) {
+    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
         InternshipApplication newApplication =
                 new InternshipApplication(companyName, jobTitle, applicationDate, applicationStatus);
         applicationManager.addApplication(newApplication);
+
+        return new CommandResult(String.format(MESSAGE_ADD_SUCCESS,
+                newApplication.getCompanyName(),
+                newApplication.getJobTitle(),
+                newApplication.getStatusToString())
+                , false, false);
     }
 
     @Override

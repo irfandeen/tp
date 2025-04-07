@@ -9,13 +9,13 @@ Class XYZCommand
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
+Class ApplicationParser
 Class XYZCommandParser
 Class CliSyntax
 Class ParserUtil
-Class ArgumentMultimap
+Class ArgumentMap
 Class ArgumentTokenizer
-Class Prefix
+Class Flag
 
 }
 
@@ -29,29 +29,30 @@ Class JobTitleValidator
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
+HiddenOutside ..> ApplicationParser
 
 'Parser Dependencies
-AddressBookParser .down.> XYZCommandParser: <<create>>
+ApplicationParser .down.> XYZCommandParser: <<create>>
 XYZCommandParser ..> XYZCommand : <<create>>
-AddressBookParser ..> Command : <<use>>
-XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
+ApplicationParser ..> Command : <<use>>
+XYZCommandParser -up-|> Parser
+XYZCommandParser ..> ArgumentMap
 XYZCommandParser ..> ArgumentTokenizer
-ArgumentTokenizer .left.> ArgumentMultimap
+ArgumentTokenizer .left.> ArgumentMap
 XYZCommandParser ..> CliSyntax
-CliSyntax ..> Prefix
+CliSyntax ..> Flag
 CliSyntax .[hidden] ParserUtil
 XYZCommandParser ..> ParserUtil
-ParserUtil .down.> Prefix
 ParserUtil .down..> Validator
-ArgumentTokenizer .down.> Prefix
+ArgumentTokenizer .down.> Flag
 XYZCommand -up-|> Command
 
 'Validator Dependencies
-ApplicationStatusValidator .right.|> Validator
-CompanyNameValidator .up.|> Validator
-JobApplicationIndexValidator .up.|> Validator
-JobTitleValidator .left.|> Validator
+ApplicationStatusValidator -right-|> Validator
+CompanyNameValidator -up-|> Validator
+JobApplicationIndexValidator -up-|> Validator
+JobTitleValidator -left-|> Validator
+
+hide member
 
 @enduml

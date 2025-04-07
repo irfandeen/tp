@@ -43,7 +43,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This Developer Guide structure draws inspiration from [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+
+...
+
+list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -55,10 +59,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
+
+> 💡 **_NOTE:_** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 ### Architecture
 
@@ -121,24 +124,27 @@ The UiMain also access constants specified in the UiConstants class.
 
 **API** : [`Logic.java`]
 
-Here's a (partial) class diagram of the `Logic` component:
+Here's a (partial) class diagram of the `Logic` component (Note that individual parser classes are omitted for clarity and represented by the overall `Parser`package):
 
 <img src="diagrams/class-diagrams/LogicClassDiagram.png" width="405"/>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `ApplicationParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the main program.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. After each execution, the `LogicManager` saves the `Model` state by executing `Storage` methods
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+Here are the other classes in `Parser` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="diagrams/class-diagrams/ParserClassesDiagram.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `ApplicationParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `ApplicationParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) 
+* `XYZCommandParser` uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which is returned back as a `Command` object.
+* All `XYZCommand` objects inherit from the abstract `Command` class that defines common methods such as `execute`, `equals`, and `isRunning`.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) implement the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 * The `ParserUtils` class depends on the `Validator` package to validate each specific field. This ensures user inputs for job title, company name, application status, etc. meet domain constraints before conversion.  
 
 ### Model component
@@ -175,10 +181,13 @@ The `Storage` component,
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+> ❗ **_NOTE:_** The lifeline for the obejcts instantiated should end at the destroy marker (X) but due to the limitation of PlantUML, the lifeline reaches the end of diagram.
 
+### Add an new internship application
+The implementation of the 
 
-### Add an internship application
 ![Sequence diagram of add command](diagrams/sequence-diagrams/AddSequenceDiagram.png)
+
 The `AddCommand` handles the creation of new internship applications from user input. The input string is first passed to `ApplicationParser`, which delegates parsing to `AddCommandParser`. This parser extracts the required fields—such as company name, role, status and date—and validates them. If validation succeeds, it passes these fields to `AddCommand` which constructs an `InternshipApplication` with the values.
 
 
@@ -195,6 +204,11 @@ After the input is read and parsed by the parser, the main program calls execute
 The listApplication method calls the printApplications() of the UiMain class, passing in the list of application. UI will do the job of printing the table of applications onto the CLI.
 
 ### Sort internship applications by field
+![Sequence diagram of sort command](diagrams/sequence-diagrams/sort-sequence.png)
+
+Very similar to the list command, sort command reads and parses the input from the user and execute the sorting on the application list 
+and finally automatically calls a printApplications() to print the table of applications (now sorted) onto the CLI.
+
 ### Find an internship application
 Here is a drafted sequence diagram of the find command and its execution.
 
