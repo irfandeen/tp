@@ -20,7 +20,7 @@ class ApplicationManagerTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application, UiMain uiMain) {
+        public void addApplication(InternshipApplication application) {
             applications.add(application);
         }
 
@@ -39,7 +39,7 @@ class ApplicationManagerTest {
                 expectedCompany, expectedJobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
 
         UiMain uiMain = UiMain.getInstance();
-        manager.addApplication(application, uiMain);
+        manager.addApplication(application);
         assertEquals(1, manager.getApplications().size(), "One application should be added.");
         InternshipApplication stored = manager.getApplications().get(0);
 

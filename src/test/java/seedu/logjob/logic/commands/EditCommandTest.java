@@ -25,7 +25,7 @@ public class EditCommandTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application, UiMain uiMain) {
+        public void addApplication(InternshipApplication application) {
             applications.add(application);
         }
 
@@ -40,8 +40,8 @@ public class EditCommandTest {
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
                 LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
-        initialList.add(original);
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
+        manager.addApplication(original);
 
         EditCommand editCmd = new EditCommand(
                 1,
@@ -51,7 +51,7 @@ public class EditCommandTest {
                 null
         );
 
-        editCmd.execute(manager, UiMain.getInstance());
+        editCmd.execute(manager);
 
         // Ensure one Field is edited
         InternshipApplication edited = manager.getApplication(0);
@@ -78,7 +78,7 @@ public class EditCommandTest {
                 ApplicationStatus.OFFERED
         );
 
-        editCmd.execute(manager, UiMain.getInstance());
+        editCmd.execute(manager);
 
         // Ensure one Field is edited
         InternshipApplication edited = manager.getApplication(0);
@@ -104,7 +104,7 @@ public class EditCommandTest {
                 null,
                 null
         );
-        assertThrows(IndexOutOfBoundsException.class, () -> editCmd.execute(manager, UiMain.getInstance()));
+        assertThrows(IndexOutOfBoundsException.class, () -> editCmd.execute(manager));
 
     }
 }

@@ -42,7 +42,7 @@ public class AddCommandTest {
         // Using the constructor with default status (APPLIED)
         AddCommand addCmd = new AddCommand(companyName, jobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
         UiMain uiMain = UiMain.getInstance();
-        addCmd.execute(dummyManager, uiMain);
+        addCmd.execute(dummyManager);
 
         // Ensure one application is added
         assertEquals(1, dummyManager.getApplications().size());
@@ -62,7 +62,7 @@ public class AddCommandTest {
         // Using the constructor with the custom status
         AddCommand addCmd = new AddCommand(companyName, jobTitle, LocalDate.now(), ApplicationStatus.INTERVIEW);
         UiMain uiMain = UiMain.getInstance();
-        addCmd.execute(dummyManager, uiMain);
+        addCmd.execute(dummyManager);
 
         // Verify the application details
         assertEquals(1, dummyManager.getApplications().size());
@@ -85,6 +85,6 @@ public class AddCommandTest {
         UiMain uiMain = UiMain.getInstance();
 
         // Expect an AssertionError during execution (make sure assertions are enabled via -ea)
-        assertThrows(AssertionError.class, () -> addCmd.execute(dummyManager, uiMain));
+        assertThrows(AssertionError.class, () -> addCmd.execute(dummyManager));
     }
 }

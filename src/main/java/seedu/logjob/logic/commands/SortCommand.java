@@ -13,7 +13,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager) throws EmptyTableException {
+    public CommandResult execute(ApplicationManager applicationManager) {
         applicationManager.sortApplication(this.sortBy);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, this.sortBy),

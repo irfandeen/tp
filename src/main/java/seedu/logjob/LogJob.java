@@ -46,7 +46,7 @@ public class LogJob {
                 ui.showLineBreak();
                 Command command = parser.parseCommand(input);
                 isRunning = command.isRunning();
-                command.execute(applicationManager, ui);
+                command.execute(applicationManager);
             } catch (Exception exception) {
                 ui.handleError(exception);
             }
