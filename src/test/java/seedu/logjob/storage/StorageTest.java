@@ -93,6 +93,7 @@ class StorageTest {
     void storeToFile_allInOrder_success() throws IOException, StorageException {
         Storage storage = new StorageManager(TEST_FILE_PATH);
 
+        // Run storeToFile with given inputs
         InternshipApplication application1 = new InternshipApplication("Google", "SWE",
                 LocalDate.ofYearDay(2025, 1), ApplicationStatus.APPLIED);
         InternshipApplication application2 = new InternshipApplication("Google", "SRE",
@@ -100,6 +101,7 @@ class StorageTest {
         InternshipApplication[] applications = {application1, application2};
         storage.storeToFile(applications);
 
+        // Expected output to file
         File testFile = new File(TEST_FILE_PATH);
         File comparisonFile = new File(COMPARISON_FILE_PATH);
         FileWriter writer = new FileWriter(comparisonFile);
@@ -107,8 +109,21 @@ class StorageTest {
         writer.write("Google;SRE;2025-01-01;REJECTED\n");
         writer.close();
 
+        // Files should match
         assertDoesNotThrow(() -> isFileContentSame(testFile, comparisonFile), "File comparison failed.");
         assertTrue(isFileContentSame(comparisonFile, testFile),
                 "File contents different. Storage does not store as expected.");
+    }
+
+    @Test
+    // boundary case
+    void storeToFile_nullStorage_storesEmptyFile() throws IOException, StorageException {
+        Storage storage = new StorageManager(TEST_FILE_PATH);
+        File testFile = new File(TEST_FILE_PATH);
+
+        InternshipApplication[] applications = {};
+        storage.storeToFile(applications);
+
+        assertEquals(0, testFile.length(), "Storage should store empty file when there are no applications.");
     }
 }
