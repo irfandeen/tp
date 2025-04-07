@@ -96,6 +96,16 @@ public class ApplicationManager {
         return observableList;
     }
 
+    /**
+     * Returns whether an application exists in the current model
+     *
+     * @param application application to be queried
+     * @return boolean depending on whether application already exists
+     */
+    public boolean contains(InternshipApplication application) {
+        return applicationList.contains(application);
+    }
+
     public void listApplications(){
         observableList = copyApplicationToObservableList();
     }
