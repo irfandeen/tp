@@ -44,6 +44,19 @@ Example of usage:
 
 **📌Note** that `-s` and `-d` flags are optional, if blank, will default to `APPLIED` and `Today's date`<br>
 
+Both **Company Name** (`-n`) and **Job Title** (`-j`) must:
+- Be **non-empty**
+- Contain only **alphanumeric characters** and **allowed special symbols**:  
+  `& , - . ' / ( ) ~ ! @ # $ % ^ * _ + = ?`
+- Be at most **50 characters long**
+
+❗ Input exceeding this limit or using unsupported characters will result in an error.
+
+💡 Examples of valid names:
+- `JP Morgan & Chase`
+- `SWE (Intern)`
+- `R&D / Data Analyst - AI`
+
 Here is a list of possible status accepted by the application:
 > applied<br>
 > interview<br>

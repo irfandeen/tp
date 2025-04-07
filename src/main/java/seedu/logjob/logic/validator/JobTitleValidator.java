@@ -3,11 +3,12 @@ import static java.util.Objects.requireNonNull;
 /**
  * Validates job title input.
  * Ensures it contains only allowed characters and meets length requirements.
+ * Allows alphanumeric characters and special symbols: & , - . ' / ( ) ~ ! @ # $ % ^ * _ + = ?. Limit of 50 characters.
  */
 public class JobTitleValidator implements Validator<String>{
     private static JobTitleValidator instance;
 
-    private static final String JOB_TITLE_REGEX =  "^[a-zA-Z0-9&,\\-.'/+ ]{1,100}$";
+    private static final String JOB_TITLE_REGEX =  "^[a-zA-Z0-9&,\\-.'/()~!@#$%^*_+=? ]{1,50}$";
 
     @Override
     public boolean validate(String jobTitle) {
