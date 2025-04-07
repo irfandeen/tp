@@ -1,5 +1,6 @@
 package seedu.logjob;
 
+import seedu.logjob.logic.LogicManager;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.Storage;
@@ -9,7 +10,7 @@ import seedu.logjob.storage.exceptions.StorageException;
 import seedu.logjob.ui.UiMain;
 import seedu.logjob.logic.commands.Command;
 import seedu.logjob.logic.parser.ApplicationParser;
-
+import seedu.logjob.logic.Logic;
 import seedu.logjob.model.ApplicationManager;
 
 import java.io.IOException;
@@ -22,11 +23,12 @@ public class LogJob {
     private Storage storage;
     private UiMain ui;
     private ApplicationManager applicationManager;
+    private Logic logic;
 
     private LogJob() {
-        parser = new ApplicationParser();
         storage = new StorageManager();
         ui = UiMain.getInstance();
+
 
         ArrayList<InternshipApplication> internships = null;
         try {
@@ -36,6 +38,7 @@ public class LogJob {
         }
 
         applicationManager = new ApplicationManager(internships);
+        logic = new LogicManager(storage, applicationManager, ui);
     }
 
     public void run() {
@@ -43,15 +46,14 @@ public class LogJob {
         while (isRunning) {
             try {
                 String input = ui.readInput();
-                ui.showLineBreak();
-                Command command = parser.parseCommand(input);
-                isRunning = command.isRunning();
-                command.execute(applicationManager, ui);
+                logic.execute(input);
+                isRunning = logic.getIsRunning();
+
             } catch (Exception exception) {
                 ui.handleError(exception);
             }
 
-            saveState();
+            //saveState();
         }
         exit();
     }
