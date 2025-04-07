@@ -43,7 +43,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This Developer Guide structure draws inspiration from [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+
+...
+
+list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -55,10 +59,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
+
+> 💡 **_NOTE:_** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 ### Architecture
 
@@ -175,7 +178,7 @@ The `Storage` component,
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
+> ❗ **_NOTE:_** The lifeline for the obejcts instantiated should end at the destroy marker (X) but due to the limitation of PlantUML, the lifeline reaches the end of diagram.
 
 ### Add an internship application
 ![Sequence diagram of add command](diagrams/sequence-diagrams/AddSequenceDiagram.png)
@@ -195,6 +198,11 @@ After the input is read and parsed by the parser, the main program calls execute
 The listApplication method calls the printApplications() of the UiMain class, passing in the list of application. UI will do the job of printing the table of applications onto the CLI.
 
 ### Sort internship applications by field
+![Sequence diagram of sort command](diagrams/sequence-diagrams/sort-sequence.png)
+
+Very similar to the list command, sort command reads and parses the input from the user and execute the sorting on the application list 
+and finally automatically calls a printApplications() to print the table of applications (now sorted) onto the CLI.
+
 ### Find an internship application
 Here is a drafted sequence diagram of the find command and its execution.
 
