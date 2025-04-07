@@ -13,7 +13,6 @@ import seedu.logjob.logic.parser.ApplicationParser;
 import seedu.logjob.model.ApplicationManager;
 
 import java.io.IOException;
-import java.nio.file.ReadOnlyFileSystemException;
 import java.util.ArrayList;
 
 public class LogJob {

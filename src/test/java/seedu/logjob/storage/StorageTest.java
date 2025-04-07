@@ -9,8 +9,6 @@ import seedu.logjob.storage.exceptions.StorageException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -38,9 +36,21 @@ class StorageTest {
         File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
-        writer.write("Goggle;SWE;APPLIED\n");
-        writer.write("John Street;REJECTED\n");
+        writer.write("Goggle;SWE;2025-01-01;APPLIED\n");
+        writer.write("John Street;2025-01-01;REJECTED\n");
         writer.close();
+    }
+
+    private boolean isSameApplications(ArrayList<InternshipApplication> expected, ArrayList<InternshipApplication> actual) {
+        if (expected.size() != actual.size()) {
+            return false;
+        }
+        for (int i = 0; i < expected.size(); i++) {
+            if (!expected.get(i).equals(actual.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean isFileContentSame(File fileA, File fileB) throws IOException {
@@ -76,6 +86,12 @@ class StorageTest {
         applications = storage.readFromFile();
         assertEquals(2, applications.size(),
                 "Number of applications should be the same.");
+        ArrayList<InternshipApplication> expected = new ArrayList();
+        expected.add(new InternshipApplication("Google", "SWE", LocalDate.ofYearDay(2025, 1),
+                ApplicationStatus.APPLIED));
+        expected.add(new InternshipApplication("John Street", "HWE", LocalDate.ofYearDay(2025, 1),
+                ApplicationStatus.REJECTED));
+        assertTrue(isSameApplications(expected, applications), "Expected applications differ from applications read");
     }
 
     @Test
