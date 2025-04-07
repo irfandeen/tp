@@ -29,7 +29,7 @@ public class DeleteCommandTest {
 
         @Override
         public void deleteApplication(int index, UiMain uiMain) {
-            applications.remove(index);
+            applications.remove(index - 1);
         }
 
         @Override
@@ -57,10 +57,10 @@ public class DeleteCommandTest {
         dummyManager.addApplication(application2, uiMain);
 
         // Delete the first application.
-        DeleteCommand deleteCommand = new DeleteCommand(0);
+        DeleteCommand deleteCommand = new DeleteCommand(1);
         deleteCommand.execute(dummyManager, uiMain);
 
-        // Verify the application at index 0 has been deleted and the remaining application is application2.
+        // Verify the application at index 1 has been deleted and the remaining application is application2.
         ArrayList<InternshipApplication> remainingApps = dummyManager.getApplications();
         assertEquals(1, remainingApps.size());
         assertEquals("InnovateHub", remainingApps.get(0).getCompanyName());
@@ -72,11 +72,11 @@ public class DeleteCommandTest {
     void execute_indexOutOfBounds_throwsIndexOutOfBoundsException() {
         DummyApplicationManager dummyManager = new DummyApplicationManager();
 
-        // Has only 1 instance ata index 0
+        // Has only 1 instance at index 1
         dummyManager.addApplication(new InternshipApplication("Google", "SWE", LocalDate.now(),
                 ApplicationStatus.APPLIED), UiMain.getInstance());
 
-        DeleteCommand deleteCommandPositiveInvalid = new DeleteCommand(1);
+        DeleteCommand deleteCommandPositiveInvalid = new DeleteCommand(2);
         DeleteCommand deleteCommandNegativeInvalid = new DeleteCommand(-1);
         DeleteCommand deleteCommandLargePositive = new DeleteCommand(99999999);
         DeleteCommand deleteCommandLargeNegative = new DeleteCommand(-9999999);

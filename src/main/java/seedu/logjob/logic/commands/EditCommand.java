@@ -29,11 +29,11 @@ public class EditCommand extends Command {
     @Override
     public void execute(ApplicationManager applicationManager, UiMain uiMain)
             throws IndexOutOfBoundsException {
-        if (editIndex < 0 || editIndex >= applicationManager.getSize()) {
+        if (editIndex <= 0 || editIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException("Invalid index. Please enter a valid index in the list.");
         }
 
-        InternshipApplication existingApplication = applicationManager.getApplication(editIndex);
+        InternshipApplication existingApplication = applicationManager.getApplication(editIndex - 1);
         InternshipApplication editedApplication = new InternshipApplication(
                 (companyName != null) ? companyName : existingApplication.getCompanyName(),
                 (jobTitle != null) ? jobTitle : existingApplication.getJobTitle(),
