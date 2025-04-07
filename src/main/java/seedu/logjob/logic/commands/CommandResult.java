@@ -47,6 +47,10 @@ public class CommandResult {
         return isExit;
     }
 
+    public boolean isHelp() {
+        return isHelp;
+    }
+
     public ArrayList<ReadOnlyApplication> getObservableList() {
         return observableList;
     }
