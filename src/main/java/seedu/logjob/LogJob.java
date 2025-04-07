@@ -1,6 +1,7 @@
 package seedu.logjob;
 
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.Storage;
 import seedu.logjob.storage.StorageManager;
 import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
@@ -12,6 +13,7 @@ import seedu.logjob.logic.parser.ApplicationParser;
 import seedu.logjob.model.ApplicationManager;
 
 import java.io.IOException;
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.ArrayList;
 
 public class LogJob {
@@ -55,7 +57,7 @@ public class LogJob {
     }
 
     private void saveState() {
-        ArrayList<InternshipApplication> internships = applicationManager.getArrayList();
+        ArrayList<ReadOnlyApplication> internships = applicationManager.getArrayList();
         InternshipApplication[] applicationsArray = internships.toArray(new InternshipApplication[0]);
         try {
             storage.storeToFile(applicationsArray);

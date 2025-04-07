@@ -24,7 +24,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application, UiMain uiMain) {
+        public void addApplication(InternshipApplication application) {
             applications.add(application);
         }
 
