@@ -33,11 +33,11 @@ title: Developer Guide
     * [Glossary](#glossary)
   * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
     * [Launch](#launch)
+    * [Getting Help](#getting-help)
     * [Adding an internship application](#adding-an-internship-application)
     * [Editing an internship application](#editing-an-internship-application)
     * [Deleting an internship application](#deleting-an-internship-application)
     * [Listing applications](#listing-applications)
-    * [Help](#help)
     * [Exit](#exit)
 --------------------------------------------------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="diagrams/class-diagrams/ModelClassDiagram.png" width="600" />
+<img src="diagrams/class-diagrams/ModelClassDiagram.png" width="800" />
 
 
 The `Model` component
