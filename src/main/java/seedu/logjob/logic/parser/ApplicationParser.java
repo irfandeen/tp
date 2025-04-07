@@ -13,10 +13,18 @@ import seedu.logjob.logic.parser.exceptions.ParseException;
 
 
 /**
- * Top level class for user input parsing.
+ * A top level parser class responsible for parsing user input commands and returning the appropriate command objects.
+ * It is the class for processing user input and delegates command-specific parsing to respective parsers.
  */
 public class ApplicationParser {
 
+    /**
+     * Parses the user input into a command object based on the command word.
+     *
+     * @param userInput the raw input string from the user.
+     * @return the corresponding {@link Command} object based on the user input.
+     * @throws ParseException if the input is empty, or if the command word is invalid or unrecognized.
+     */
     public Command parseCommand(String userInput) throws ParseException {
         if (userInput == null || userInput.isEmpty()) {
             throw new ParseException("Empty Command.");
