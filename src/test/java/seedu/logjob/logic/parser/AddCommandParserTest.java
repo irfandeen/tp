@@ -39,17 +39,19 @@ public class AddCommandParserTest {
     void parse_invalidArgs_throwsParseException() {
         // missing 2 flags
         assertParseFailure(parser, "",
-                "Missing flag(s): -n -j ");
+                "Missing or Empty flag(s): -n -j ");
         assertParseFailure(parser, " /j Software Engineer /n Yahoo",
-                "Missing flag(s): -n -j ");
+                "Missing or Empty flag(s): -n -j ");
+        assertParseFailure(parser, " -nABC -jDEF",
+                "Missing or Empty flag(s): -n -j ");
 
         // missing 1 flag
         assertParseFailure(parser, " -n Yahoo",
-                "Missing flag(s): -j ");
+                "Missing or Empty flag(s): -j ");
         assertParseFailure(parser, " -j Software Engineer",
-                "Missing flag(s): -n ");
+                "Missing or Empty flag(s): -n ");
         assertParseFailure(parser, " -j Software Engineer -j AI/ML Engineer",
-                "Missing flag(s): -n ");
+                "Missing or Empty flag(s): -n ");
 
         // contains preamble
         assertParseFailure(parser, " this job -j Software Engineer -n TechCompany",
