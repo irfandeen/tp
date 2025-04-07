@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import seedu.logjob.logic.commands.exceptions.DuplicateApplicationException;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.ui.UiMain;
@@ -65,4 +66,25 @@ public class AddCommandTest {
         // Expect an AssertionError during execution (make sure assertions are enabled via -ea)
         assertThrows(AssertionError.class, () -> addCmd.execute(dummyManager));
     }
+
+    @Test
+    void execute_duplicateApplication_throwsDuplicateApplicationException() {
+        ApplicationManagerStub dummyManager = new ApplicationManagerStub();
+
+        String companyName = "Duplicate Inc.";
+        String jobTitle = "Business Analyst";
+        LocalDate now = LocalDate.now();
+        ApplicationStatus status = ApplicationStatus.APPLIED;
+
+        // First add the application
+        AddCommand firstAdd = new AddCommand(companyName, jobTitle, now, status);
+        firstAdd.execute(dummyManager);
+
+        // Now try to add the same application again
+        AddCommand duplicateAdd = new AddCommand(companyName, jobTitle, now, status);
+
+        // Expect a DuplicateApplicationException
+        assertThrows(DuplicateApplicationException.class, () -> duplicateAdd.execute(dummyManager));
+    }
+
 }

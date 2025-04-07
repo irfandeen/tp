@@ -2,7 +2,6 @@ package seedu.logjob.logic.commands;
 
 import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.ui.exceptions.EmptyTableException;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
@@ -15,7 +14,7 @@ public class FindCommand extends Command {
     }
 
     public CommandResult execute(ApplicationManager applicationManager)
-            throws IndexOutOfBoundsException, EmptyTableException {
+            throws IndexOutOfBoundsException {
         applicationManager.findApplications(searchTerm);
         return new CommandResult(
                 String.format(MESSAGE_FIND_SUCCESS, applicationManager.getSize()),

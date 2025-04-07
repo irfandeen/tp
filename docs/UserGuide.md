@@ -52,10 +52,6 @@ Both **Company Name** (`-n`) and **Job Title** (`-j`) must:
 
 ❗ Input exceeding this limit or using unsupported characters will result in an error.
 
-💡 Examples of valid names:
-- `JP Morgan & Chase`
-- `SWE (Intern)`
-- `R&D / Data Analyst - AI`
 
 Here is a list of possible status accepted by the application:
 > applied<br>
@@ -69,6 +65,10 @@ Here is a list of possible status accepted by the application:
 
 ❗To include the date of application, follow the format: `YYYY-MM-DD` as shown in the example.
 
+⚠️ Duplicate Detection: A job application is considered a duplicate if all of its fields match an existing entry.
+
+❌ Commands that add duplicate applications will be rejected and trigger an error message.
+
 ### Editing an application: `edit`
 Edits an existing Internship Application on the list at position INDEX
 
@@ -80,6 +80,13 @@ Example of usage:
 **📌Note** that INDEX has to be an integer from `0` to `n-1`, where `n`  is the total number of applications.
 Edit must also contain at least one flag.
 
+⚠️ No-Operation Detection: If the input arguments exactly match the fields of the existing Internship Application, it is consider as a No-Operation.
+
+❌ No-Operation commands are ignored and trigger a warning message.
+
+⚠️ Duplicate Detection: If an application is edited such that all of its fields match an existing entry, it is consider duplicate.
+
+❌ Commands that produce duplicate edits will be rejected and trigger an error message.
 
 ### Listing the application: `list`
 List the job applications to the command line interface.

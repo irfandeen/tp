@@ -24,6 +24,11 @@ public class ApplicationManagerStub extends ApplicationManager {
         return obervableApplications;
     }
 
+    @Override
+    public boolean contains(InternshipApplication application) {
+        return applications.contains(application);
+    }
+
     public ArrayList<InternshipApplication> getApplications() {
         return applications;
     }
