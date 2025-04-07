@@ -29,7 +29,6 @@ public class LogJob {
         storage = new StorageManager();
         ui = UiMain.getInstance();
 
-
         ArrayList<InternshipApplication> internships = null;
         try {
             internships = storage.readFromFile();

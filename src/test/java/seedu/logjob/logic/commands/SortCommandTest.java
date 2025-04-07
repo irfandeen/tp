@@ -15,28 +15,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SortCommandTest {
-
-    // Dummy ApplicationManager that stores added applications.
-    private class DummyApplicationManager extends ApplicationManager {
-        private ArrayList<InternshipApplication> applications = new ArrayList<>();
-
-        public DummyApplicationManager(ArrayList<InternshipApplication> applications) {
-            super(applications);
-            this.applications = applications;
-        }
-
-        @Override
-        public void addApplication(InternshipApplication application, UiMain uiMain) {
-            applications.add(application);
-        }
-
-        public ArrayList<InternshipApplication> getApplications() {
-            return applications;
-        }
-    }
-
     @Test
-    void execute_sortByName_listSorted() throws EmptyTableException {
+    void execute_sortByName_listSorted() {
         ArrayList<InternshipApplication> applications = new ArrayList<>();
         InternshipApplication applicationOne = new InternshipApplication(
                 "TechCorp",
@@ -53,28 +33,29 @@ public class SortCommandTest {
         applications.add(applicationOne);
         applications.add(applicationTwo);
 
-        DummyApplicationManager dummyManager = new DummyApplicationManager(applications);
-        UiMain uiMain = UiMain.getInstance();
+        ApplicationManager dummyManager = new ApplicationManager(applications);
 
-        assertEquals(2, dummyManager.getApplications().size());
-        InternshipApplication firstApplication = dummyManager.getApplications().get(0);
+        assertEquals(2, dummyManager.getSize());
+        InternshipApplication firstApplication = dummyManager.getArrayList().get(0).getApplication();
         assertEquals("TechCorp", firstApplication.getCompanyName());
 
         SortCommand sortCmd = new SortCommand("Company Name");
-        sortCmd.execute(dummyManager, uiMain);
+        sortCmd.execute(dummyManager);
 
-        firstApplication = dummyManager.getApplications().get(0);
+        firstApplication = dummyManager.getArrayList().get(0).getApplication();
         assertEquals("apple", firstApplication.getCompanyName());
     }
 
 
     @Test
-    void execute_emptyList_expectException() {
-        DummyApplicationManager dummyManager = new DummyApplicationManager(new ArrayList<>());
+    void execute_emptyList_expectCommandResult() {
+        ApplicationManager dummyManager = new ApplicationManager(new ArrayList<>());
 
         SortCommand sortCmd = new SortCommand("Company Name");
-        UiMain uiMain = UiMain.getInstance();
-
-        assertThrows(Exception.class, () -> sortCmd.execute(dummyManager, uiMain));
+        CommandResult res = sortCmd.execute(dummyManager);
+        assertEquals(
+                0,
+                res.getObservableList().size()
+        );
     }
 }

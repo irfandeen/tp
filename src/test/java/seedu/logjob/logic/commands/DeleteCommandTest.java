@@ -23,12 +23,12 @@ public class DeleteCommandTest {
         }
 
         @Override
-        public void addApplication(InternshipApplication application, UiMain uiMain) {
+        public void addApplication(InternshipApplication application) {
             applications.add(application);
         }
 
         @Override
-        public void deleteApplication(int index, UiMain uiMain) {
+        public void deleteApplication(int index) {
             applications.remove(index - 1);
         }
 
@@ -53,12 +53,12 @@ public class DeleteCommandTest {
         InternshipApplication application2 = new InternshipApplication("InnovateHub", "Product Manager",
                 LocalDate.now(), ApplicationStatus.INTERVIEW);
         UiMain uiMain = UiMain.getInstance();
-        dummyManager.addApplication(application1, uiMain);
-        dummyManager.addApplication(application2, uiMain);
+        dummyManager.addApplication(application1);
+        dummyManager.addApplication(application2);
 
         // Delete the first application.
         DeleteCommand deleteCommand = new DeleteCommand(1);
-        deleteCommand.execute(dummyManager, uiMain);
+        deleteCommand.execute(dummyManager);
 
         // Verify the application at index 1 has been deleted and the remaining application is application2.
         ArrayList<InternshipApplication> remainingApps = dummyManager.getApplications();
@@ -74,20 +74,16 @@ public class DeleteCommandTest {
 
         // Has only 1 instance at index 1
         dummyManager.addApplication(new InternshipApplication("Google", "SWE", LocalDate.now(),
-                ApplicationStatus.APPLIED), UiMain.getInstance());
+                ApplicationStatus.APPLIED));
 
         DeleteCommand deleteCommandPositiveInvalid = new DeleteCommand(2);
         DeleteCommand deleteCommandNegativeInvalid = new DeleteCommand(-1);
         DeleteCommand deleteCommandLargePositive = new DeleteCommand(99999999);
         DeleteCommand deleteCommandLargeNegative = new DeleteCommand(-9999999);
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandPositiveInvalid.execute(dummyManager,
-                UiMain.getInstance()), "Deleting out of bounds should throw an IndexOutOfBoundsException.");
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandNegativeInvalid.execute(dummyManager,
-                        UiMain.getInstance()), "Deleting a negative index should throw an IndexOutOfBoundsException.");
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandLargePositive.execute(dummyManager,
-                UiMain.getInstance()), "Deleting a large and invalid index should throw an IndexOutOfBoundsException.");
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandLargeNegative.execute(dummyManager,
-                        UiMain.getInstance()),
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandPositiveInvalid.execute(dummyManager), "Deleting out of bounds should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandNegativeInvalid.execute(dummyManager), "Deleting a negative index should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandLargePositive.execute(dummyManager), "Deleting a large and invalid index should throw an IndexOutOfBoundsException.");
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandLargeNegative.execute(dummyManager),
                 "Deleting a large negative index should throw an IndexOutOfBoundsException.");
 
     }
@@ -98,10 +94,9 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(0);
         DeleteCommand deleteCommandNonZero = new DeleteCommand(1);
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommand.execute(dummyManager, UiMain.getInstance()),
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommand.execute(dummyManager),
                 "Deleting empty application manager should throw an IndexOutOfBoundsException.");
-        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandNonZero.execute(dummyManager,
-                        UiMain.getInstance()),
+        assertThrows(IndexOutOfBoundsException.class, () -> deleteCommandNonZero.execute(dummyManager),
                 "Deleting a non-zero index on an empty application manager should throw an IndexOutOfBoundsException.");
     }
 }
