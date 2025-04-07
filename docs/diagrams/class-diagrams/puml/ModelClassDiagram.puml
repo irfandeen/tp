@@ -3,24 +3,59 @@
 
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
-skinparam classBackgroundColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR_T1
 
-class XYZCommand
+class XYZCommand {
+  +execute()
+}
 
 package "Model" as ModelPackage {
-    class ApplicationManager
-    class InternshipApplication
+    class ApplicationManager {
+        -applicationList: ArrayList<InternshipApplication>
+        -observableList: ArrayList<ReadOnlyApplication>
+        +ApplicationManager(applicationList: ArrayList<InternshipApplication>)
+        +addApplication(application: InternshipApplication)
+        +updateApplication(index: int, application: InternshipApplication)
+        +deleteApplication(index: int)
+        +sortApplication(sortBy: String)
+        +findApplications(searchTerm: String)
+        +getArrayList(): ArrayList<ReadOnlyApplication>
+        +getSize(): int
+        +getApplication(index: int): InternshipApplication
+        +listApplications()
+        -copyApplicationToObservableList(): ArrayList<ReadOnlyApplication>
+    }
+
+    class InternshipApplication {
+        -companyName: String
+        -jobTitle: String
+        -applicationStatus: ApplicationStatus
+        -applicationDate: LocalDate
+        +InternshipApplication(companyName: String, jobTitle: String, applicationStatus: ApplicationStatus, applicationDate: LocalDate)
+        +getCompanyName(): String
+        +getJobTitle(): String
+        +getStatus(): ApplicationStatus
+        +getStatusToString(): String
+        +getApplicationDate(): LocalDate
+        +getApplicationDateToString(): String
+        +toString(): String
+        +equals(Object obj): boolean
+    }
+
     class ApplicationStatus {
+        +APPLIED
+        +INTERVIEW
+        +OFFERED
+        +REJECTED
+        +ACCEPTED
+        +REJECTED_OFFER
     }
 }
 
-package "UI" {
-}
 package "Storage" {
 }
 
 XYZCommand .down.> ApplicationManager : «calls»
-ApplicationManager .left.> "UI" : «prints»
 "Storage" .right.> ApplicationManager : «reads»
 ApplicationManager --> InternshipApplication
 InternshipApplication ..> ApplicationStatus
