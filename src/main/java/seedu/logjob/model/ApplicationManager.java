@@ -69,15 +69,16 @@ public class ApplicationManager {
     }
 
     public void sortApplication(String sortBy, UiMain uiMain) throws EmptyTableException {
-        ArrayList<InternshipApplication> copyList = new ArrayList<>(applicationList); // Create a copy of the list
+        assert sortBy != null : "sortBy cannot be empty";
 
         if (sortBy.equals("Company Name")) {
-            copyList.sort(Comparator.comparing(InternshipApplication::getCompanyName, String.CASE_INSENSITIVE_ORDER));
+            applicationList.sort(
+                    Comparator.comparing(InternshipApplication::getCompanyName, String.CASE_INSENSITIVE_ORDER));
         } else {
-            copyList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
+            applicationList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
         }
 
-        ApplicationManager copy = new ApplicationManager(copyList); // Pass the sorted copy to a new ApplicationManager
+        ApplicationManager copy = new ApplicationManager(applicationList);
         copy.listApplication(uiMain);
 
         uiMain.printMessage("Applications Successfully Sorted By: " + sortBy);
