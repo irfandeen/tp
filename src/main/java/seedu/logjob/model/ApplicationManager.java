@@ -49,7 +49,7 @@ public class ApplicationManager {
      * @param application The new application to replace the existing one.
      */
     public void updateApplication(int index, InternshipApplication application) {
-        applicationList.set(index, application);
+        applicationList.set(index - 1, application);
     }
 
     /**
@@ -57,8 +57,8 @@ public class ApplicationManager {
      * @param index The index of the application to be deleted.
      */
     public void deleteApplication(int index, UiMain uiMain) {
-        applicationList.remove(index);
-        uiMain.printMessage("Index: " + index + " Successful Deletion");
+        applicationList.remove(index - 1);
+        uiMain.printMessage("Index " + index + ": Successful Deletion");
     }
 
     /**

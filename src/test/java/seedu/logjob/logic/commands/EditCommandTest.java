@@ -44,7 +44,7 @@ public class EditCommandTest {
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                0,
+                1,
                 "NewCompany",
                 null,
                 null,
@@ -71,7 +71,7 @@ public class EditCommandTest {
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                0,
+                1,
                 "NewCompany",
                 "NewRole",
                 LocalDate.of(2025, 3, 25),
@@ -98,7 +98,7 @@ public class EditCommandTest {
         DummyApplicationManager manager = new DummyApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
-                1, // Edit Index out of bounds
+                2, // Edit Index out of bounds
                 "New Company",
                 null,
                 null,
