@@ -1,17 +1,61 @@
 @startuml
 
-participant LogJob
-participant DeleteCommandParser
-participant DeleteCommand
-participant ApplicationManager
-participant UI
+!include ../../style.puml
 
-LogJob -> DeleteCommandParser: parse(args)
-DeleteCommandParser --> LogJob: DeleteCommand
-LogJob -> DeleteCommand: execute()
-DeleteCommand -> ApplicationManager: delete(index)
-ApplicationManager --> DeleteCommand: void
-DeleteCommand -> UI: printMessage(deleteSuccess)
-DeleteCommand --> LogJob: void
+participant LogJob #grey
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ApplicationParser" as ApplicationParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "a:DeleteCommand" as DeleteCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ApplicationManager" as ApplicationManager MODEL_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant ":UI" as ui UI_COLOR
+end box
+
+LogJob -> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> ApplicationParser: parseCommand(args)
+activate ApplicationParser
+
+create DeleteCommandParser
+ApplicationParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+DeleteCommand --> DeleteCommandParser
+deactivate
+
+DeleteCommandParser --> ApplicationParser
+deactivate DeleteCommandParser
+ApplicationParser -> LogicManager
+destroy DeleteCommandParser
+deactivate ApplicationParser
+
+LogicManager -> DeleteCommand: execute()
+activate DeleteCommand
+DeleteCommand -> ApplicationManager: delete(application) \nif valid index
+activate ApplicationManager
+ApplicationManager --> DeleteCommand
+deactivate ApplicationManager
+DeleteCommand --> LogicManager: commandResult
+deactivate DeleteCommand
+destroy DeleteCommand
+
+LogicManager -> ui: printMessage(deleteSuccess)
+activate ui
+ui --> LogicManager
+deactivate ui
+deactivate DeleteCommand
+LogicManager --> LogJob
 
 @enduml

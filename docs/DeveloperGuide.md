@@ -186,7 +186,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add an new internship application
 The implementation of the 
 
-![Sequence diagram of add command](diagrams/sequence-diagrams/AddSequenceDiagram.png)
+![Sequence diagram of add command](diagrams/sequence-diagrams/add-sequence.png)
 
 The `AddCommand` handles the creation of new internship applications from user input. The input string is first passed to `ApplicationParser`, which delegates parsing to `AddCommandParser`. This parser extracts the required fields—such as company name, role, status and date—and validates them. If validation succeeds, it passes these fields to `AddCommand` which constructs an `InternshipApplication` with the values.
 
