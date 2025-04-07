@@ -3,7 +3,7 @@ package seedu.logjob.logic.commands;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
-import seedu.logjob.ui.UiMain;
+
 
 import java.time.LocalDate;
 
@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
+    public CommandResult execute(ApplicationManager applicationManager) {
         InternshipApplication newApplication =
                 new InternshipApplication(companyName, jobTitle, applicationDate, applicationStatus);
         applicationManager.addApplication(newApplication);

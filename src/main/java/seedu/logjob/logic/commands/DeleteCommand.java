@@ -1,7 +1,6 @@
 package seedu.logjob.logic.commands;
 
 import seedu.logjob.model.ApplicationManager;
-import seedu.logjob.ui.UiMain;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
@@ -15,7 +14,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain)
+    public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (commandIndex <= 0 || commandIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException(MESSAGE_OUT_OF_BOUNDS);

@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
+    public CommandResult execute(ApplicationManager applicationManager) {
         return new CommandResult("", false, true);
     }
 

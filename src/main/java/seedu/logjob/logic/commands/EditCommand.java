@@ -4,7 +4,6 @@ import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
-import seedu.logjob.ui.UiMain;
 
 
 import java.time.LocalDate;
@@ -30,7 +29,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain)
+    public CommandResult execute(ApplicationManager applicationManager)
             throws IndexOutOfBoundsException {
         if (editIndex <= 0 || editIndex > applicationManager.getSize()) {
             throw new IndexOutOfBoundsException(MESSAGE_OUT_OF_BOUNDS);
