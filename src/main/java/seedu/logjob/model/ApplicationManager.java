@@ -1,6 +1,5 @@
 package seedu.logjob.model;
 
-import seedu.logjob.ui.UiMain;
 import seedu.logjob.ui.exceptions.EmptyTableException;
 
 import java.util.ArrayList;
@@ -11,35 +10,15 @@ import java.util.Comparator;
  */
 public class ApplicationManager {
     private final ArrayList<InternshipApplication> applicationList;
+    private ArrayList<ReadOnlyApplication> observableList;
 
     public ApplicationManager(ArrayList<InternshipApplication> applicationList) {
         this.applicationList = applicationList;
     }
 
-    /**
-     * Adds a new internship application to the list.
-     * @param application The application to be added.
-     */
-    public void addApplication(InternshipApplication application, UiMain uiMain) {
+    public void addApplication(InternshipApplication application) {
         applicationList.add(application);
-        uiMain.printMessage(
-                "Application: "
-                        + application.getCompanyName()
-                        + " "
-                        + application.getJobTitle()
-                        + " "
-                        + application.getStatusToString()
-                        + " Added Successfully"
-        );
-    }
-
-    /**
-     * Returns existing internship application object at index
-     * @param index Index of application to be viewed
-     * @return Reference to existing object
-     */
-    public InternshipApplication getApplication(int index) {
-        return applicationList.get(index);
+        observableList = copyApplicationToObservableList();
     }
 
     /**
@@ -50,56 +29,71 @@ public class ApplicationManager {
      */
     public void updateApplication(int index, InternshipApplication application) {
         applicationList.set(index - 1, application);
+        observableList = copyApplicationToObservableList();
     }
 
     /**
      * Deletes an internship application from the list.
+     *
      * @param index The index of the application to be deleted.
      */
-    public void deleteApplication(int index, UiMain uiMain) {
+    public void deleteApplication(int index) {
         applicationList.remove(index - 1);
-        uiMain.printMessage("Index " + index + ": Successful Deletion");
+        observableList = copyApplicationToObservableList();
     }
 
-    /**
-     * Lists all internship applications in a table format.
-     */
-    public void listApplication(UiMain uiMain) throws EmptyTableException {
-        uiMain.printApplications(this.applicationList);
-    }
-
-    public void sortApplication(String sortBy, UiMain uiMain) throws EmptyTableException {
+    public void sortApplication(String sortBy) throws EmptyTableException {
         assert sortBy != null : "sortBy cannot be empty";
 
+        observableList = copyApplicationToObservableList();
+
         if (sortBy.equals("Company Name")) {
-            applicationList.sort(
-                    Comparator.comparing(InternshipApplication::getCompanyName, String.CASE_INSENSITIVE_ORDER));
+            observableList.sort(
+                    Comparator.comparing(application ->
+                            application.getApplication().getCompanyName(), String.CASE_INSENSITIVE_ORDER));
         } else {
-            applicationList.sort(Comparator.comparing(InternshipApplication::getApplicationDate));
+            observableList.sort(Comparator.comparing(
+                    application ->
+                            application.getApplication().getApplicationDate()));
         }
-
-        ApplicationManager copy = new ApplicationManager(applicationList);
-        copy.listApplication(uiMain);
-
-        uiMain.printMessage("Applications Successfully Sorted By: " + sortBy);
     }
 
-    public ArrayList<InternshipApplication> findApplications(String searchTerm) {
-        ArrayList<InternshipApplication> applications = new ArrayList<>();
-        for (InternshipApplication application : applicationList) {
-            String applicationString = application.toString().toLowerCase();
+    public void findApplications(String searchTerm) {
+        observableList = new ArrayList<ReadOnlyApplication>();
+
+        for (int i = 0; i < applicationList.size(); i++) {
+            String applicationString = applicationList.get(i).toString().toLowerCase();
             if (applicationString.contains(searchTerm.toLowerCase())) {
-                applications.add(application);
+                ReadOnlyApplication matchedApplication = new ReadOnlyApplication(i, applicationList.get(i));
+                observableList.add(matchedApplication);
             }
         }
-        return applications;
     }
 
-    public ArrayList<InternshipApplication> getArrayList() {
-        return applicationList;
+    public ArrayList<ReadOnlyApplication> getArrayList() {
+        return observableList;
     }
 
     public int getSize() {
-        return applicationList.size();
+        return observableList.size();
+    }
+
+    /**
+     * Returns existing internship application object at index
+     *
+     * @param index Index of application to be viewed
+     * @return Reference to existing object
+     */
+
+    public InternshipApplication getApplication(int index) {
+        return applicationList.get(index);
+    }
+
+    private ArrayList <ReadOnlyApplication> copyApplicationToObservableList() {
+        observableList = new ArrayList<ReadOnlyApplication>();
+        for (int i = 0; i < applicationList.size(); i++) {
+            observableList.add(new ReadOnlyApplication(i, applicationList.get(i)));
+        }
+        return observableList;
     }
 }

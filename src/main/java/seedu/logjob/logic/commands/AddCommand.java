@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
         InternshipApplication newApplication =
                 new InternshipApplication(companyName, jobTitle, applicationDate, applicationStatus);
-        applicationManager.addApplication(newApplication, uiMain);
+        applicationManager.addApplication(newApplication);
 
         return new CommandResult(String.format(MESSAGE_ADD_SUCCESS,
                 newApplication.getCompanyName(),

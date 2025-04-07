@@ -13,9 +13,11 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
-        applicationManager.sortApplication(this.sortBy, uiMain);
+
+    public void execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
+        applicationManager.sortApplication(this.sortBy);
         return null;
+
     }
 
     @Override
