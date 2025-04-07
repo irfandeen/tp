@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import seedu.logjob.logic.commands.exceptions.DuplicateApplicationException;
 import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.InternshipApplication;
@@ -86,4 +87,26 @@ public class EditCommandTest {
         assertThrows(IndexOutOfBoundsException.class, () -> editCmd.execute(manager));
 
     }
+
+    @Test
+    void execute_noFieldEditedDuplicateEdit_throwsDuplicateException() {
+        ArrayList<InternshipApplication> initialList = new ArrayList<>();
+        InternshipApplication original1 = new InternshipApplication("Same Company", "Role",
+                LocalDate.of(2023, 12, 31), ApplicationStatus.APPLIED);
+        InternshipApplication original2 = new InternshipApplication("Company to change", "Role",
+                LocalDate.of(2023, 12, 31), ApplicationStatus.APPLIED);
+        initialList.add(original1);
+        initialList.add(original2);
+        ApplicationManager manager = new ApplicationManager(initialList);
+
+        // No Fields Edited. No changes to index 1.
+        EditCommand noChangeEdit = new EditCommand(1, "Same Company", null, null, null);
+        assertThrows(DuplicateApplicationException.class, () -> noChangeEdit.execute(manager));
+
+        // Edit Command produces duplicate entry. Changes Index 2 -> 1, invalid edit.
+        EditCommand duplicateEdit = new EditCommand(2, "Same Company", null, null, null);
+        assertThrows(DuplicateApplicationException.class, () -> duplicateEdit.execute(manager));
+
+    }
+
 }
