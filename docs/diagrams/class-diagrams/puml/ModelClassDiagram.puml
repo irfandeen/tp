@@ -1,0 +1,28 @@
+@startuml
+!include ../../style.puml
+
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+class XYZCommand
+
+package "Model" as ModelPackage {
+    class ApplicationManager
+    class InternshipApplication
+    class ApplicationStatus {
+    }
+}
+
+package "UI" {
+}
+package "Storage" {
+}
+
+XYZCommand .down.> ApplicationManager : «calls»
+ApplicationManager .left.> "UI" : «prints»
+"Storage" .right.> ApplicationManager : «reads»
+ApplicationManager --> InternshipApplication
+InternshipApplication ..> ApplicationStatus
+
+@enduml
