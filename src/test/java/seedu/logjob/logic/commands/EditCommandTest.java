@@ -14,33 +14,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EditCommandTest {
-
-    // Dummy ApplicationManager that stores added applications.
-    private class DummyApplicationManager extends ApplicationManager {
-        private final ArrayList<InternshipApplication> applications;
-
-        public DummyApplicationManager(ArrayList<InternshipApplication> applications) {
-            super(applications);
-            this.applications = applications;
-        }
-
-        @Override
-        public void addApplication(InternshipApplication application) {
-            applications.add(application);
-        }
-
-        public ArrayList<InternshipApplication> getApplications() {
-            return applications;
-        }
-    }
-
     @Test
     void execute_oneFieldEdited_applicationUpdated() throws IndexOutOfBoundsException {
         // Set up application manager with one application
         ArrayList<InternshipApplication> initialList = new ArrayList<>();
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
                 LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
-        DummyApplicationManager manager = new DummyApplicationManager(initialList);
+        ApplicationManager manager = new ApplicationManager(initialList);
         manager.addApplication(original);
 
         EditCommand editCmd = new EditCommand(
@@ -68,7 +48,7 @@ public class EditCommandTest {
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
                 LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
         initialList.add(original);
-        DummyApplicationManager manager = new DummyApplicationManager(initialList);
+        ApplicationManager manager = new ApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
                 1,
@@ -95,7 +75,7 @@ public class EditCommandTest {
         InternshipApplication original = new InternshipApplication("OldCompany", "OldRole",
                 LocalDate.of(2024, 1, 1), ApplicationStatus.APPLIED);
         initialList.add(original);
-        DummyApplicationManager manager = new DummyApplicationManager(initialList);
+        ApplicationManager manager = new ApplicationManager(initialList);
 
         EditCommand editCmd = new EditCommand(
                 2, // Edit Index out of bounds
