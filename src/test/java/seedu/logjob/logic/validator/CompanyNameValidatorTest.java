@@ -14,15 +14,16 @@ public class CompanyNameValidatorTest {
         assertTrue(validator.validate("Procter & Gamble"));
         assertTrue(validator.validate("MacDonald's Singapore"));
         assertTrue(validator.validate("Baskin-Robbins"));
-        assertTrue(validator.validate("7/11 Singapore"));
+        assertTrue(validator.validate("Yahoo!"));
+
     }
 
     @Test
-    void validate_invalidStatusArg_returnsFalse() {
-        assertFalse(validator.validate("** Company"));
-        assertFalse(validator.validate("__bank__"));
-        assertFalse(validator.validate("??? company"));
-        assertFalse(validator.validate("1% Corporation"));
+    void validate_invalidCharactersArg_returnsFalse() {
+        assertFalse(validator.validate("你好 Company"));
+        assertFalse(validator.validate("€ bank"));
+        assertFalse(validator.validate("© company"));
+        assertFalse(validator.validate("ÆX Corporation"));
     }
 
     @Test
@@ -30,5 +31,10 @@ public class CompanyNameValidatorTest {
         assertFalse(validator.validate(""));
         assertFalse(validator.validate("  "));
         assertThrows(NullPointerException.class, () -> validator.validate(null));
+    }
+
+    @Test
+    void validate_overFiftyCharacters_returnsFalse() throws NullPointerException {
+        assertFalse(validator.validate("123456789012345678901234567890123456789012345678901"));
     }
 }

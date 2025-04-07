@@ -3,13 +3,17 @@ package seedu.logjob.logic;
 import seedu.logjob.logic.commands.Command;
 import seedu.logjob.logic.commands.CommandResult;
 import seedu.logjob.logic.parser.ApplicationParser;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.Storage;
 import seedu.logjob.model.ApplicationManager;
 
 import seedu.logjob.logic.commands.exceptions.IndexOutOfBoundsException;
 import seedu.logjob.logic.parser.exceptions.ParseException;
+import seedu.logjob.storage.exceptions.StorageException;
 import seedu.logjob.ui.UiMain;
 import seedu.logjob.ui.exceptions.EmptyTableException;
+
+import java.util.ArrayList;
 
 
 public class LogicManager implements Logic {
@@ -48,8 +52,17 @@ public class LogicManager implements Logic {
             ui.printApplications(result.getObservableList());
         }
 
-        // Save application state to storage
-        // TO BE IMPLEMENTED
+        saveState();
+    }
+
+    private void saveState() {
+        ArrayList<ReadOnlyApplication> internships = model.getArrayList();
+
+        try {
+            storage.storeToFile(internships);
+        } catch (StorageException exception) {
+            ui.handleError(exception);
+        }
     }
 
     public boolean getIsRunning() {

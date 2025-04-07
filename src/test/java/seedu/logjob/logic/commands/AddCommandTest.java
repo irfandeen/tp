@@ -5,43 +5,22 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import seedu.logjob.model.ApplicationManager;
 import seedu.logjob.model.InternshipApplication;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.ui.UiMain;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class AddCommandTest {
 
-    // Dummy ApplicationManager that stores added applications.
-    private class DummyApplicationManager extends ApplicationManager {
-        private final ArrayList<InternshipApplication> applications = new ArrayList<>();
-
-        public DummyApplicationManager() {
-            super(new ArrayList<InternshipApplication>());
-        }
-
-        @Override
-        public void addApplication(InternshipApplication application) {
-            applications.add(application);
-        }
-
-        public ArrayList<InternshipApplication> getApplications() {
-            return applications;
-        }
-    }
-
     @Test
     void execute_defaultStatus_applicationAdded() {
-        DummyApplicationManager dummyManager = new DummyApplicationManager();
+        ApplicationManagerStub dummyManager = new ApplicationManagerStub();
         String companyName = "TechCorp";
         String jobTitle = "Software Engineer";
 
         // Using the constructor with default status (APPLIED)
         AddCommand addCmd = new AddCommand(companyName, jobTitle, LocalDate.now(), ApplicationStatus.APPLIED);
-        UiMain uiMain = UiMain.getInstance();
         addCmd.execute(dummyManager);
 
         // Ensure one application is added
@@ -54,7 +33,7 @@ public class AddCommandTest {
 
     @Test
     void execute_customStatus_applicationAdded() {
-        DummyApplicationManager dummyManager = new DummyApplicationManager();
+        ApplicationManagerStub dummyManager = new ApplicationManagerStub();
         String companyName = "InnovateHub";
         String jobTitle = "Product Manager";
         ApplicationStatus customStatus = ApplicationStatus.INTERVIEW;
@@ -74,7 +53,7 @@ public class AddCommandTest {
 
     @Test
     void execute_nullCompanyName_assertionError() {
-        DummyApplicationManager dummyManager = new DummyApplicationManager();
+        ApplicationManagerStub dummyManager = new ApplicationManagerStub();
         // Passing a null company name to trigger an assertion failure
         String companyName = null;
         String jobTitle = "TestJob";
@@ -82,7 +61,6 @@ public class AddCommandTest {
 
         // Construct the command with a null company name
         AddCommand addCmd = new AddCommand(companyName, jobTitle, now, ApplicationStatus.APPLIED);
-        UiMain uiMain = UiMain.getInstance();
 
         // Expect an AssertionError during execution (make sure assertions are enabled via -ea)
         assertThrows(AssertionError.class, () -> addCmd.execute(dummyManager));

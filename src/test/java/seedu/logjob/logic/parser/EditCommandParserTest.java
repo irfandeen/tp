@@ -69,8 +69,8 @@ public class EditCommandParserTest {
         // Invalid argument: Company Name
         assertParseFailure(parser, " 0 -n    -j Software Engineer" ,
                 "Invalid Company Name: ");
-        assertParseFailure(parser, " 1 -n *Invalid Company   -j Software Engineer" ,
-                "Invalid Company Name: *Invalid Company");
+        assertParseFailure(parser, " 1 -n 谷歌   -j Software Engineer" ,
+                "Invalid Company Name: 谷歌");
 
         // Invalid argument: Job Title
         assertParseFailure(parser, " 3 -n Google -j" ,

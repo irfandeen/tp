@@ -3,6 +3,7 @@ package seedu.logjob.storage;
 import org.junit.jupiter.api.Test;
 import seedu.logjob.model.ApplicationStatus;
 import seedu.logjob.model.InternshipApplication;
+import seedu.logjob.model.ReadOnlyApplication;
 import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 import seedu.logjob.storage.exceptions.StorageException;
 
@@ -26,9 +27,9 @@ class StorageTest {
         File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
-        writer.write(HashUtil.generateHash(new StringBuilder("Goggle;SWE;2025-01-01;APPLIED")
-                .append("John Street;HWE;2025-01-01;REJECTED")) + "\n");
-        writer.write("Goggle;SWE;2025-01-01;APPLIED\n");
+        writer.write(HashUtil.generateHash(new StringBuilder("Google;SWE;2025-01-01;APPLIED").append(
+                "John Street;HWE;2025-01-01;REJECTED")) + "\n");
+        writer.write("Google;SWE;2025-01-01;APPLIED\n");
         writer.write("John Street;HWE;2025-01-01;REJECTED\n");
         writer.close();
     }
@@ -37,7 +38,7 @@ class StorageTest {
         File file = new File(TEST_FILE_PATH);
         FileWriter writer = new FileWriter(file);
 
-        writer.write("Goggle;SWE;2025-01-01;APPLIED\n");
+        writer.write("Google;SWE;2025-01-01;APPLIED\n");
         writer.write("John Street;2025-01-01;REJECTED\n");
         writer.close();
     }
@@ -88,7 +89,7 @@ class StorageTest {
         applications = storage.readFromFile();
         assertEquals(2, applications.size(),
                 "Number of applications should be the same.");
-        ArrayList<InternshipApplication> expected = new ArrayList();
+        ArrayList<InternshipApplication> expected = new ArrayList<>();
         expected.add(new InternshipApplication("Google", "SWE",
                 LocalDate.ofYearDay(2025, 1), ApplicationStatus.APPLIED));
         expected.add(new InternshipApplication("John Street", "HWE",
@@ -118,7 +119,9 @@ class StorageTest {
                 LocalDate.ofYearDay(2025, 1), ApplicationStatus.APPLIED);
         InternshipApplication application2 = new InternshipApplication("Google", "SRE",
                 LocalDate.ofYearDay(2025, 1), ApplicationStatus.REJECTED);
-        InternshipApplication[] applications = {application1, application2};
+        ArrayList<ReadOnlyApplication> applications = new ArrayList<>();
+        applications.add(new ReadOnlyApplication(0, application1));
+        applications.add(new ReadOnlyApplication(1, application2));
         storage.storeToFile(applications);
 
         // Expected output to file
@@ -144,7 +147,7 @@ class StorageTest {
         Storage storage = new StorageManager(TEST_FILE_PATH);
         File testFile = new File(TEST_FILE_PATH);
 
-        InternshipApplication[] applications = {};
+        ArrayList<ReadOnlyApplication> applications = new ArrayList<>();
         storage.storeToFile(applications);
 
         assertEquals(0, testFile.length(),

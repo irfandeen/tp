@@ -24,7 +24,7 @@ public class ParserUtilsTest {
     void parseCompanyName_invalidNames_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCompanyName("")); // Empty name
         assertThrows(ParseException.class, () -> ParserUtil.parseCompanyName(" ")); // Only spaces
-        assertThrows(ParseException.class, () -> ParserUtil.parseCompanyName("@InvalidName!")); // Invalid chars
+        assertThrows(ParseException.class, () -> ParserUtil.parseCompanyName("百度")); // Invalid chars
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ParserUtilsTest {
     void parseJobTitle_invalidTitles_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle("")); // Empty title
         assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(" ")); // Only spaces
-        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle("@InvalidTitle!")); // Invalid chars
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle("大学教授")); // Invalid chars
     }
 
     @Test
