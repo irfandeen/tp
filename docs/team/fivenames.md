@@ -38,6 +38,7 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
 - **Managed releases:**
     - 📌 Version 1.0
     - 📌 Version 2.0
+    - 📌 Version 2.1
 - **Platform:** GitHub
 
 ---
@@ -45,23 +46,26 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
 ## 🔧 Enhancements to Existing Features
 - ✅ **Updated UI package** to align with coding standards (**Pull Request #55**)
 - ✅ **Added additional tests** to increase test coverage (**Pull Request #82**)
+- ✅ **Took part in integration** to ensure each feature function smoothly and follow the OOP best pratices.
 
 ---
 
 ## 📖 Documentation Contributions
 
 ### 📌 User Guide
-- 📝 Added documentation for **sort** and **list** features.
+- 📝 Documented **sort** and **list** features.
+- 📝 Added images and illustrations
+- 📝 Added **quick start** and **known issues** sections.
 
 ### 📌 Developer Guide
-- 📝 Added **acknowledgements** and **getting started** sections.
 - 📝 Documented **UI component architecture**.
 - 📝 Provided implementation details for **sort** and **list** features.
+- 📝 Added **acknowledgements** and **getting started** sections.
 
 ---
 
 ## 🌍 Community Contributions
-- 👀 **Reviewed PRs:** #13, #33, #84
+- 👀 **Reviewed and approved PRs:** #13, #33, #84
 - 🛠 **Maintained issue tracker** to ensure project efficiency.
 
 ---
