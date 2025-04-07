@@ -1,4 +1,5 @@
 package seedu.logjob.model;
+
 import java.time.LocalDate;
 
 public class InternshipApplication {
@@ -7,7 +8,7 @@ public class InternshipApplication {
     private final ApplicationStatus status;
     private final LocalDate applicationDate;
 
-    public InternshipApplication (
+    public InternshipApplication(
             String companyName, String jobTitle, LocalDate applicationDate, ApplicationStatus status) {
 
         assert companyName != null && !companyName.isEmpty() : "companyName should not be null or empty";
@@ -50,6 +51,22 @@ public class InternshipApplication {
     }
 
     @Override
-    public boolean equals() {
+    public boolean equals(Object other) {
+        if (!(other instanceof InternshipApplication)) {
+            return false;
+        }
+
+        if (other == null) {
+            return false;
+        }
+
+        if (this.companyName.equals(((InternshipApplication) other).getCompanyName()) &&
+                this.jobTitle.equals(((InternshipApplication) other).getJobTitle()) &&
+                this.applicationDate.equals(((InternshipApplication) other).getApplicationDate()) &&
+                this.status.equals(((InternshipApplication) other).getStatus())) {
+            return true;
+        }
+        
+        return false;
     }
 }
