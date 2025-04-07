@@ -16,16 +16,18 @@ public class FindCommand extends Command {
         this.searchTerm = searchTerm.toLowerCase();
     }
 
-    public void execute(ApplicationManager applicationManager, UiMain ui)
+    public CommandResult execute(ApplicationManager applicationManager, UiMain ui)
             throws IndexOutOfBoundsException, EmptyTableException {
         ArrayList<InternshipApplication> applicationsFound = applicationManager.findApplications(searchTerm);
         if (applicationsFound.isEmpty()) {
             ui.printMessage("No applications found for search term: " + searchTerm);
-            return;
+
         }
 
         ui.printMessage("Found " + applicationsFound.size() + " application(s) matching search term: " + searchTerm);
         ui.printApplications(applicationsFound);
+
+        return null;
     }
 
     @Override

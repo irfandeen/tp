@@ -9,8 +9,9 @@ public class HelpCommand extends Command {
     public HelpCommand(){}
 
     @Override
-    public void execute(ApplicationManager applicationManager, UiMain uiMain) {
+    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) {
         uiMain.helpOutput();
+        return null;
     }
 
     @Override
