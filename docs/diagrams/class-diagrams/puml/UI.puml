@@ -1,11 +1,8 @@
 @startuml
 
+!include ../../style.puml
 skinparam ClassAttributeIconSize 0
-skinparam classBackgroundColor green
-skinparam classBorderColor black
-skinparam classArrowColor darkgreen
-skinparam classFontColor white
-hide circle
+skinparam classBackgroundColor UI_COLOR
 
 package Model {
     class ApplicationManager
@@ -29,7 +26,7 @@ package UI as UiPackage {
 }
 
 ApplicationManager << (X,#FFFFFF) >>
-ApplicationManager --> UiMain : getInstance()
+ApplicationManager --> UiMain
 
 UiMain ..> UiTable
 UiMain ..> UiConstants
