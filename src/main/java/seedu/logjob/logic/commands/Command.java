@@ -8,7 +8,7 @@ import seedu.logjob.ui.exceptions.EmptyTableException;
 public abstract class Command {
     public Command() {
     }
-    public abstract void execute(ApplicationManager applicationManager, UiMain uiMain)
+    public abstract CommandResult execute(ApplicationManager applicationManager, UiMain uiMain)
             throws IndexOutOfBoundsException, EmptyTableException;
 
     public boolean isRunning() {

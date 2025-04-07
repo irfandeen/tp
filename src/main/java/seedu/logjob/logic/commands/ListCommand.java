@@ -11,8 +11,9 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
+    public CommandResult execute(ApplicationManager applicationManager, UiMain uiMain) throws EmptyTableException {
         applicationManager.listApplication(uiMain);
+        return null;
     }
 
     @Override

@@ -183,8 +183,11 @@ The `Storage` component,
 This section describes some noteworthy details on how certain features are implemented.
 > ❗ **_NOTE:_** The lifeline for the obejcts instantiated should end at the destroy marker (X) but due to the limitation of PlantUML, the lifeline reaches the end of diagram.
 
-### Add an internship application
+### Add an new internship application
+The implementation of the 
+
 ![Sequence diagram of add command](diagrams/sequence-diagrams/AddSequenceDiagram.png)
+
 The `AddCommand` handles the creation of new internship applications from user input. The input string is first passed to `ApplicationParser`, which delegates parsing to `AddCommandParser`. This parser extracts the required fields—such as company name, role, status and date—and validates them. If validation succeeds, it passes these fields to `AddCommand` which constructs an `InternshipApplication` with the values.
 
 
