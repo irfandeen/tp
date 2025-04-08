@@ -4,9 +4,7 @@
 skinparam ClassAttributeIconSize 0
 skinparam classBackgroundColor UI_COLOR
 
-package Model {
-    class ApplicationManager
-}
+
 
 
 package UI as UiPackage {
@@ -25,10 +23,11 @@ package UI as UiPackage {
     }
 }
 
-ApplicationManager << (X,#FFFFFF) >>
-ApplicationManager --> UiMain
+Class " " as HiddenSource #FFFFFF
+skinparam classBorderColor White
+HiddenSource "1"-[UI_COLOR]-> UiMain
 
-UiMain ..> UiTable
-UiMain ..> UiConstants
+UiMain .[UI_COLOR].> UiTable
+UiMain .[UI_COLOR].> UiConstants
 
 @enduml
