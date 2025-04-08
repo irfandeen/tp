@@ -43,6 +43,13 @@ class StorageTest {
         writer.close();
     }
 
+    /**
+     * Helper method to compare two lists of internship applications for equality.
+     *
+     * @param expected The expected list of applications.
+     * @param actual The actual list of applications to compare.
+     * @return True if both lists are equal, otherwise false.
+     */
     private boolean isSameApplications(ArrayList<InternshipApplication> expected,
             ArrayList<InternshipApplication> actual) {
         if (expected.size() != actual.size()) {
@@ -56,6 +63,14 @@ class StorageTest {
         return true;
     }
 
+    /**
+     * Helper method to compare the contents of two files.
+     *
+     * @param fileA The first file to compare.
+     * @param fileB The second file to compare.
+     * @return True if both files have the same content, otherwise false.
+     * @throws IOException If an error occurs while reading the files.
+     */
     private boolean isFileContentSame(File fileA, File fileB) throws IOException {
         Scanner scannerA = new Scanner(fileA);
         Scanner scannerB = new Scanner(fileB);

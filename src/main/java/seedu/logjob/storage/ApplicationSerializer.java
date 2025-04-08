@@ -6,6 +6,10 @@ import seedu.logjob.storage.exceptions.InvalidDelimitedStringException;
 
 import java.time.LocalDate;
 
+/**
+ * Utility class for serializing and deserializing {@link InternshipApplication} objects
+ * to and from delimited string format for file storage.
+ */
 public class ApplicationSerializer {
     private static final String DELIMITER = ";";
     private static final int NUMBER_OF_FIELDS = 4;
@@ -13,11 +17,24 @@ public class ApplicationSerializer {
 
     private ApplicationSerializer() {}
 
+    /**
+     * Converts an {@link InternshipApplication} object into a single delimited string for storage.
+     *
+     * @param application the internship application to serialize.
+     * @return a delimited string representation of the application.
+     */
     public static String applicationToDelimitedString(InternshipApplication application) {
         return application.getCompanyName() + DELIMITER + application.getJobTitle() + DELIMITER +
                 application.getApplicationDateString() + DELIMITER + application.getStatusToString();
     }
 
+    /**
+     * Parses a delimited string and constructs a corresponding {@link InternshipApplication} object.
+     *
+     * @param delimitedString the string representation of the application, using delimiters.
+     * @return the deserialized InternshipApplication object.
+     * @throws InvalidDelimitedStringException if the input string is malformed or contains invalid data.
+     */
     public static InternshipApplication delimitedStringToApplication(String delimitedString)
             throws InvalidDelimitedStringException {
         String[] fields = delimitedString.split(DELIMITER);

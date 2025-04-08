@@ -14,6 +14,11 @@ import seedu.logjob.storage.exceptions.StorageException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Entry point for the LogJob application.
+ * Manages the lifecycle of the application, including initialization,
+ * input handling, and application termination.
+ */
 public class LogJob {
     private Boolean isRunning = true;
     private ApplicationParser parser;
@@ -22,6 +27,10 @@ public class LogJob {
     private ApplicationManager applicationManager;
     private Logic logic;
 
+    /**
+     * Private constructor that initializes all necessary components of the application.
+     * Handles file loading and error recovery if any issues occur during startup.
+     */
     private LogJob() {
         storage = new StorageManager();
         ui = UiMain.getInstance();
@@ -43,6 +52,10 @@ public class LogJob {
         logic = new LogicManager(storage, applicationManager, ui);
     }
 
+    /**
+     * Starts the main loop of the application.
+     * Continuously reads and processes user input until the user exits.
+     */
     public void run() {
         while (isRunning) {
             try {
@@ -57,7 +70,11 @@ public class LogJob {
         ui.exitMessage();
     }
 
-
+    /**
+     * Main method. Creates and runs a new instance of the LogJob application.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         LogJob logJob = new LogJob();
         logJob.run();
