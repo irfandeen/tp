@@ -18,9 +18,10 @@ package "Parser" as ParserPackage{}
 package Model {}
 package Storage {}
 
-Class HiddenDestination #FFFFFF
-Class HiddenSource #FFFFFF
-HiddenDestination .left[hidden] HiddenSource
+
+Class " " as HiddenSource #FFFFFF
+skinparam classBorderColor White
+
 
 HiddenSource .down.> Logic
 LogicManager .right-|> Logic
