@@ -1,7 +1,7 @@
 # Irfan Deen - Project Portfolio Page
 
 ## 📌 Product Overview
-LogJob (LJ) is a desktop app for managing job applications, optimized for use via a Command Line Interface (CLI)
+LogJob (LJ) is a desktop app for managing job applications, optimized for use via a Command Line Interface (CLI). If you can type fast, LJ can get your job application management tasks done faster than traditional GUI apps.
 
 ## 🚀 Summary of Contributions
 
