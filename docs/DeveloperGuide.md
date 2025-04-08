@@ -43,11 +43,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-This Developer Guide structure draws inspiration from [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html)
-
-...
-
-list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well
+- This Developer Guide structure draws inspiration from [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+- It uses JUnit5 for testing software
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,16 +56,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-
-
 > 💡 **_NOTE:_** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 ### Architecture
 
 <img src="diagrams/architecture-diagrams/ArchitectureDiagram.png" alt="Architecture Diagram" width = 300 />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
-Given below is a quick overview of main components and how they interact with each other.
+The ***Architecture Diagram*** given above shows the overall architecture of the LogJob application software. A quick overview of each of the components has been given below.
 
 **Main components of the architecture**
 
@@ -78,10 +72,12 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command parser/executor.
+* [**`UI`**](#ui-component): The UI of LogJob. Responsible for all user interactions between the user and the application.
+* [**`Logic`**](#logic-component): The command parser/executor. Parses, validates, and executes the given command.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+`Util`: Provides classes for use across multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -89,12 +85,14 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <img src="diagrams/architecture-diagrams/ArchitectureSequenceDiagram.png" alt="Architecture Sequence Diagram" width="750" />
 
+> **NOTE**: The sequence diagram above shows a simplified version of the `delete` command execution for clarity purposes
+
 For the two main components [`Model`](...) and [`Storage`](...) dealing with application state,
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* The main components `Logic`, `Model` and `Storage` are defined in interfaces. This allows the implemenetation details of each component to be decoupled from the implementation details.
+* The main componetents `Logic`, `Model` and `Storage` are implemented in `LogicManager`, `ApplictationManager`, and `StorageManager` respectively.
 
-For example, the [`Storage`](...) component defines its API in the [`Storage.java`](...) interface. It implements this interface via the [`StorageManager.java`](...) class. Other components interact through this interface rather than a concrete calss to prevent other components being coupled to the implementation. 
+> **EXAMPLE:** The [`Storage`](...) component defines its API in the [`Storage.java`](...) interface. It implements this interface via the [`StorageManager.java`](...) class. Other components interact through this interface rather than a concrete calss to prevent other components being coupled to the implementation. 
 
 The sections below give more details of each component.
 
@@ -113,9 +111,9 @@ The `UI` component is called by the ApplicationManager,
 * Outputs the responses of the program to the user.
 * Outputs the error message that is thrown by the program.
 
-The Class UiMain is a Singleton that only the ApplicationManager gets an Instance of the class.
+The Class UiMain is a Singleton class, and only one instance exists system wide. It is passed to the necessary components as an instance when needed.
 
-The UiMain also calls the methods in the Utility class UiTable to generate the table for the list of application.
+The UiMain also calls the methods in the utility class UiTable to generate the table for the list of application.
 The getTable() method will return the full string of the application table to the UiMain.
 
 The UiMain also access constants specified in the UiConstants class.
@@ -165,15 +163,16 @@ The `Model` component
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/storage/Storage.java)
 
 Here is a draft of Storage Component
-![Class Diagram of Storage](diagrams/class-diagrams/storageclass.png)
+![Class Diagram of Storage](diagrams/class-diagrams/StorageClassDiagram.png)
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* Is implemented by the StorageManager, which reads and writes from the `data.txt` file stored in disk
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* It depends on `HashUtil` to generate and verify hashes
+* It depends on `ApplicationSerializer` to serialize and deserialize applications into a string format.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -210,12 +209,16 @@ Very similar to the list command, sort command reads and parses the input from t
 and finally automatically calls a printApplications() to print the table of applications (now sorted) onto the CLI.
 
 ### Find an internship application
-Here is a drafted sequence diagram of the find command and its execution.
 
 ![Sequence diagram of find command](diagrams/sequence-diagrams/find-sequence.png)
 
 ### Help command
+
+![Sequence diagram of help command](diagrams/sequence-diagrams/help-sequence.png)
+
 ### Exit the application
+![Sequence diagram of exit command](diagrams/sequence-diagrams/exit-sequence.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -1,0 +1,54 @@
+@startuml
+
+!include ../../style.puml
+
+participant LogJob #grey
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ApplicationParser" as ApplicationParser LOGIC_COLOR
+participant ":HelpCommandParser" as HelpCommandParser LOGIC_COLOR
+participant "a:HelpCommand" as HelpCommand LOGIC_COLOR
+end box
+
+
+box UI UI_COLOR_T1
+participant ":UI" as ui UI_COLOR
+end box
+
+LogJob -> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> ApplicationParser: parseCommand(args)
+activate ApplicationParser
+
+create HelpCommandParser
+ApplicationParser -> HelpCommandParser
+activate HelpCommandParser
+
+create HelpCommand
+HelpCommandParser -> HelpCommand
+activate HelpCommand
+HelpCommand --> HelpCommandParser
+deactivate
+
+HelpCommandParser --> ApplicationParser
+deactivate HelpCommandParser
+ApplicationParser -> LogicManager
+destroy HelpCommandParser
+deactivate ApplicationParser
+
+LogicManager -> HelpCommand: execute()
+activate HelpCommand
+HelpCommand --> LogicManager: commandResult
+deactivate HelpCommand
+destroy HelpCommand
+
+LogicManager -> ui: helpOutput()
+activate ui
+ui --> LogicManager
+deactivate ui
+deactivate HelpCommand
+LogicManager --> LogJob
+
+@enduml
