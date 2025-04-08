@@ -6,7 +6,9 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
 ## 🚀 Summary of Contributions
 
 ### **Code Contributions:** [Project Dashboard](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2025-02-21&tabOpen=true&tabType=authorship&tabAuthor=irfandeen&tabRepo=AY2425S2-CS2113-T11a-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+
 ___
+
 ###  **Enhancements Implemented**
 - Implemented `Storage` and related persistence classes
    - Implemented `ApplicationSerializer` to enable serialization and deserialization of `InternshipApplication`
@@ -45,6 +47,7 @@ ___
 ___
 ### Community Contributions
 - Helped to design overall arhitecture and contracts (interfaces) for better OOP design
+
 ___
 ### Review/Mentoring contributions
 - Reveied PRs and closed issues for teammates 
