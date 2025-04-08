@@ -16,7 +16,7 @@ title: Developer Guide
     * [Model component](#model-component)
     * [Storage component](#storage-component)
   * [**Implementation**](#implementation)
-    * [Add an internship application](#add-an-internship-application)
+    * [Add a new internship application](#add-a-new-internship-application)
     * [Edit an internship application](#edit-an-internship-application)
     * [Delete an internship application](#delete-an-internship-application)
     * [List all internship applications](#list-all-internship-applications)
@@ -183,14 +183,14 @@ The `Storage` component,
 This section describes some noteworthy details on how certain features are implemented.
 > ❗ **_NOTE:_** The lifeline for the obejcts instantiated should end at the destroy marker (X) but due to the limitation of PlantUML, the lifeline reaches the end of diagram.
 
-### Add an new internship application
-The implementation of the 
+### Add a new internship application
+The diagram below illustrates the classes involved and the sequence of method calls involved in processing an `add` command:
 
 ![Sequence diagram of add command](diagrams/sequence-diagrams/add-sequence.png)
 
-The `AddCommand` handles the creation of new internship applications from user input. The input string is first passed to `ApplicationParser`, which delegates parsing to `AddCommandParser`. This parser extracts the required fields—such as company name, role, status and date—and validates them. If validation succeeds, it passes these fields to `AddCommand` which constructs an `InternshipApplication` with the values.
+The `AddCommand` handles the creation of new internship applications from user input. The input string is first passed to `LogicManager`, which delegates parsing responsibility to `ApplicationParser`. The parser recognizes the command type and forwards the input to `AddCommandParser`. This parser extracts the required fields—such as company name, role, status and date—and validates them. If validation succeeds, it passes these fields to `AddCommand` which constructs an `InternshipApplication` with the values.
 
-
+Next the `AddCommand` interacts with the `Model` to add a new `InternshipApplication` class. If there is an existing application already in the model, the new class is a duplicate and an error is thrown. Otherwise, it is added tp the `Model`. A `CommandResult` that encapsulates command output is returned `LogicManager`, which then uses the `UI` component to output this result to the user.   
 
 
 ### Edit an internship application
