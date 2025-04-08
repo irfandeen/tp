@@ -1,72 +1,49 @@
 /'
- 'Commonly used styles and colors across diagrams.
- 'Refer to https://plantuml-documentation.readthedocs.io/en/latest for a more
- 'comprehensive list of skinparams.
- '/
+ Monokai Light-inspired PlantUML style (lighter shades)
+ Designed for white/light backgrounds with enhanced contrast for T1–T4.
+'/
 
-
-'T1 through T4 are shades of the original color from lightest to darkest
-
-!define UI_COLOR #1D8900
-!define UI_COLOR_T1 #83E769
-!define UI_COLOR_T2 #3FC71B
-!define UI_COLOR_T3 #166800
-!define UI_COLOR_T4 #0E4100
-
-!define LOGIC_COLOR #3333C4
-!define LOGIC_COLOR_T1 #C8C8FA
-!define LOGIC_COLOR_T2 #6A6ADC
-!define LOGIC_COLOR_T3 #1616B0
-!define LOGIC_COLOR_T4 #101086
-
-!define MODEL_COLOR #9D0012
-!define MODEL_COLOR_T1 #F97181
-!define MODEL_COLOR_T2 #E41F36
-!define MODEL_COLOR_T3 #7B000E
-!define MODEL_COLOR_T4 #51000A
-
-!define STORAGE_COLOR #A38300
-!define STORAGE_COLOR_T1 #FFE374
-!define STORAGE_COLOR_T2 #EDC520
-!define STORAGE_COLOR_T3 #806600
-!define STORAGE_COLOR_T4 #544400
-
-!define USER_COLOR #000000
+skinparam backgroundColor #FFFFFF
 
 skinparam Package {
     BackgroundColor #FFFFFF
-    BorderThickness 1
+    BorderColor #000000
     FontSize 16
+    FontColor #000000
 }
 
 skinparam Class {
-    FontColor #FFFFFF
+    BackgroundColor #FFFFFF
+    FontColor #000000
     FontSize 15
-    BorderThickness 1
-    BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
-    FontName Arial
+    BorderColor #000000
+    StereotypeFontColor #444444
+    FontName Consolas
 }
 
 skinparam Actor {
-    BorderColor USER_COLOR
-    Color USER_COLOR
-    FontName Arial
+    BorderColor #000000
+    Color #F92672
+    FontColor #000000
+    FontName Consolas
 }
 
 skinparam Sequence {
     MessageAlign center
     BoxFontSize 15
-    BoxPadding 0
-    BoxFontColor #FFFFFF
-    FontName Arial
+    BoxPadding 2
+    BoxFontColor #000000
+    FontName Consolas
 }
 
 skinparam Participant {
-    FontColor #FFFFFF
+    FontColor #000000
+    BackgroundColor #F3F3F3
     Padding 20
 }
 
+skinparam ArrowColor #000000
+skinparam ArrowFontColor #000000
 skinparam ArrowFontStyle bold
 skinparam MinClassWidth 50
 skinparam ParticipantPadding 10
@@ -76,3 +53,31 @@ skinparam packageStyle Rectangle
 
 hide footbox
 hide circle
+
+' === Dark base, Lighter T1–T4 ===
+
+!define UI_COLOR #5A8F2C
+!define UI_COLOR_T1 #9FCF73
+!define UI_COLOR_T2 #87B95A
+!define UI_COLOR_T3 #6CA143
+!define UI_COLOR_T4 #54862E
+
+!define LOGIC_COLOR #3B7EA1
+!define LOGIC_COLOR_T1 #80B8D2
+!define LOGIC_COLOR_T2 #6CA3C2
+!define LOGIC_COLOR_T3 #5190AD
+!define LOGIC_COLOR_T4 #407A94
+
+!define MODEL_COLOR #B03B58
+!define MODEL_COLOR_T1 #F1ABBB
+!define MODEL_COLOR_T2 #D0637F
+!define MODEL_COLOR_T3 #B64B69
+!define MODEL_COLOR_T4 #9F3B56
+
+!define STORAGE_COLOR #C87F1F
+!define STORAGE_COLOR_T1 #F2BA70
+!define STORAGE_COLOR_T2 #E2A54A
+!define STORAGE_COLOR_T3 #D19229
+!define STORAGE_COLOR_T4 #BA7814
+
+!define USER_COLOR #333333

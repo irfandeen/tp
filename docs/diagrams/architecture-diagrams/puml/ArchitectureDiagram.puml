@@ -16,13 +16,13 @@ package LogJob{
 rectangle "File" as File #palegreen
 
 ' Relationships
-User -left-> UI
-Main -> UI
-Main --> Logic
-Main --> Model
-Main --> Storage
-UI -[UI_COLOR]-> Logic
+User -left[#black]> UI
+Main -[#grey]> UI
+Main -[#grey]> Logic
+Main --[#grey]> Model
+Main --[#grey]> Storage
 UI -[UI_COLOR]-> Model
+Logic -[LOGIC_COLOR]-> UI
 Logic -[LOGIC_COLOR]-> Storage
 Logic -[LOGIC_COLOR]-> Model
 Storage -up[STORAGE_COLOR].> Model

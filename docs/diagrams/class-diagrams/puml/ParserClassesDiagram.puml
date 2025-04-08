@@ -30,6 +30,7 @@ Class JobTitleValidator
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> ApplicationParser
+hide HiddenOutside
 
 'Parser Dependencies
 ApplicationParser .down.> XYZCommandParser: <<create>>

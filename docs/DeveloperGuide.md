@@ -103,7 +103,7 @@ The sections below give more details of each component.
 The **API** of this component is specified in [`UiMain.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/ui/UiMain.java)
 
 Here is a class diagram of the UI component, not all methods and attributes are included to reduce the complexity.
-![UML Diagram](diagrams/class-diagrams/UI.png)
+![UML Diagram](diagrams/class-diagrams/UIClassDiagram.png)
 
 The UI consists of a `UiMain` that handles the direct interactions between the user and the program logic.
 
