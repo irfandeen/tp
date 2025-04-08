@@ -56,14 +56,14 @@ Both **Company Name** (`-n`) and **Job Title** (`-j`) must:
 
 
 Here is a list of possible status accepted by the application:
-> applied<br>
-> interview<br>
-> rejected<br>
-> offered<br>
-> accepted<br>
-> rejected_offer<br>
+> applied [0]<br>
+> interview [1]<br>
+> rejected [2] <br>
+> offered [3]<br>
+> accepted [4] <br>
+> rejected_offer [5] <br>
 
-💡 The status is case-insensitive.
+💡 The status is case-insensitive. Note that the statuses can be input as numbers from 0 to 5, or as the full name of the status (without the number). The status numbers associated with the status are indicated as the square brackets in the table above.
 
 ❗To include the date of application, follow the format: `YYYY-MM-DD` as shown in the example.
 
