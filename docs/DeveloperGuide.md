@@ -165,7 +165,7 @@ The `Model` component
 
 **API** : [`Storage.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/storage/Storage.java)
 
-Here is a draft of Storage Component
+
 ![Class Diagram of Storage](diagrams/class-diagrams/StorageClassDiagram.png)
 
 The `Storage` component,
@@ -193,8 +193,21 @@ Next the `AddCommand` interacts with the `Model` to add a new `InternshipApplica
 
 
 ### Edit an internship application
+The diagram below illustrates the classes involved and the sequence of method calls involved in processing an `edit` command:
 ![Sequence diagram of edit command](diagrams/sequence-diagrams/edit-sequence.png)
+
+The `EditCommand` is responsible for modifying an existing internship application in the application list. After parsing is completed and the command is instantiated, `EditCommand` proceeds to execute by retrieving the application at the specified index.
+During execution, it checks:
+* Whether the `index` is valid (within bounds of the application list)
+* Whether at least one editable field (e.g., company name, job title, status, date) has been provided
+
+If no field is provided for update, or the provided field is same as the existing, an error is thrown to indicate a no-op command.
+
+To apply the edit, a new `InternshipApplication` object is constructed using the updated values, and this new instance replaces the original application in the model. Before replacement, the model performs a duplicate check—if the new application already exists in the list (based on key fields), the command is rejected as a duplicate.
+
+
 ### Delete an internship application
+The diagram below illustrates the classes involved and the sequence of method calls involved in processing an `delete` command:
 ![Sequence diagram of delete command](diagrams/sequence-diagrams/delete-sequence.png)
 ### List all internship applications
 ![Sequence diagram of list command](diagrams/sequence-diagrams/list-sequence.png)
@@ -223,7 +236,7 @@ and finally automatically calls a printApplications() to print the table of appl
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design considerations:**
-1. **Clear Seperation of Concerns:** When deciding the architecture, we wanted to ensure that the different components of the application are clearly separated. This allows for easier maintenance and development of the application as the team could work on different components simultaneously. For example, the `Logic` component is responsible for parsing and executing commands, while the `Model` component is responsible for managing the data.
+1. **Clear Separation of Concerns:** When deciding the architecture, we wanted to ensure that the different components of the application are clearly separated. This allows for easier maintenance and development of the application as the team could work on different components simultaneously. For example, the `Logic` component is responsible for parsing and executing commands, while the `Model` component is responsible for managing the data.
 2. **Intuitive User Experience:** To make the application user-friendly, we tried to make the commands as intuitive as possible, and even developed a help command to assist users in understanding how to use the application. The commands are designed to be similar to common CLI commands, making it easier for users who are familiar with command line interfaces.
 3. **Extensibility:** The architecture is designed to be extensible, allowing for future features to be added without significant changes to the existing codebase. For example, the `Logic` component can easily accommodate new commands by adding new command classes and parsers.
 
@@ -267,27 +280,130 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `LogJob` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Delete a person**
+### Use Case: UC01 - Add Internship Application
 
-**MSS**
+**Main Success Scenario (MSS):**
 
-1.  User adds internship applicaions to the application list
-2.  LogJob adds the internship applications to the list
-3. User requests to view the list of applications
-4. LogJob shows the list of applications
-5. User requests to delete a specific application in the list
-6. LogJob deletes the application from the list
-7. User wants to edit a specific application in the list
-8. Logjob updates the application in the list
-9. Use case ends.
+1. User enters command to add a new internship application with required details.
+2. LogJob parses the input and validates the provided fields.
+3. LogJob adds the internship application to the list.
+4. Use case ends.
+
+**Extensions:**
+
+- **2a.** User input is missing required fields or contains invalid formats.
+    - 2a1. LogJob shows an error message and prompts for correct input.
+    - 2a2. User re-enters command with the corrected input.
+    - Use case resumes from Step 2.
+
+- **3a.** Duplicate internship application detected (same name, job title, status, and date).
+    - 3a1. LogJob rejects the application and notifies the user.
+    - Use case ends.
+
+
+### Use Case: UC02 - List Internship Applications
+
+**MSS:**
+
+1. User requests to list all internship applications.
+2. LogJob displays the full list of stored applications.
+3. Use case ends.
+
+
+### Use Case: UC03 - Delete Internship Application
+
+**MSS:**
+
+1. User enters command to delete a specific application by index.
+2. LogJob verifies that the index is valid.
+3. LogJob deletes the internship application at the given index.
+4. Use case ends.
+
+**Extensions:**
+
+- **1a.** The index provided is invalid or out of bounds.
+    - 1a1. LogJob informs the user of the invalid index.
+    - 1a2. User provides a valid index.
+    - Use case resumes from Step 3.
+
+
+### Use Case: UC04 - Edit Internship Application
+
+**MSS:**
+
+1. User enters command to edit an internship application with a valid index and at least one editable field.
+2. LogJob validates the new input fields and index.
+3. LogJob replaces the old application with the updated one.
+4. Use case ends.
+
+**Extensions:**
+
+- **1a.** Index provided does not correspond to any stored application.
+    - 1a1. LogJob displays an error message.
+    - 1a2. User re-enters command with a valid index.
+    - Use case resumes from Step 2.
+
+- **1b.** No editable fields are provided.
+    - 1b1. LogJob informs user that at least one field must be specified.
+    - Use case ends.
+
+- **2a.** Updated application duplicates an existing one.
+    - 2a1. LogJob prevents the update and notifies the user.
+    - Use case ends.
+
+---
+
+### Use Case: UC05 - Find Internship Applications by Company Name or Job Title
+
+**Main Success Scenario (MSS):**
+
+1. User enters a keyword to search for internship applications.
+2. LogJob displays applications whose company name or job title contains the keyword.
+3. Use case ends.
+
+**Extensions:**
+
+- **1a.** Keyword is missing.
+    - 1a1. LogJob prompts user to enter keyword.
+    - 1a2. User re-enters keyword.
+    - Use case resumes from Step 2.
+
+- **2a.** No matching applications found.
+    - 2a1. LogJob notifies the user that no matches were found.
+    - 2a2. User may retry with a different keyword.
+    - Use case resumes from Step 2.
+
+
+### Use Case: UC06 - Sort Internship Applications by Application Date
+
+**Main Success Scenario (MSS):**
+
+1. User requests to sort the internship applications by date.
+2. LogJob sorts the stored applications in ascending order of date.
+3. Sorted list is displayed to the user.
+4. Use case ends.
+
+**Extensions:**
+
+- **1a.** Sort command is missing required date flag.
+    - 1a1. LogJob shows an error message requesting a flag input.
+    - 1a2. User re-enters the command correctly.
+    - Use case resumes from Step 2.
+
+- **2a.** No applications are present to be sorted.
+    - 2a1. LogJob displays a message stating that no applications exist.
+    - Use case ends.
 
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should be portable to any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+4.  The system is designed for local use and therefore for 1 local user. 
+5.  A complete user guide will be available for job seekers, detailing every command and covering common troubleshooting methods.  
+6.  The system should handle 100% of invalid inputs (invalid company names, application indexes) without crashing and provide useful error messages for the user to correct their input.
+7.  Automated unit and integration testing should be supported for continuous integration and development, with unit tests should cover at least 70% of the codebase. This ensures code quality and robustness and future updates to be tested with less manual intervention. 
 
 ### Glossary
 
@@ -305,7 +421,7 @@ Given below are instructions to test the app manually.
    1. Download the jar file and copy into an empty folder
    2. Open the terminal and navigate to the folder.
    3. Type `java -jar LogJob.jar` and press enter.
-   4. Adjust the terminal size as necessary to prevent the text from wrapping.
+   4. Maximise the terminal size to prevent the text from wrapping.
    5. Test the commands below to ensure the application is working as expected.
 
 ### Getting Help
