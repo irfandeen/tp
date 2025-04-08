@@ -225,13 +225,26 @@ and finally automatically calls a printApplications() to print the table of appl
 
 ![Sequence diagram of find command](diagrams/sequence-diagrams/find-sequence.png)
 
+`find` command search string will first be parsed by the `FindCommandParser` (which validates for empty inputs, and edge cases). If it passes validation, a `FindCommandObject` is returned.
+When the `FindCommand` object is executed, it utilizes the `find(application)` function in the model `ApplicationManager` which will return an `observableList` (a read-only list of `InternshipApplication`).
+The result is then stored into a standardized `CommandResult` object, which stores the `findSuccess` output message, and the `observableList`.
+
+`LogicManager` then outputs the returned CommandResult using `UI` printMessage method.
+
 ### Help command
 
 ![Sequence diagram of help command](diagrams/sequence-diagrams/help-sequence.png)
 
+Similar to the commands described above, the `help` command will first be parsed through the `ApplicationParser`, which creates a `HelpCommandParser` object that ensures that `help` does not have any trailing arguments (as it does not take any arguments).
+After which it returns a `HelpCommand` object. When executed, the `HelpCommand` object will return a standardized `CommandResult` object with the `isHelp` attributed set to `true`.
+
+Since the `HelpCommand` is rather output heavy and heavily reliant on various UI constants, it has a dedicated UI method to output help. The `LogicManager` then calls `helpOutput` method of `UI`, which will output the help message to the user. (Note that `help` and `exit` are the ***only*** commands that have dedicated `UI` methods)
+
 ### Exit the application
 ![Sequence diagram of exit command](diagrams/sequence-diagrams/exit-sequence.png)
 
+Similar to the commands above, after being parsed and validated for arguments (`exit` should have none), an `ExitCommand` object is returned. The `ExitCommand` object, when executed, returns a `CommandResult` object, with the `isRunning` attribute set to `false`.
+`LogJob` queries `isRunning()` after every command, and after `exit` is processed, it will return false, which will then exit the program (and the instances of `LogJob`, `LogicManager`, `ApplicationParser`, and `UI` will cease to exist and be garbage collected).
 
 --------------------------------------------------------------------------------------------------------------------
 
