@@ -166,7 +166,7 @@ The `Model` component
 **API** : [`Storage.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/storage/Storage.java)
 
 Here is a draft of Storage Component
-![Class Diagram of Storage](diagrams/class-diagrams/StorageDiagram.png)
+![Class Diagram of Storage](diagrams/class-diagrams/StorageClassDiagram.png)
 
 The `Storage` component,
 * Is implemented by the StorageManager, which reads and writes from the `data.txt` file stored in disk
