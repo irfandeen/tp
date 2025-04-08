@@ -1,13 +1,34 @@
 @startuml
+!include ../../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
 
-interface Storage {
-    readApplicationsFromFile(): ArrayList<InternshipApplication>
-    storeApplicationsToFile(applications: InternshipApplication[]): void
+package Storage as StoragePackage {
+
+class StorageManager
+class "<<interface>>\nStorage" as Storage
+Class "ApplicationSerializer" as ApplicationSerializer
+Class "HashUtil" as HashUtil
 }
 
-class StorageManager implements Storage {
-    readApplicationsFromFile(): ArrayList<InternshipApplication>
-    storeApplicationsToFile(applications: InternshipApplication[]): void
-}
+
+package Model {}
+
+Class HiddenDestination #FFFFFF
+Class HiddenSource #FFFFFF
+HiddenDestination .left[hidden] HiddenSource
+
+HiddenSource .down.> Storage
+StorageManager .up-|> Storage
+StorageManager .left.> HashUtil: <<hashes>>
+StorageManager  .right.> ApplicationSerializer: <<serializes>>
+ApplicationSerializer .down-> Model
+StorageManager ..> Model
+
+
+
+hide member
+
 
 @enduml

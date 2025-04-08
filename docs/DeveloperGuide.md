@@ -163,15 +163,16 @@ The `Model` component
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2113-T11a-2/tp/blob/master/src/main/java/seedu/logjob/storage/Storage.java)
 
 Here is a draft of Storage Component
-![Class Diagram of Storage](diagrams/class-diagrams/storageclass.png)
+![Class Diagram of Storage](diagrams/class-diagrams/StorageDiagram.png)
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* Is implemented by the StorageManager, which reads and writes from the `data.txt` file stored in disk
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* It depends on `HashUtil` to generate and verify hashes
+* It depends on `ApplicationSerializer` to serialize and deserialize applications into a string format.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -208,12 +209,16 @@ Very similar to the list command, sort command reads and parses the input from t
 and finally automatically calls a printApplications() to print the table of applications (now sorted) onto the CLI.
 
 ### Find an internship application
-Here is a drafted sequence diagram of the find command and its execution.
 
 ![Sequence diagram of find command](diagrams/sequence-diagrams/find-sequence.png)
 
 ### Help command
+
+![Sequence diagram of help command](diagrams/sequence-diagrams/help-sequence.png)
+
 ### Exit the application
+![Sequence diagram of exit command](diagrams/sequence-diagrams/exit-sequence.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
