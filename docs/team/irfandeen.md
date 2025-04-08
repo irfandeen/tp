@@ -15,13 +15,13 @@ ___
 - Implemented `Find` command to enable finding by keywords
 - Implemented Common `Logger` application-wide utility
 - Implemented `Validator` common class to validate arguments such as indices
-___
+
 ###  **Contribution to User Guide**
 - Added documentation for **find** and **delete** features.
 - Added documentation for QuickStart (Appendix)
 - Added documentation for User Testing (Appendix)
 - Structuring and formatting of UG
-___
+
 ###  **Contributions to Developer Guide**
 
 **Diagrams**
