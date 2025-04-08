@@ -424,22 +424,49 @@ Given below are instructions to test the app manually.
    4. Maximise the terminal size to prevent the text from wrapping.
    5. Test the commands below to ensure the application is working as expected.
 
+
 ### Getting Help
-1. Input: `help`<br>
-2. Expected: Shows a table of commands and their usage
+
+1. Typing help command
+
+    1. Test case: `help`<br>
+       **Expected:** A table listing all commands and their usage appears.
 
 
-### Adding an internship application
-1. Input: `add -n Goggle -j SWE -s APPLIED -d 2025-01-01`<br>
-   Expected: `Application: Goggle SWE APPLIED Added Successfully`
+### Adding an Internship Application
+
+1. Adding a new internship entry
+
+    1. Test case: `add -n Goggle -j SWE -s APPLIED -d 2025-01-01`<br>
+       **Expected:** A message `Application: Goggle SWE APPLIED Added Successfully` is shown.
+
+    1. Test case: `add -j PM -n Amazon`<br>
+       **Expected:** Defaults are applied (`APPLIED`, today's date). A message `Application: Amazon PM APPLIED Added Successfully` is shown.
+
+    1. Test case: `add -n Google -j SWE -d 2025-01-99`<br>
+       **Expected:** Invalid date. Error message shown.
+
+    1. Test case: `add -n Google -d 2025-01-01 -j SWE -s APPLIED` (duplicate)<br>
+       **Expected:** Error message indicating duplicate application.
+
 
 ### Editing an internship application
-1. Input: `edit 1 -n Goggle -j HWE -s INTERVIEW -d 2025-02-02`<br>
-2. Expected: `Application: Goggle HWE INTERVIEW Edited Successfully`
+1. Editing fields of an existing application
+
+    1. Prerequisite: At least one application exists.
+
+    1. Test case: `edit 1 -n Goggle -j HWE -s INTERVIEW -d 2025-02-02`<br>
+       **Expected:** The application is updated. A success message `Application: Goggle HWE INTERVIEW Edited Successfully` is shown.
+
+    1. Test case: `edit 1`<br>
+       **Expected:** Error message indicating that at least one field must be edited.
+
+    1. Test case: `edit 100 -n Test` (index out of range)<br>
+       **Expected:** Error message for invalid index.
 
 ### Listing applications
 1. Input: `list`
-2. Expected: Table with all current internship applications.<br>
+2. **Expected:** Table with all current internship applications.<br>
    - The table should be formatted with the following columns:
      - Index
      - Company Name
@@ -449,23 +476,53 @@ Given below are instructions to test the app manually.
 
 
 ### Sort the internship applications
-1. Input: `sort -n/-d`<br>
-2. Expected: Use `list` command to ensure that the list is sorted by <br>
-    - `-n` : Company Name
-    - `-d` : Date of Application
+1. Sorting by name or date
+
+    1. Test case: `sort -n`<br>
+       **Expected:** The list is sorted alphabetically by company name.
+
+    1. Test case: `sort -d`<br>
+       **Expected:** The list is sorted by application date in ascending order.
+
+    1. Test case: `sort -x`<br>
+       **Expected:** Error message shown for invalid sort key.
 
 ### Find an internship application
-1. Input: `find <keyword>`<br>
-2. Expected: Applications that contain the keyword in their company name, job title, status or date are displayed.<br>
+1. Searching by keyword
+
+    1. Prerequisite: Multiple applications with varying fields. No field contains the string `"NotFound"`.
+
+    1. Test case: `find SWE`<br>
+       **Expected:** Applications with "SWE" in company name, job title, status or date are shown.
+
+    1. Test case: `find NotFound`<br>
+       **Expected:** No results. Message shown to indicate no matches.
+
+    1. Test case: `find`<br>
+       **Expected:** Error shown for missing keyword.
+   
 
 ### Deleting an internship application
-1. Input: `delete 1`<br>
-2. Expected: `Index: 1 Successful Deletion`<br>
+
+1. Deleting a valid application from the list.
+
+   **Prerequisite**: At least 2 applications exist. Use `list` to verify.
+
+    - Test case: `delete 1`  
+      **Expected**: First application is removed.  
+      Success message: `ID: 1 Deleted Successfully`  
+      Use `list` to confirm it's removed.
+
+2. Attempting to delete with an invalid index.
+
+    - Test case: `delete 99` (index out of bounds)  
+      **Expected**: No deletion occurs.  
+      Error message: `Invalid index. Please enter a valid index in the list.`
 
 
 ### Exit
 1. Input: `exit`<br>
-2. Expected: The application closes<br>
+2. **Expected** Goodbye message is displayed. The application closes.<br>
 
 ### Data Persistence
 1. Input: Exit the program and restart the program. <br>
