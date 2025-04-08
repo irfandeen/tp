@@ -15,9 +15,8 @@ Class "HashUtil" as HashUtil
 
 package Model {}
 
-Class HiddenDestination #FFFFFF
-Class HiddenSource #FFFFFF
-HiddenDestination .left[hidden] HiddenSource
+Class " " as HiddenSource #FFFFFF
+skinparam classBorderColor White
 
 HiddenSource .down.> Storage
 StorageManager .up-|> Storage
