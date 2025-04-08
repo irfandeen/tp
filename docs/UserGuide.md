@@ -1,9 +1,10 @@
 # User Guide
-
+___
 ## Introduction
 
 LogJob (LJ) is a desktop app for managing job applications, optimized for use via a Command Line Interface (CLI). If you can type fast, LJ can get your job application management tasks done faster than traditional GUI apps.
 
+___
 # Table of Contents
 
 - [Quick Start](#quick-start)
@@ -32,6 +33,7 @@ LogJob (LJ) is a desktop app for managing job applications, optimized for use vi
     `list`
 5. For more possible commands please refer to the Features and the Command Summary sections.
 ---
+
 ## Features
 
 ### Adding an application: `add`
@@ -165,30 +167,41 @@ Exits from LogJob.
 Example usage:
 
 `exit`
-
+___
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
 
-**A**: You can simply move over data.txt to the same directory as LogJob.jar anywhere, and LogJob will be synchronised!
+**A**: `data.txt` is the data file for LogJob, found in the same directory as `LogJob.jar`.
+If moving data between different locations/computers is needed, the `data.txt` can be simply copied over to the target destination.
 
 **Q**: How do I save my data?
 
 **A**: No need to manually save your data! LogJob will automatically save your data to your computer whenever you exit the application.
 
+**Q**: Must I create my own data.txt?
+
+**A**: No! You do not have to create your own data.txt! LogJob will create one for you one does not exist!
+
+**Q**: Can I manually change data.txt?
+
+**A**: No! LogJob values data integrity, therefore it will reject your changes to data.txt!
+
+___
 ## Known Issues
 
 1. When the terminal window is not large enough to display the whole row of application, the row will be wrapped around by the terminal, this is due to the limitation of Command Line Interface.<br>
 ![issue](images/knownIssue.png)
 Try to enlarge or full screen the terminal when encountering such issue, refrain from adding company names or job titles that are too long.
 
+___
 
 ## Command Summary
-
-{Give a 'cheat sheet' of commands here}
 
 * Add application `add -n [COMPANY NAME] -j [JOB TITLE] -s [APPLICATION STATUS] -d[DATE]`
 * List applications `list`
 * Sort applications `sort -n/-d`
 * Delete applications `delete <index>`
 * Find applications `find <keyword>`
+* Exit LogJob `exit`
+* Get Help `help`
